@@ -1,4 +1,4 @@
-import TestApi from "./components/testApi";
+import TestApi from "./api/testApi";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TestHome from "./pages/tetHome";
 import TestLogin from "./pages/testLogin";
