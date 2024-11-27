@@ -4,10 +4,12 @@ import axios from "axios";
 const TestHome = () => {
   const navigate = useNavigate();
 
+  // 로그인 버튼 클릭 함수
   const loginButtonClick = async () => {
     try {
       // Spring Boot에 데이터 전송 및 URL 반환받기
-      const response = await axios.post("/login/navigate");
+      // 화면 이동의 기능을 구현할 때는 /navigate 로 시작하는 것으로 통일
+      const response = await axios.post("/navigate/login");
       const redirectUrl = response.data.redirectUrl;
       console.log("Redirect URL : ", redirectUrl);
       // 반환받은 URL로 화면 이동
@@ -15,7 +17,7 @@ const TestHome = () => {
     } catch (error) {
       console.error("Error during navigation:", error);
       alert("페이지 이동 중 오류가 발생했습니다.");
-    }
+    } // 이런 공통 부분을 -> 전부 components 폴더로 넣을 것
   };
   return (
     <>

@@ -1,5 +1,4 @@
 import React, {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 import axios from "axios";
 
 const TestLogin = () => {
@@ -8,7 +7,7 @@ const TestLogin = () => {
   const homeButtonClick = async () => {
     try {
       // Spring Boot에 데이터 전송 및 URL 반환받기
-      const response = await axios.post("/home/navigate");
+      const response = await axios.post("/navigate/home");
       const redirectUrl = response.data.redirectUrl;
       console.log("Redirect URL : ", redirectUrl);
       // 반환받은 URL로 화면 이동

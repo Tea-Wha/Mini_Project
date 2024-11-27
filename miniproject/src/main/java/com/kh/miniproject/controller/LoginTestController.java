@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/navigate")
 public class LoginTestController {
-    @PostMapping("/navigate")
+    @PostMapping("/home")
     public Map<String, String> loginNavigation () {
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/");
