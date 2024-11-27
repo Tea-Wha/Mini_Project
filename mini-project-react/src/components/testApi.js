@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
 
 const TestApi = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8111/api/test");
+        const response = await axios.get("/api/test");
         console.log("Response:", response.data); // 응답 데이터 확인
       } catch (error) {
         console.error("Error", error); // 에러가 발생하면 로그 출력
