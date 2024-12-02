@@ -97,22 +97,22 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen}) => {
 		<MenuContainer>
 			<MenuGroup>
 				{menuList.map((menu) => (
-					<Link to={menu.link}><MenuItem>{menu.name}</MenuItem></Link>
+					<Link to={menu.link}><MenuItem key={menu.name}>{menu.name}</MenuItem></Link>
 				))}
 				<MenuItem onClick={onClickMyPage}>내정보</MenuItem>
 			</MenuGroup>
 			{myPageOpen && (
 				<MenuGroup>
 				{nickname ? myPageList.map((menu) => (
-						<Link to={menu.link}><MenuItem>{menu.name}</MenuItem></Link>
+						<Link to={menu.link}><MenuItem key={menu.name}>{menu.name}</MenuItem></Link>
 					)) :
 					loginMenuList.map((menu) => (
-						<Link to={menu.link}><MenuItem>{menu.name}</MenuItem></Link>
+						<Link to={menu.link}><MenuItem key={menu.name}>{menu.name}</MenuItem></Link>
 					))}
 				<FindGroup>
 					{nickname ? <p>{nickname} 님 어서오세요</p>
 						: findMenuList.map((menu) => (
-							<Link to={menu.link}><MenuItemSmall>{menu.name}</MenuItemSmall></Link>
+							<Link to={menu.link}><MenuItemSmall key={menu.name}>{menu.name}</MenuItemSmall></Link>
 						))}
 				</FindGroup>
 			</MenuGroup>
