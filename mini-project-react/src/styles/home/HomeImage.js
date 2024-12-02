@@ -1,14 +1,20 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ImageContainer = styled.div`
-  background-image: ${(props) => props.imageLink};
+  background-image: url(${(props) => props.imageLink});
   object-fit: cover;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  align-items: last baseline;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;
 export const CircleButton = styled.button`
-  background-color: ${({selected}) =>
+  background-color: ${({ selected }) =>
     selected ? "black" : "#fff"}; // selected일 때 red로 변경
   // 보여주기용
   width: 15px;

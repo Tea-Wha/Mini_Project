@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -8,9 +8,9 @@ export const Container = styled.div`
   align-items: center;
   // 크기 설정용
   width: 100%;
-  height: 500px;
+  height: 1024px;
   // 영역 확인용
-  background-color: bisque;
+  background-color: none;
 `;
 
 export const NavContainer = styled.div`
@@ -19,6 +19,8 @@ export const NavContainer = styled.div`
   align-items: flex-start;
   // 크기 설정용
   width: 100%;
+  position: absolute;
+  z-index: 1;
 `;
 export const MenuContainer = styled.div`
   display: flex;
@@ -31,11 +33,14 @@ export const Button = styled.button`
   width: 100px;
   background-color: rgba(128, 128, 128, 0);
   border: none;
-  margin-top: 10px;
+  text-align: center;
+  align-items: center;
   cursor: pointer;
   font-weight: bold;
+  height: 40px;
+  transition: background-color 0.5s ease, transform 0.5s ease;
   &:hover {
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: rgba(128, 128, 128, 0.1);
   }
 `;
 
@@ -52,8 +57,10 @@ export const Initial = styled.div`
   margin-top: 5px;
   font-weight: bold;
   font-size: 1.4rem;
+  display: flex;
 `;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
+  display: flex;
 `;

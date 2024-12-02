@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -7,7 +7,8 @@ export const MenuContainer = styled.div`
   height: 100vh;
   left: 0;
   top: 0;
-  background-color: lightgray;
+  background-color: rgba(128, 128, 128, 0.6);
+  z-index: 2;
 `;
 
 export const MenuGroup = styled.div`
@@ -15,7 +16,7 @@ export const MenuGroup = styled.div`
   flex-direction: column;
   // 보이기용 공간
   margin: 10px 20px;
-  background-color: bisque;
+  background-color: white;
 `;
 
 export const FindGroup = styled.div`
@@ -38,6 +39,14 @@ export const CloseButton = styled.button`
   margin: 10px 20px;
   padding: 10px 20px;
   text-align: center;
+  background-color: rgba(128, 128, 128, 0);
+  border-radius: 30%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
 `;
 
 export const MenuItemSmall = styled.button`
