@@ -7,8 +7,8 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   // 크기 설정용
-  width: 100%;
-  height: 1024px;
+  width: 100vw;
+  height: 100vh;
   // 영역 확인용
   background-color: none;
 `;
@@ -37,6 +37,7 @@ export const Button = styled.button`
   align-items: center;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1.1rem;
   height: 40px;
   transition: background-color 0.5s ease, transform 0.5s ease;
   &:hover {
@@ -54,9 +55,9 @@ export const Initial = styled.div`
   margin: 0 auto;
   cursor: pointer;
   color: black;
-  margin-top: 5px;
+  margin-top: 0px;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   display: flex;
 `;
 

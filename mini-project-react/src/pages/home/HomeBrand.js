@@ -1,5 +1,10 @@
 import HomeBrandImage from "./HomeBrandImage";
-import {Container} from "../../styles/home/HomeBrand";
+import {
+  Container,
+  SubContainer,
+  Button,
+  ButtonContainer,
+} from "../../styles/home/HomeBrand";
 
 const HomeBrand = () => {
   const brandList = [
@@ -30,18 +35,26 @@ const HomeBrand = () => {
   ];
   // 반응형 웹으로 구성해야 할지 논의 필요
   // hover image 추가 -> 커서 올릴 시 다른 각도의 차 이미지로 변경하게끔 구현
+  // Button 추가 예정
+  // 밑에 다음 슬라이드로 넘어가는 표시 추가 예정
   return (
     <>
       <Container>
-        {brandList.map((brand) => (
-          <HomeBrandImage
-            key={brand.name}
-            name={brand.name}
-            image={brand.image}
-            hoverimage={brand.hoverimage}
-            link={brand.link}
-          />
-        ))}
+        <SubContainer>
+          <ButtonContainer>
+            <Button></Button>
+            <Button></Button>
+          </ButtonContainer>
+          {brandList.map((brand) => (
+            <HomeBrandImage
+              key={brand.name}
+              name={brand.name}
+              image={brand.image}
+              hoverimage={brand.hoverimage}
+              link={brand.link}
+            />
+          ))}
+        </SubContainer>
       </Container>
     </>
   );

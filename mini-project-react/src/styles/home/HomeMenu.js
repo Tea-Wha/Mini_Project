@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -62,9 +62,17 @@ export const MenuItem = styled.button`
   margin: 10px 20px;
   padding: 10px 20px;
   cursor: pointer;
-  background-color: white;
   border: none;
+  border-radius: 5px;
   font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  transition: background-color 0.3s ease, transform 0.5s ease;
+  background-color: ${(props) =>
+    props.isSubOpen ? "rgba(128,128,128,0.3)" : "white"};
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
 `;
 
 export const CloseButton = styled.button`
