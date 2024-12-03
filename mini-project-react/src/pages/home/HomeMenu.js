@@ -11,17 +11,17 @@ import {
 // 부모 클래스에서 값을 알기 위해 부모에서 useState생성후 props로 내려줌
 // myPageOpen 은 마이페이지부분 열기
 // menuOpen 은 메뉴 전체부분 열기
-const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen}) => {
+const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
   const nickname = localStorage.getItem("nickname");
 
   const menuList = [
-    {name: "차량 검색", link: "/search"},
-    {name: "브랜드별 보기", link: "/brands"},
-    {name: "견적 내기", link: "/estimate"},
+    {name: "Search", link: "/search"},
+    {name: "Brand Type", link: "/brands"},
+    {name: "Customizing", link: "/estimate"},
   ];
   const loginMenuList = [
-    {name: "로그인", link: "/login"},
-    {name: "회원 가입", link: "/signup"},
+    {name: "Log in", link: "/login"},
+    {name: "Sign up", link: "/signup"},
   ];
   const findMenuList = [
     {name: "아이디 찾기", link: "/findId"},
@@ -43,14 +43,14 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen}) => {
   };
 
   return (
-    <MenuContainer>
+    <MenuContainer isOpen={menuOpen}>
       <MenuGroup>
         {menuList.map((menu) => (
           <Link to={menu.link}>
             <MenuItem key={menu.name}>{menu.name}</MenuItem>
           </Link>
         ))}
-        <MenuItem onClick={onClickMyPage}>내정보</MenuItem>
+        <MenuItem onClick={onClickMyPage}>My Page</MenuItem>
       </MenuGroup>
       {myPageOpen && (
         <MenuGroup>
