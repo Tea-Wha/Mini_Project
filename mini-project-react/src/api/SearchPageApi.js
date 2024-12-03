@@ -17,10 +17,11 @@ const SearchApi = {
 	// price 의 경우 최대 최소를 받아서 사용
 	// + AND ENGINE_TYPE in engine 엔진은 안에 있는지로 검색
 	// -------------------------------------------------------------------------
-	carListSearch: async ( company, price, engine, carClass, sort) => {
+	carListSearch: async (name, company, price, engine, carClass, sort) => {
 		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + " - " + company + " - " + price + " - " + engine + " - " + carClass + " - " + sort);
+			"검색 내용 : " + name + " - " + company + " - " + price + " - " + engine + " - " + carClass + " - " + sort);
 		const params = {
+			name: "%"+name+"%",
 			company: company,
 			price: price,
 			engine: engine,
