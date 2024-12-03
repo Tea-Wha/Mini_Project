@@ -13,7 +13,10 @@ import {
 
 const HomeHead = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [myPageOpen, setMyPageOpen] = useState(false);
+  const [subPageOpen, setSubPageOpen] = useState({
+    brand: false,
+    myPage: false,
+  });
 
   const onClickMenu = () => {
     setMenuOpen(!menuOpen);
@@ -21,7 +24,7 @@ const HomeHead = () => {
 
   const onClickLogin = () => {
     setMenuOpen(true);
-    setMyPageOpen(true);
+    setSubPageOpen(true);
   };
 
   return (
@@ -40,8 +43,8 @@ const HomeHead = () => {
 
       <HomeMenu
         setMenuOpen={setMenuOpen}
-        myPageOpen={myPageOpen}
-        setMyPageOpen={setMyPageOpen}
+        subPageOpen={subPageOpen}
+        setSubPageOpen={setSubPageOpen}
         menuOpen={menuOpen} // menuOpen 상태 추가
       />
     </Container>
