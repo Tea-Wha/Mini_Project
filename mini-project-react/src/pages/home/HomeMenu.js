@@ -43,7 +43,8 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
     setMenuOpen(false);
     setMyPageOpen(false);
   };
-
+  // SideContainer로 따로 빼서 추가적인 작업 수월하게끔 변경 예정 (진행중)
+  // 브랜드 쪽 SideContainer는 스크롤 추가해서 전체 브랜드 대표 차 진열 예정
   return (
     <>
       <MenuContainer isOpen={menuOpen}>

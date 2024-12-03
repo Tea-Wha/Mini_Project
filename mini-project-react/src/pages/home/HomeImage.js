@@ -14,6 +14,8 @@ const HomeImage = () => {
   ];
 
   const startAutoScroll = () => {
+    // stpAutoScroll() 추가 -> autoscroll이 계속 겹쳐서 정해진 시간보다
+    // 빨리 스크롤 되는 문제점 발생
     stopAutoScroll();
     // autoScroll을 시작하는 함수
     const interval = window.setInterval(() => {
