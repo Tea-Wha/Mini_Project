@@ -1,6 +1,5 @@
-import styled, { css } from "styled-components";
-import { useEffect, useState } from "react";
-import { ImageContainer, CircleButton } from "../../styles/home/HomeImage";
+import {useEffect, useState} from "react";
+import {ImageContainer, CircleButton} from "../../styles/home/HomeImage";
 
 const HomeImage = () => {
   const [index, setIndex] = useState(0);

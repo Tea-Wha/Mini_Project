@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 
 export const ImageContainer = styled.div`
   background-image: url(${(props) => props.imageLink});
@@ -10,11 +10,11 @@ export const ImageContainer = styled.div`
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
 `;
 export const CircleButton = styled.button`
-  background-color: ${({ selected }) =>
+  background-color: ${({selected}) =>
     selected ? "black" : "#fff"}; // selected일 때 red로 변경
   // 보여주기용
   width: 15px;

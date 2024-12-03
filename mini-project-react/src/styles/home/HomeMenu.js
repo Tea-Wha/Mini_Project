@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 
 export const MenuContainer = styled.div`
   display: flex;
-  position: fixed;
+  position: absolute;
   // 보이기용
   height: 100vh;
   left: 0;
@@ -30,6 +30,10 @@ export const MenuItem = styled.button`
   width: 200px;
   margin: 10px 20px;
   padding: 10px 20px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  font-weight: bold;
 `;
 
 export const CloseButton = styled.button`
@@ -52,4 +56,8 @@ export const CloseButton = styled.button`
 export const MenuItemSmall = styled.button`
   width: 90px;
   padding: 5px 0;
+  background-color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 `;
