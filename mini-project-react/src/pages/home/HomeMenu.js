@@ -17,11 +17,11 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
   const menuList = [
     {name: "Search", link: "/search"},
     {name: "Brand Type", link: "/brands"},
-    {name: "견적 내기", link: "/estimate"},
+    {name: "Customizing", link: "/estimate"},
   ];
   const loginMenuList = [
-    {name: "로그인", link: "/login"},
-    {name: "회원 가입", link: "/signup"},
+    {name: "Log in", link: "/login"},
+    {name: "Sign up", link: "/signup"},
   ];
   const findMenuList = [
     {name: "아이디 찾기", link: "/findId"},
@@ -40,7 +40,6 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
   const onClickClose = () => {
     setMenuOpen(false);
     setMyPageOpen(false);
-    console.log("Menu Open Status : ", !menuOpen);
   };
 
   return (
@@ -51,7 +50,7 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
             <MenuItem key={menu.name}>{menu.name}</MenuItem>
           </Link>
         ))}
-        <MenuItem onClick={onClickMyPage}>내정보</MenuItem>
+        <MenuItem onClick={onClickMyPage}>My Page</MenuItem>
       </MenuGroup>
       {myPageOpen && (
         <MenuGroup>

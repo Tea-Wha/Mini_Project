@@ -7,13 +7,14 @@ const HomeImage = () => {
 
   const imageList = [
     "/testimages/001.png",
-    "/testimages/001.png",
-    "/testimages/001.png",
-    "/testimages/001.png",
-    "/testimages/001.png",
+    "/testimages/genesis-kr-g80.jpg",
+    "/testimages/genesis-kr-g90.jpg",
+    "/testimages/genesis-gv80.jpg",
+    "/testimages/genesis-kr-g70.jpg",
   ];
 
   const startAutoScroll = () => {
+    stopAutoScroll();
     // autoScroll을 시작하는 함수
     const interval = window.setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % imageList.length);
@@ -27,6 +28,7 @@ const HomeImage = () => {
       clearInterval(autoScroll);
       setAutoScroll(null);
     }
+    clearInterval(autoScroll);
   };
 
   useEffect(() => {
@@ -44,8 +46,8 @@ const HomeImage = () => {
   };
 
   return (
-    <ImageContainer imageLink={imageList[index]}>
-      {imageList.map((image, idx) => (
+    <ImageContainer imageLink={imageList[index]} index={index}>
+      {imageList.map((_, idx) => (
         <CircleButton
           key={idx}
           selected={index === idx} // index와 일치하면 selected prop 전달

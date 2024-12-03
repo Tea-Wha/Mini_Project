@@ -27,6 +27,8 @@ export const MenuGroup = styled.div`
   margin: 10px 20px;
   background-color: white;
   position: relative;
+  height: 50vh;
+  border-radius: 10px;
 `;
 
 export const FindGroup = styled.div`
@@ -60,6 +62,7 @@ export const CloseButton = styled.button`
   transition: background-color 0.5s ease, transform 0.5s ease;
   &:hover {
     background-color: rgba(128, 128, 128, 0.3);
+    font-weight: bold;
   }
 `;
 

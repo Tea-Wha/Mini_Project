@@ -17,7 +17,6 @@ const HomeHead = () => {
 
   const onClickMenu = () => {
     setMenuOpen(!menuOpen);
-    console.log("Menu Open Status : ", !menuOpen);
   };
 
   const onClickLogin = () => {

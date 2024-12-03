@@ -23,5 +23,4 @@ export const CircleButton = styled.button`
   margin-left: 5px;
   margin-bottom: 5px;
   cursor: pointer;
-  transition: background-color 1s;
 `;
