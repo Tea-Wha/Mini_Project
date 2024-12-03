@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {
   MenuContainer,
+  MenuSideContainer,
   MenuGroup,
   MenuItem,
   CloseButton,
@@ -35,6 +36,7 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
 
   const onClickMyPage = () => {
     setMyPageOpen(!myPageOpen);
+    console.log(!myPageOpen);
   };
 
   const onClickClose = () => {
@@ -43,17 +45,46 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
   };
 
   return (
-    <MenuContainer isOpen={menuOpen}>
-      <MenuGroup>
-        {menuList.map((menu) => (
-          <Link to={menu.link}>
-            <MenuItem key={menu.name}>{menu.name}</MenuItem>
-          </Link>
-        ))}
-        <MenuItem onClick={onClickMyPage}>My Page</MenuItem>
-      </MenuGroup>
-      {myPageOpen && (
+    <>
+      <MenuContainer isOpen={menuOpen}>
         <MenuGroup>
+          {menuList.map((menu) => (
+            <Link to={menu.link}>
+              <MenuItem key={menu.name}>{menu.name}</MenuItem>
+            </Link>
+          ))}
+          <MenuItem onClick={onClickMyPage}>My Page</MenuItem>
+        </MenuGroup>
+        <MenuSideContainer isMypage={myPageOpen}>
+          <MenuGroup>
+            {nickname
+              ? myPageList.map((menu) => (
+                  <Link to={menu.link}>
+                    <MenuItem key={menu.name}>{menu.name}</MenuItem>
+                  </Link>
+                ))
+              : loginMenuList.map((menu) => (
+                  <Link to={menu.link}>
+                    <MenuItem key={menu.name}>{menu.name}</MenuItem>
+                  </Link>
+                ))}
+            <FindGroup>
+              {nickname ? (
+                <p>{nickname} 님 어서오세요</p>
+              ) : (
+                findMenuList.map((menu) => (
+                  <Link to={menu.link}>
+                    <MenuItemSmall key={menu.name}>{menu.name}</MenuItemSmall>
+                  </Link>
+                ))
+              )}
+            </FindGroup>
+          </MenuGroup>
+          <CloseButton onClick={onClickClose}> X </CloseButton>
+        </MenuSideContainer>
+      </MenuContainer>
+      {/* <MenuSideContainer>
+        <MenuGroup isMypage={myPageOpen}>
           {nickname
             ? myPageList.map((menu) => (
                 <Link to={menu.link}>
@@ -77,9 +108,9 @@ const HomeMenu = ({setMenuOpen, myPageOpen, setMyPageOpen, menuOpen}) => {
             )}
           </FindGroup>
         </MenuGroup>
-      )}
-      <CloseButton onClick={onClickClose}> X </CloseButton>
-    </MenuContainer>
+        <CloseButton onClick={onClickClose}> X </CloseButton>
+      </MenuSideContainer> */}
+    </>
   );
 };
 
