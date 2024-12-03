@@ -17,15 +17,15 @@ const SearchApi = {
 	// price 의 경우 최대 최소를 받아서 사용
 	// + AND ENGINE_TYPE in engine 엔진은 안에 있는지로 검색
 	// -------------------------------------------------------------------------
-	carListSearch: async (name, company, price, engine, sort) => {
+	carListSearch: async ( company, price, engine, carClass, sort) => {
 		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + name + " - " + company + " - " + price + " - " + engine + " - " + sort);
+			"검색 내용 : " + " - " + company + " - " + price + " - " + engine + " - " + carClass + " - " + sort);
 		const params = {
-			name: name,
 			company: company,
 			price: price,
 			engine: engine,
-			sort: sort
+			carClass: carClass,
+			sort: sort,
 		};
 		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
 	},
@@ -44,6 +44,10 @@ const SearchApi = {
 	maxPrice: async () => {
 		console.log("최대 가격 불러오기")
 		return await axios.get(KH_DOMAIN + "/carList/maxPrice");
+	},
+	carClassList: async () => {
+		console.log("자동차 종류 불러오기")
+		return await axios.get(KH_DOMAIN + "/carList/carClasses");
 	}
 }
 export default SearchApi
