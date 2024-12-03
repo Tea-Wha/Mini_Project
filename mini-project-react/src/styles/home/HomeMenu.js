@@ -9,6 +9,15 @@ export const MenuContainer = styled.div`
   top: 0;
   background-color: rgba(128, 128, 128, 0.6);
   z-index: 2;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+
+  ${(props) =>
+    props.isOpen &&
+    css`
+      transform: translateX(0);
+    `}
 `;
 
 export const MenuGroup = styled.div`
@@ -17,6 +26,7 @@ export const MenuGroup = styled.div`
   // 보이기용 공간
   margin: 10px 20px;
   background-color: white;
+  position: relative;
 `;
 
 export const FindGroup = styled.div`

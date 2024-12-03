@@ -17,6 +17,7 @@ const HomeHead = () => {
 
   const onClickMenu = () => {
     setMenuOpen(!menuOpen);
+    console.log("Menu Open Status : ", !menuOpen);
   };
 
   const onClickLogin = () => {
@@ -37,13 +38,13 @@ const HomeHead = () => {
         <Button onClick={onClickLogin}>Login</Button>
       </NavContainer>
       <HomeImage />
-      {menuOpen && (
-        <HomeMenu
-          setMenuOpen={setMenuOpen}
-          myPageOpen={myPageOpen}
-          setMyPageOpen={setMyPageOpen}
-        />
-      )}
+
+      <HomeMenu
+        setMenuOpen={setMenuOpen}
+        myPageOpen={myPageOpen}
+        setMyPageOpen={setMyPageOpen}
+        menuOpen={menuOpen} // menuOpen 상태 추가
+      />
     </Container>
   );
 };
