@@ -18,6 +18,9 @@ const SearchStore= (props) => {
 		return [state, setState];
 	};
 	
+	// 이름을 통해 검색하는 name
+	// {Like 검색사용 값을 넘길때부터 %를 앞뒤에 붙여서 보낼 것임}
+	const [name, setName] = useSyncedState("searchName", "")
 	// 회사 이름을 통해 검색하는 company
 	// {버튼을 통해 조작할거라  in 사용}
 	const [company, setCompany] = useSyncedState("searchCompany", "");
@@ -32,7 +35,7 @@ const SearchStore= (props) => {
 	const [price, setPrice] = useSyncedState("searchPrice", {isPrice: false, min: 0, max: 999999999,});
 	
 	return (
-	<SearchContext.Provider value={{company, setCompany, engine, setEngine, price, setPrice, carClass, setCarClass }}>
+	<SearchContext.Provider value={{company, setCompany, engine, setEngine, price, setPrice, carClass, setCarClass, name, setName}}>
 		{props.children}
 	</SearchContext.Provider>
 	)

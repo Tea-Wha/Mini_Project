@@ -1,10 +1,13 @@
 import HomeHead from "./HomeHead";
-import HomeMenu from "./HomeMenu";
+import HomeBrand from "./HomeBrand";
+import Footer from "./Footer";
 
 const HomeMain = () => {
 	return (
 		<>
 			<HomeHead/>
+			<HomeBrand/>
+			<Footer/>
 		</>
 	)
 }
