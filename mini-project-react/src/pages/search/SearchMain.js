@@ -1,16 +1,27 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useReducer, useState} from "react";
 import SearchApi from "../../api/SearchPageApi"
 import styled from "styled-components";
+import SearchOptions from "./SearchOptions";
+import {SearchContext} from "../../context/SearchStore";
+import SearchArrange from "./SearchArrange";
+import SearchItems from "./SearchItems";
 
-const BoardContainer = styled.div`
-		width: 100%;
-		display: flex;
-`
-const SearchContainer = styled.div`
-		width: 30%;
-		display: flex;
-		flex-direction: column;
-`
+const BoardContainer = styled.div``
+
+const SearchContainer = styled.div``
+
+const ListContainer = styled.div``
+
+const sortReducer = (state, action) => {
+	switch (action.type) {
+		case "SET_SORT_BY":
+			return { ...state, sortBy: action.payload };
+		case "SET_SORT_TYPE":
+			return { ...state, sortType: action.payload };
+		default:
+			return state;
+	}
+};
 
 // {}에 감싸여 있는게 국형씨 요청사항
 const SearchMain = () => {
@@ -19,79 +30,71 @@ const SearchMain = () => {
 	const [companies, setCompanies] = useState([]);
 	// 엔진 목록을 불러와서 저장할 리스트
 	const [engines, setEngines] = useState([]);
+	// 차종을 불러와서 저장할 리스트
+	const [classList,setClassList] = useState([]);
 	// 최대 금액을 불러와서 저장할 변수
 	const [maxPrice, setMaxPrice] = useState(999999999);
 	
-	// 이름을 통해 검색을 할 때 사용할 Name
-	// {값이 있으면 Car_Name 에 Like ? 를 사용하여 값 추출}
-	const [name, setName] = useState("");
-	// 회사 이름을 통해 검색하는 company
-	// {버튼을 통해 조작할거라  in 사용}
-	const [company, setCompany] = useState("");
-	// 가격 범위를 통해 검색을 할 때 사용할 price
-	// {isPrice 가 true 면 price 에 BETWEEN ? AND ? 를 사용하여 값 추출}
-	const [price, setPrice] = useState({
-		isPrice: false,
-		min: 0,
-		max: maxPrice,
+	// 정렬을 위한 sort
+	// {정렬은 DB 에서 말고, Back 에서 Comparator (Switch Case 사용) 나 Comparable 사용
+	const [sort, dispatchSort] = useReducer(sortReducer, {
+		sortBy: "price",
+		sortType: "asc",
 	});
-	// 엔진타입을 선택하기 위한 engine
-	// {마찬가지로 버튼으로 고르는 것이므로 in 사용}
-	const [engine, setEngine] = useState("");
 	
-	const [sort, setSort] = useState({
-		sortBy: "name",
-		sortType: "desc",
-	})
+	// 받아온 정보를 배열로 받을 list
+	const [list, setList] = useState([]);
 	
-	const onClickSearch = () => {}
-	
-	const value = { name, setName, company, setCompany, engine, setEngines, price, setPrice };
+	const {company,price,engine,carClass} = useContext(SearchContext);
 	
 	useEffect(() => {
-		const getCompany = async () => {
+		const search = async () => {
 			try {
-				const rsp = await SearchApi.companiesList();
+				const rsp = await SearchApi.carListSearch(company,price,engine,carClass,sort);
 				console.log(rsp.data);
-				setCompanies(rsp.data);
+				setList(rsp.data)
 			} catch (error) {
-				alert("회사 정보에 서버가 응답하지 않습니다.");
+				alert("검색에 서버가 응답하지 않습니다.")
 			}
 		}
-		const getEngine = async () => {
-			try {
-				const rsp = await SearchApi.enginesList();
-				console.log(rsp.data);
-				setEngines(rsp.data);
-			} catch (error) {
-				alert("엔진 정보에 서버가 응답하지 않습니다.")
-			}
-		}
-		const getMaxPrice = async () => {
-			try {
-				const rsp = await SearchApi.maxPrice();
-				console.log(rsp.data);
-				setMaxPrice(rsp.data);
-			} catch (error) {
-				alert("최대 가격에 서버가 응답하지 않습니다.")
-			}
-		}
-		getCompany();
-		getEngine();
-		getMaxPrice();
-	},[])
+		search();
+	}, [company, price, engine, carClass, sort.sortBy, sort.sortType]);
 	
+	useEffect(() => {
+		const fetchInitialData = async () => {
+			try {
+				const [companiesRsp, enginesRsp, maxPriceRsp, classesRsp] = await Promise.all([
+					SearchApi.companiesList(),
+					SearchApi.enginesList(),
+					SearchApi.maxPrice(),
+					SearchApi.carClassList(),
+				]);
+				
+				setCompanies(companiesRsp.data);
+				setEngines(enginesRsp.data);
+				setMaxPrice(maxPriceRsp.data);
+				setClassList(classesRsp.data);
+			} catch (error) {
+				alert("초기 데이터를 불러오는 중 문제가 발생했습니다.");
+			}
+		};
+		fetchInitialData();
+	}, []);
 	
 	return(
 		<BoardContainer>
 			<SearchContainer>
-				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice}/>
+				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice} classList={classList}/>
 			</SearchContainer>
-			<ListConatiner>
-				<SearchOptionCloser/>
-				<SearchArrange/>
-				<SearchItems/>
-			</ListConatiner>
+			<ListContainer>
+				<SearchArrange
+					sort={sort}
+					setSortBy={(sortBy) => dispatchSort({ type: "SET_SORT_BY", payload: sortBy })}
+					setSortType={(sortType) => dispatchSort({ type: "SET_SORT_TYPE", payload: sortType })}
+				/>
+				<SearchItems list={list}/>
+			</ListContainer>
 		</BoardContainer>
 	)
 }
+export default SearchMain;
