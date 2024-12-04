@@ -19,7 +19,7 @@ const SearchApi = {
 	// -------------------------------------------------------------------------
 	carListSearch: async (name, company, price, engine, carClass, sort) => {
 		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + name + " - " + company + " - " + price + " - " + engine + " - " + carClass + " - " + sort);
+			"검색 내용 : " + name + " - " + company + " - " + JSON.stringify(price) + " - " + engine + " - " + carClass + " - " + JSON.stringify(sort));
 		const params = {
 			name: "%"+name+"%",
 			company: company,

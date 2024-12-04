@@ -41,24 +41,25 @@ const SearchMain = () => {
 		sortBy: "price",
 		sortType: "asc",
 	});
-	
 	// 받아온 정보를 배열로 받을 list
 	const [list, setList] = useState([]);
 	
-	const {company,price,engine,carClass} = useContext(SearchContext);
+	const {name,company,price,engine,carClass} = useContext(SearchContext);
+	
+	// 검색을 위한 search
+	const search = async () => {
+		try {
+			const rsp = await SearchApi.carListSearch(name,company,price,engine,carClass,sort);
+			console.log(rsp.data);
+			setList(rsp.data)
+		} catch (error) {
+			alert("검색에 서버가 응답하지 않습니다.")
+		}
+	}
 	
 	useEffect(() => {
-		const search = async () => {
-			try {
-				const rsp = await SearchApi.carListSearch(company,price,engine,carClass,sort);
-				console.log(rsp.data);
-				setList(rsp.data)
-			} catch (error) {
-				alert("검색에 서버가 응답하지 않습니다.")
-			}
-		}
 		search();
-	}, [company, price, engine, carClass, sort.sortBy, sort.sortType]);
+	}, [company, engine, carClass, sort.sortBy, sort.sortType]);
 	
 	useEffect(() => {
 		const fetchInitialData = async () => {
@@ -84,7 +85,7 @@ const SearchMain = () => {
 	return(
 		<BoardContainer>
 			<SearchContainer>
-				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice} classList={classList}/>
+				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice} classList={classList} search={search} />
 			</SearchContainer>
 			<ListContainer>
 				<SearchArrange
