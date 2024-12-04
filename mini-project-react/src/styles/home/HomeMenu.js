@@ -82,7 +82,7 @@ export const MenuItem = styled.button`
   background-color: ${(props) =>
     props.isSubOpen ? "rgba(128,128,128,0.3)" : "white"};
   &:hover {
-    background-color: rgba(128, 128, 128, 0.3);
+    background-color: #e9e9e9;
   }
   & + &::before {
     content: "";

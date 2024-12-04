@@ -13,24 +13,28 @@ const HomeBrand = () => {
       image: "/testimages/sonata_009.png",
       hoverimage: "/testimages/sonata_001.png",
       link: "#",
+      logo: "/testlogos/hyundai.png",
     },
     {
       name: "TUCSON",
       image: "/testimages/tucson_009.png",
       hoverimage: "/testimages/tucson_001.png",
       link: "#",
+      logo: "/testlogos/hyundai.png",
     },
     {
       name: "K9",
       image: "/testimages/abp_01.png",
       hoverimage: "/testimages/abp_63.png",
       link: "#",
+      logo: "/testlogos/kia_new.png",
     },
     {
       name: "EV6",
       image: "/testimages/swp_01.png",
       hoverimage: "/testimages/swp_63.png",
       link: "#",
+      logo: "/testlogos/kia_new.png",
     },
   ];
   // 반응형 웹으로 구성해야 할지 논의 필요
@@ -52,6 +56,7 @@ const HomeBrand = () => {
               image={brand.image}
               hoverimage={brand.hoverimage}
               link={brand.link}
+              logo={brand.logo}
             />
           ))}
         </SubContainer>

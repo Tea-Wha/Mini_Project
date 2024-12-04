@@ -45,8 +45,10 @@ export const Button = styled.button`
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  background-color: white;
   &:hover {
-    background-color: rgba(128, 128, 128, 0.3);
+    /* background-color: rgba(128, 128, 128, 0.3); */
+    background-color: #e9e9e9;
   }
   & + & {
     margin-left: 20px;
@@ -54,7 +56,7 @@ export const Button = styled.button`
   &::before {
     content: "";
     position: absolute;
-    top: 38%;
+    top: 39%;
     left: 45%;
     width: 10px;
     height: 2px;
@@ -64,7 +66,7 @@ export const Button = styled.button`
   &::after {
     content: "";
     position: absolute;
-    top: 62%;
+    top: 61%;
     left: 45%;
     width: 10px;
     height: 2px;
@@ -73,7 +75,7 @@ export const Button = styled.button`
   }
   & + &::before {
     position: absolute;
-    top: 38%;
+    top: 39%;
     left: 55%;
     width: 10px;
     height: 2px;
@@ -83,7 +85,7 @@ export const Button = styled.button`
   & + &::after {
     content: "";
     position: absolute;
-    top: 62%;
+    top: 61%;
     left: 55%;
     width: 10px;
     height: 2px;
