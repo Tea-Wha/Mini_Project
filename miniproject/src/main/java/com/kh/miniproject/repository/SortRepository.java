@@ -17,10 +17,10 @@ import java.util.List;
 public class SortRepository {
 
     private final JdbcTemplate jdbcTemplate;
-    private static final String SORT_MANUFACTURERS = "SELECT COMPANY_NAME, IMAGE_URL FROM COMPANIES";
+    private static final String SORT_MANUFACTURERS = "SELECT MANUFACTURER_NAME, IMAGE_URL FROM MANUFACTURERS";
     private static final String SORT_MAX_PRICE = "SELECT MAX(PRICE) AS MAX_PRICE FROM CARS";
     private static final String SORT_ENGINES = "SELECT ENGINE_TYPE FROM ENGINES";
-    private static final String SORT_CLASSIFICATIONS = "SELECT CLASSIFICATION_NAME FROM CLASSIFICATIONS";
+    private static final String SORT_CLASSIFICATIONS = "SELECT CLASSIFICATION FROM CLASSIFICATIONS";
 
     // 제조사 리스트 조회
     public List<ManufacturerVo> getManufacturer() {
