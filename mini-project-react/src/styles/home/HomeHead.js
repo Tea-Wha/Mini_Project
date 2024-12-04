@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
-	overflow: hidden;
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@ export const Button = styled.button`
   align-items: center;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
   height: 40px;
   transition: background-color 0.5s ease, transform 0.5s ease;
   &:hover {
