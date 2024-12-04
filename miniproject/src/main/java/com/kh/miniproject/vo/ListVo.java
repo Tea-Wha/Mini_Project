@@ -4,16 +4,11 @@ package com.kh.miniproject.vo;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class ListVo {
     private String carName;
     private String manufacturer;
     private int price;
-    private int minPrice;
-    private int maxPrice;
     private String engineType;
     private String classification;
 }
