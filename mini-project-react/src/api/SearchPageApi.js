@@ -21,12 +21,15 @@ const SearchApi = {
 		console.log("조건에따라 검색하기\n" +
 			"검색 내용 : " + name + " - " + company + " - " + JSON.stringify(price) + " - " + engine + " - " + carClass + " - " + JSON.stringify(sort));
 		const params = {
-			name: "%"+name+"%",
-			company: company,
-			price: price,
+			name: `%${name}%`,
+			manufacturer: company,
+			isPrice: price.isPrice,
+			maxPrice: price.max,
+			minPrice: price.min,
 			engine: engine,
 			carClass: carClass,
-			sort: sort,
+			sortBy: sort.sortBy,
+			sortOrder: sort.order,
 		};
 		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
 	},

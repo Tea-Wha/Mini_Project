@@ -16,7 +16,8 @@ const ToggleButton = styled.button``
 
 
 const PriceSlider = styled(Slider)`
-	visibility: ${props => props.visible ? "visible" : "hidden"};
+  
+		visibility: ${props => props.visible ? "visible" : "hidden"};
 `
 
 const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
@@ -65,8 +66,10 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 	};
 	
 	const onToggleButton = e => {
+		console.log(visible)
 		setVisible({...visible, [e.target.id]: !visible[e.target.id]});
 	}
+	
 	const onTogglePrice = () => {
 		setPrice({...price, isPrice: !price.isPrice});
 	}

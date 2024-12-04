@@ -56,7 +56,7 @@ const SearchMain = () => {
 			alert("검색에 서버가 응답하지 않습니다.")
 		}
 	}
-	
+	window.localStorage.clear()
 	useEffect(() => {
 		search();
 	}, [company, engine, carClass, sort.sortBy, sort.sortType]);
@@ -70,10 +70,13 @@ const SearchMain = () => {
 					SearchApi.maxPrice(),
 					SearchApi.carClassList(),
 				]);
-				
+				console.log(companiesRsp.data);
 				setCompanies(companiesRsp.data);
+				console.log(enginesRsp.data);
 				setEngines(enginesRsp.data);
+				console.log(maxPriceRsp.data);
 				setMaxPrice(maxPriceRsp.data);
+				console.log(classesRsp.data);
 				setClassList(classesRsp.data);
 			} catch (error) {
 				alert("초기 데이터를 불러오는 중 문제가 발생했습니다.");

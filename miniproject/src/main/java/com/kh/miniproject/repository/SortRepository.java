@@ -3,7 +3,10 @@ package com.kh.miniproject.repository;
 import com.kh.miniproject.vo.ClassificationVo;
 import com.kh.miniproject.vo.EngineVo;
 import com.kh.miniproject.vo.ManufacturerVo;
+import com.kh.miniproject.vo.OptionsVo;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -11,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class SortRepository {
@@ -23,43 +26,50 @@ public class SortRepository {
     private static final String SORT_CLASSIFICATIONS = "SELECT CLASSIFICATION FROM CLASSIFICATIONS";
 
     // 제조사 리스트 조회
-    public List<ManufacturerVo> getManufacturer() {
+    public List<OptionsVo> getManufacturer() {
+        log.warn("제조사 : " + jdbcTemplate.query(SORT_MANUFACTURERS, new ManufacturerRowMapper()));
         return jdbcTemplate.query(SORT_MANUFACTURERS, new ManufacturerRowMapper());
     }
 
     // 엔진 타입 리스트 조회
-    public List<EngineVo> getEngines() {
+    public List<OptionsVo> getEngines() {
+        log.warn("엔진 : " + jdbcTemplate.query(SORT_ENGINES, new EngineRowMapper()));
         return jdbcTemplate.query(SORT_ENGINES, new EngineRowMapper());
     }
 
     // 최대 가격 조회
     public Integer getMaxPrice() {
+        log.warn("최대 가격 : "+ jdbcTemplate.queryForObject(SORT_MAX_PRICE, Integer.class));
         return jdbcTemplate.queryForObject(SORT_MAX_PRICE, Integer.class);
     }
 
     // 자동차 클래스 리스트 조회
-    public List<ClassificationVo> getCarClasses() {
+    public List<OptionsVo> getCarClasses() {
+        log.warn("차종 : " + jdbcTemplate.query(SORT_CLASSIFICATIONS, new ClassificationRowMapper()));
         return jdbcTemplate.query(SORT_CLASSIFICATIONS, new ClassificationRowMapper());
     }
+    
+    
+    
 
-    private static class ManufacturerRowMapper implements RowMapper<ManufacturerVo> {
+    private static class ManufacturerRowMapper implements RowMapper<OptionsVo> {
         @Override
-        public ManufacturerVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new ManufacturerVo(rs.getString("MANUFACTURER_NAME"), rs.getString("IMAGE_URL"));
+        public OptionsVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new OptionsVo(rs.getString("MANUFACTURER_NAME"), rs.getString("IMAGE_URL"),null);
         }
     }
 
-    private static class EngineRowMapper implements RowMapper<EngineVo> {
+    private static class EngineRowMapper implements RowMapper<OptionsVo> {
         @Override
-        public EngineVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new EngineVo(rs.getString("ENGINE_TYPE"));
+        public OptionsVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new OptionsVo(rs.getString("ENGINE_TYPE"),null,null);
         }
     }
 
-    private static class ClassificationRowMapper implements RowMapper<ClassificationVo> {
+    private static class ClassificationRowMapper implements RowMapper<OptionsVo> {
         @Override
-        public ClassificationVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new ClassificationVo(rs.getString("CLASSIFICATION"));
+        public OptionsVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new OptionsVo(rs.getString("CLASSIFICATION"),null,null);
         }
     }
 }

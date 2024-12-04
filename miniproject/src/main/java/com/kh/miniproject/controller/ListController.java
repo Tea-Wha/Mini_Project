@@ -21,6 +21,7 @@ public class ListController {
     public ResponseEntity<List<ListVo>> getFilteredCars(
             @RequestParam(required = false) String carName,
             @RequestParam(required = false) String manufacturer,
+            @RequestParam(required = false) Boolean isPrice,
             @RequestParam(required = false) Integer minPrice,
             @RequestParam(required = false) Integer maxPrice,
             @RequestParam(required = false) String engineType,
