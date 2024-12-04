@@ -15,9 +15,21 @@ const ListContainer = styled.div``
 const sortReducer = (state, action) => {
 	switch (action.type) {
 		case "SET_SORT_BY":
-			return { ...state, sortBy: action.payload };
-		case "SET_SORT_TYPE":
-			return { ...state, sortType: action.payload };
+			// 정렬 기준 변경 시 정렬 방향을 초기화
+			if (state.sortBy === action.payload) {
+				// 기준이 동일하면 정렬 방향 토글
+				return {
+					...state,
+					sortType: state.sortType === "asc" ? "desc" : "asc",
+				};
+			} else {
+				// 기준이 바뀌면 정렬 방향 초기화
+				return {
+					...state,
+					sortBy: action.payload,
+					sortType: "asc", // 새 기준으로 변경 시 초기값
+				};
+			}
 		default:
 			return state;
 	}
@@ -42,7 +54,7 @@ const SearchMain = () => {
 		sortType: "asc",
 	});
 	// 받아온 정보를 배열로 받을 list
-	const [list, setList] = useState([]);
+	const [list, setList] = useState(null);
 	
 	const {name,company,price,engine,carClass} = useContext(SearchContext);
 	
@@ -56,7 +68,8 @@ const SearchMain = () => {
 			alert("검색에 서버가 응답하지 않습니다.")
 		}
 	}
-	window.localStorage.clear()
+	
+		
 	useEffect(() => {
 		search();
 	}, [company, engine, carClass, sort.sortBy, sort.sortType]);
@@ -93,8 +106,9 @@ const SearchMain = () => {
 			<ListContainer>
 				<SearchArrange
 					sort={sort}
-					setSortBy={(sortBy) => dispatchSort({ type: "SET_SORT_BY", payload: sortBy })}
-					setSortType={(sortType) => dispatchSort({ type: "SET_SORT_TYPE", payload: sortType })}
+					setSortBy={(sortBy) =>
+						dispatchSort({ type: "SET_SORT_BY", payload: sortBy })
+					}
 				/>
 				<SearchItems list={list}/>
 			</ListContainer>

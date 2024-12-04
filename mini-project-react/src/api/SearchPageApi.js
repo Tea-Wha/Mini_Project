@@ -29,7 +29,7 @@ const SearchApi = {
 			engine: engine,
 			carClass: carClass,
 			sortBy: sort.sortBy,
-			sortOrder: sort.order,
+			sortOrder: sort.sortType,
 		};
 		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
 	},
