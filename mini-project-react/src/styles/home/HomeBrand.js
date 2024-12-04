@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ export const ButtonContainer = styled.div`
   right: 20px;
   width: 100px;
   height: 50px;
-  background-color: black;
+  background-color: none;
   justify-content: center;
   align-items: center;
 `;
@@ -41,7 +41,53 @@ export const Button = styled.button`
   position: relative;
   width: 30px;
   height: 30px;
+  border: 1px solid #dadcdf;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
   & + & {
     margin-left: 20px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 38%;
+    left: 45%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 62%;
+    left: 45%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  & + &::before {
+    position: absolute;
+    top: 38%;
+    left: 55%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  & + &::after {
+    content: "";
+    position: absolute;
+    top: 62%;
+    left: 55%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 `;
