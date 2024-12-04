@@ -1,4 +1,5 @@
 import styled, {css} from "styled-components";
+import {Link} from "react-router-dom";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -74,13 +75,52 @@ export const MenuItem = styled.button`
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 30px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
   transition: background-color 0.3s ease, transform 0.5s ease;
   background-color: ${(props) =>
     props.isSubOpen ? "rgba(128,128,128,0.3)" : "white"};
   &:hover {
     background-color: rgba(128, 128, 128, 0.3);
   }
+  & + &::before {
+    content: "";
+    position: absolute;
+    top: -21px;
+    left: 0px;
+    width: 200px;
+    height: 2px;
+    background-color: #dadcdf;
+    transform: rotate(0deg);
+  }
+  ${(props) =>
+    props.id === "brand" &&
+    css`
+      &::before {
+        content: "";
+        position: absolute;
+        top: -21px;
+        left: 0px;
+        width: 200px;
+        height: 2px;
+        background-color: #dadcdf;
+        transform: rotate(0deg);
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 61px;
+        left: 0px;
+        width: 200px;
+        height: 2px;
+        background-color: #dadcdf;
+        transform: rotate(0deg);
+      }
+    `}
 `;
+// toggle 버튼들 누를 시 선이 사라지는 현상 발생
+// 해결하긴 했지만 마음에 안들게 해결함 -> 나중에 다시 봐볼것
 
 export const CloseButton = styled.button`
   // 그리기용
@@ -108,4 +148,9 @@ export const MenuItemSmall = styled.button`
   border: none;
   font-weight: bold;
   cursor: pointer;
+`;
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  position: relative;
+  color: black;
 `;
