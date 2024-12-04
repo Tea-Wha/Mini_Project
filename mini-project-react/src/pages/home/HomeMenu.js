@@ -37,7 +37,7 @@ const HomeMenu = ({ setMenuOpen, subPageOpen, setSubPageOpen, menuOpen }) => {
   // 브랜드 쪽 SideContainer는 스크롤 추가해서 전체 브랜드 대표 차 진열 예정
   return (
     <>
-      <MenuContainer isOpen={menuOpen}>
+      <MenuContainer isOpen={menuOpen} subPageOpen={subPageOpen}>
         <MenuGroup>
           {menuList.map((menu) => (
             <Link to={menu.link}>
@@ -55,8 +55,9 @@ const HomeMenu = ({ setMenuOpen, subPageOpen, setSubPageOpen, menuOpen }) => {
             </MenuItem>
           ))}
         </MenuGroup>
-        {toggleList.map((menu) => (
+        {toggleList.map((menu,idx) => (
           <HomeSideMenu
+            idx={idx}
             key={menu.id}
             id={menu.id}
             isSubOpen={subPageOpen[menu.id]}
