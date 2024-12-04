@@ -1,14 +1,11 @@
 package com.kh.miniproject.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class ManufacturerVo {
     private String manufacturerName;
     private String url;
-
-    public ManufacturerVo(String companyName, String imageUrl) {
-    }
 }
