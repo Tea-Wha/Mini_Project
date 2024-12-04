@@ -8,7 +8,7 @@ export const MenuSideContainer = styled.div`
   // 보이기용
   height: 100vh;
   z-index: -1;
-  
+
   transition: transform 0.3s ease-in-out;
 
   ${(props) =>
@@ -23,13 +23,18 @@ export const MenuGroup = styled.div`
   flex-direction: column;
   // 보이기용 공간
   margin: 10px 20px;
-  background-color: white;
+  background-color: transparent;
   position: relative;
   height: 50vh;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  ${(props) =>
+    props.isSubOpen &&
+    css`
+      background-color: white;
+    `}
 `;
 
 export const MenuItem = styled.button`
@@ -38,9 +43,17 @@ export const MenuItem = styled.button`
   margin: 10px 20px;
   padding: 10px 20px;
   cursor: pointer;
-  background-color: white;
+  background-color: transparent;
   border: none;
   font-weight: bold;
+  font-size: 1rem;
+  color: transparent;
+  ${(props) =>
+    props.isSubOpen &&
+    css`
+      background-color: white;
+      color: black;
+    `}
 `;
 
 export const MenuItemSmall = styled.button`
@@ -48,10 +61,17 @@ export const MenuItemSmall = styled.button`
   padding: 5px 0;
   font-size: 0.8em;
   margin: 15px 0 0;
-  background-color: white;
+  background-color: transparent;
   border: none;
   font-weight: bold;
   cursor: pointer;
+  color: transparent;
+  ${(props) =>
+    props.isSubOpen &&
+    css`
+      background-color: white;
+      color: black;
+    `}
 `;
 
 export const FindGroup = styled.div`

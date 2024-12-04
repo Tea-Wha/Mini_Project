@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -27,23 +27,6 @@ export const MenuContainer = styled.div`
       width: 650px;
     `}
 `;
-export const MenuSideContainer = styled.div`
-  display: flex;
-  position: relative;
-  // 보이기용
-  height: 100vh;
-  background-color: rgba(128, 128, 128, 0.6);
-  z-index: 0;
-
-  transform: translateX(-200%);
-  transition: transform 0.3s ease-in-out;
-
-  ${(props) =>
-    props.isMypage &&
-    css`
-      transform: translateX(0);
-    `}
-`;
 
 export const MenuGroup = styled.div`
   display: flex;
@@ -52,7 +35,7 @@ export const MenuGroup = styled.div`
   margin: 10px 20px;
   background-color: white;
   position: relative;
-  height: 50vh;
+  height: 25vh;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -74,7 +57,8 @@ export const MenuItem = styled.button`
   border-radius: 5px;
   font-weight: bold;
   font-size: 1.1rem;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  margin-top: 15px;
   position: relative;
   justify-content: center;
   align-items: center;
@@ -87,7 +71,7 @@ export const MenuItem = styled.button`
   & + &::before {
     content: "";
     position: absolute;
-    top: -21px;
+    top: -16px;
     left: 0px;
     width: 200px;
     height: 2px;
@@ -100,7 +84,7 @@ export const MenuItem = styled.button`
       &::before {
         content: "";
         position: absolute;
-        top: -21px;
+        top: -16px;
         left: 0px;
         width: 200px;
         height: 2px;
@@ -110,7 +94,7 @@ export const MenuItem = styled.button`
       &::after {
         content: "";
         position: absolute;
-        top: 61px;
+        top: 55px;
         left: 0px;
         width: 200px;
         height: 2px;
