@@ -24,7 +24,7 @@ const HomeHead = () => {
 
   const onClickLogin = () => {
     setMenuOpen(true);
-    setSubPageOpen(true);
+    setSubPageOpen({...subPageOpen, myPage: true});
   };
 
   return (
