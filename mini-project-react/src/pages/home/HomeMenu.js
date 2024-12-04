@@ -1,13 +1,12 @@
-import {Link} from "react-router-dom";
 import {
   CloseButton,
   MenuContainer,
   MenuGroup,
   MenuItem,
   StyledLink,
+  StyledDiv,
 } from "../../styles/home/HomeMenu";
 import HomeSideMenu from "./HomeSideMenu";
-import {useState} from "react";
 
 // 부모 클래스에서 값을 알기 위해 부모에서 useState생성후 props로 내려줌
 // myPageOpen 은 마이페이지부분 열기
@@ -43,6 +42,7 @@ const HomeMenu = ({setMenuOpen, subPageOpen, setSubPageOpen, menuOpen}) => {
           {menuList.map((menu) => (
             <MenuItem key={menu.name}>
               <StyledLink to={menu.link}>{menu.name}</StyledLink>
+              <StyledDiv></StyledDiv>
             </MenuItem>
           ))}
           {toggleList.map((menu) => (
@@ -53,6 +53,7 @@ const HomeMenu = ({setMenuOpen, subPageOpen, setSubPageOpen, menuOpen}) => {
               isSubOpen={subPageOpen[menu.id]}
             >
               {menu.name}
+              <StyledDiv></StyledDiv>
             </MenuItem>
           ))}
         </MenuGroup>
@@ -64,7 +65,7 @@ const HomeMenu = ({setMenuOpen, subPageOpen, setSubPageOpen, menuOpen}) => {
             isSubOpen={subPageOpen[menu.id]}
           />
         ))}
-        <CloseButton onClick={onClickClose}> X </CloseButton>
+        <CloseButton onClick={onClickClose}> </CloseButton>
       </MenuContainer>
     </>
   );
