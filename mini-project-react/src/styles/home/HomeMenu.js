@@ -73,7 +73,7 @@ export const MenuItem = styled.button`
   border: none;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 30px;
   position: relative;
   justify-content: center;
@@ -128,9 +128,9 @@ export const CloseButton = styled.button`
   height: 50px;
   margin: 10px 20px;
   padding: 10px 20px;
-  text-align: center;
   background-color: rgba(128, 128, 128, 0);
   border-radius: 30%;
+  position: relative;
   border: none;
   cursor: pointer;
   transition: background-color 0.5s ease, transform 0.5s ease;
@@ -138,19 +138,67 @@ export const CloseButton = styled.button`
     background-color: rgba(128, 128, 128, 0.3);
     font-weight: bold;
   }
+  &:hover::before {
+    height: 2px;
+  }
+  &:hover::after {
+    height: 2px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 1px;
+    background-color: black;
+    border-radius: 10px;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 1px;
+    border-radius: 10px;
+    background-color: black;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 `;
 
-export const MenuItemSmall = styled.button`
-  width: 90px;
-  padding: 5px 0;
-  margin-top: 15px;
-  background-color: white;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-`;
 export const StyledLink = styled(Link)`
   text-decoration: none;
   position: relative;
   color: black;
+`;
+export const StyledDiv = styled.div`
+  background-color: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 65%;
+    left: 60%;
+    width: 10px;
+    height: 2px;
+    background-color: grey;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 `;

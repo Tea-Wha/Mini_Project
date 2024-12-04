@@ -1,9 +1,16 @@
 import {useEffect, useState} from "react";
-import {ImageContainer, CircleButton} from "../../styles/home/HomeImage";
+import {
+  ImageContainer,
+  CircleButton,
+  PauseButton,
+  StartButton,
+} from "../../styles/home/HomeImage";
 
 const HomeImage = () => {
   const [index, setIndex] = useState(0);
   const [autoScroll, setAutoScroll] = useState(null);
+  const [pauseClick, setPauseClick] = useState(true);
+  const [startClick, setStartClick] = useState(false);
 
   const imageList = [
     "/testimages/001.png",
@@ -43,8 +50,20 @@ const HomeImage = () => {
 
   const handleClickButton = (idx) => {
     setIndex(idx); // 버튼 클릭 시 인덱스 변경
+    // stopAutoScroll(); // 클릭하면 자동 스크롤 멈춤
+    // startAutoScroll(); // 그 뒤로 다시 autoScroll 시작
+  };
+
+  const pauseClickButton = () => {
     stopAutoScroll(); // 클릭하면 자동 스크롤 멈춤
-    startAutoScroll(); // 그 뒤로 다시 autoScroll 시작
+    setPauseClick(!pauseClick);
+    setStartClick(!startClick);
+  };
+
+  const startClickButton = () => {
+    startAutoScroll(); // 클릭하면 자동 스크롤 멈춤
+    setStartClick(!startClick);
+    setPauseClick(!pauseClick);
   };
 
   return (
@@ -56,6 +75,8 @@ const HomeImage = () => {
           onClick={() => handleClickButton(idx)} // 버튼 클릭 시 index 변경
         />
       ))}
+      <PauseButton onClick={() => pauseClickButton()} isPause={pauseClick} />
+      <StartButton onClick={() => startClickButton()} isStart={startClick} />
     </ImageContainer>
   );
 };

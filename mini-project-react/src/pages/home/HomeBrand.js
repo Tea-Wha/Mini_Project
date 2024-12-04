@@ -42,8 +42,8 @@ const HomeBrand = () => {
       <Container>
         <SubContainer>
           <ButtonContainer>
-            <Button></Button>
-            <Button></Button>
+            <Button />
+            <Button />
           </ButtonContainer>
           {brandList.map((brand) => (
             <HomeBrandImage
