@@ -18,20 +18,19 @@ public class ListService {
     public List<ListVo> getFiltered(ListVo listVo) {
         String carName = listVo.getCarName();
         String manufacturer = listVo.getManufacturer();
-        Integer price = listVo.getPrice();
         Integer minPrice = listVo.getMinPrice();
         Integer maxPrice = listVo.getMaxPrice();
         String engineType = listVo.getEngineType();
         String classification = listVo.getClassification();
         String sortBy = listVo.getSortBy();
         String sortType = listVo.getSortType();
-        log.error("service : carName = {}, manufacturer = {}, price = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, price, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         // 가격이 활성화된 경우(가격 범위 필터 적용)
         
         log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);
         
         // Repository 에서 직접 정렬된 데이터 가져오기
-        return listRepository.getFilter(carName, manufacturer, price, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        return listRepository.getFilter(carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
     }
 
 

@@ -1,40 +1,66 @@
 import styled, {css} from "styled-components";
-import {Button} from "@mui/material";
+import {ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {useState} from "react";
+import {ButtonContainer} from "../../styles/home/HomeBrand";
 
-const OptionContainer = styled.div`
-    display: ${props => props.visible ? "flex" : "none"};
+//https://mui.com/material-ui/react-toggle-button/
+const OptionContainer = styled(ToggleButtonGroup)`
+    display: flex;
+		flex-wrap: wrap;
+		margin: 10px;
 `;
 
-const ToggleOption = styled(Button)``
+const ToggleOption = styled(ToggleButton)`
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		width: 100px;
+		height: 100px;
+		margin: 10px;
+`
+
+const ToggleButtonContainer = styled.div`
+		position: relative;
+		width: 100px;
+		height: 100px;
+    margin: 10px;
+`
+
 
 const Image = styled.img`
-width: 100px;
-		height: 100px;
+		width: 50px;
 `
 
 const SearchOption = ({value, setter, list, visible}) => {
 	console.log(visible)
 	
-	const onClickToggleOption = e => {
-		console.log("추가할 내용이 들어있는 리스트 : " + JSON.stringify(list))
-		console.log("현재 담겨있는 값들 : " + value)
-		const newValue = e.currentTarget.getAttribute('data-name'); // data-name 속성 값 가져오기
-		console.log("새로 추가할 값 : " + newValue)
-		if (value !== null && value.includes(newValue)) {
-			setter(value.filter(item => item !== newValue)); // 값이 있으면 배열에서 제거
-		} else {
-			setter([...value, newValue]); // 값이 없으면 배열에 추가
-		}
-	}
+	const [formats, setFormats] = useState(() => value);
+	
+	const handleFormat = (event, newFormats) => {
+		console.log(newFormats);
+		setFormats(newFormats);
+		setter(newFormats);
+	};
 	
 	
 	return (
-		<OptionContainer visible={visible}>
+		<OptionContainer
+			sx={{ display: visible ? "flex" : "none",
+				border: "1px solid lightgray", // 그룹에 테두리 추가
+				borderRadius: 2,}}
+			onChange={handleFormat}
+			variant="text"
+			value={formats}>
 			{list && list.map((item, index) => (
-				<ToggleOption onClick={onClickToggleOption} key={index} data-name={item.name} variant={value.includes(item.name) ? "contained" : "outlined"}>
-					<p>{item.name}</p>
-					{item.image && <Image src={item.image} alt=""/>}
-				</ToggleOption>
+				<ToggleButtonContainer>
+					<ToggleOption key={index}
+					              value={item.name}
+					              sx={{border: "1px solid lightgray", overflow: "hidden"}}
+					              color="primary">
+						<p>{item.name}</p>
+						{item.image && <Image src={item.image} alt=""/>}
+					</ToggleOption>
+				</ToggleButtonContainer>
 			))}
 		</OptionContainer>
 	)
