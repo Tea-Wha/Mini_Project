@@ -6,6 +6,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 public class ListVo {
+    private int carNo;
     private String carName;
     private String manufacturer;
     private int price;

@@ -23,13 +23,13 @@ const SearchStore= (props) => {
 	const [name, setName] = useSyncedState("searchName", "")
 	// 회사 이름을 통해 검색하는 company
 	// {버튼을 통해 조작할거라  in 사용}
-	const [company, setCompany] = useSyncedState("searchCompany", "");
+	const [company, setCompany] = useSyncedState("searchCompany", []);
 	// 엔진타입을 선택하기 위한 engine
 	// {마찬가지로 버튼으로 고르는 것이므로 in 사용}
-	const [engine, setEngine] = useSyncedState("searchEngine", "");
+	const [engine, setEngine] = useSyncedState("searchEngine", []);
 	// 차종을 통해 검색하는 carClass
 	// { company 와 동일}
-	const [carClass, setCarClass] = useSyncedState("searchCarClass", "")
+	const [carClass, setCarClass] = useSyncedState("searchCarClass", [])
 	// 가격 범위를 통해 검색을 할 때 사용할 price
 	// {isPrice 가 true 면 price 에 BETWEEN ? AND ? 를 사용하여 값 추출}
 	const [price, setPrice] = useSyncedState("searchPrice", {isPrice: false, min: 0, max: 999999999,});

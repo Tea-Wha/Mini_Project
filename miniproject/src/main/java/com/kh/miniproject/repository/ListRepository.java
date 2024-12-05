@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -17,40 +18,59 @@ import java.util.List;
 @Slf4j
 public class ListRepository {
     private final JdbcTemplate jdbcTemplate;
-
-    public List<ListVo> getFilter(String carName, String manufacturer, Integer minPrice, Integer maxPrice, String engineType, String classification) {
+    
+    public List<ListVo> getFilter(String carName, String manufacturer, Boolean isPrice, Integer minPrice, Integer maxPrice,
+                                    String engineType, String classification, String sortBy, String sortType) {
         StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
+        log.error("repository : carName = {}, manufacturer = {}, isPrice = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, isPrice, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         if (carName != null && !carName.isEmpty()) {
-            sql.append("AND CAR_NAME LIKE ?");
+            sql.append("AND CAR_NAME LIKE ? ");
             params.add(carName);
         }
+        
         if (manufacturer != null && !manufacturer.isEmpty()) {
-            sql.append("AND MANUFACTURER_NAME = ? ");
-            params.add(manufacturer);
+            sql.append("AND MANUFACTURER_NAME IN (")
+                .append(manufacturer)
+                .append(") ");
         }
-        if (minPrice != null) {
-            sql.append("AND PRICE >= ? ");
-            params.add(minPrice);
+        
+        if (isPrice != null && isPrice) {
+            if (minPrice != null) {
+                sql.append("AND PRICE >= ? ");
+                params.add(minPrice);
+            }
+            if (maxPrice != null) {
+                sql.append("AND PRICE <= ? ");
+                params.add(maxPrice);
+            }
         }
-        if (maxPrice != null) {
-            sql.append("AND PRICE <= ? ");
-            params.add(maxPrice);
-        }
+        
         if (engineType != null && !engineType.isEmpty()) {
-            sql.append("AND ENGINE_TYPE = ? ");
-            params.add(engineType);
+            sql.append("AND ENGINE_TYPE IN (")
+                .append(engineType)
+                .append(") ");
         }
+        
         if (classification != null && !classification.isEmpty()) {
-            sql.append("AND CLASSIFICATION = ? ");
-            params.add(classification);
+            sql.append("AND CLASSIFICATION IN (")
+                .append(classification)
+                .append(") ");
         }
-
-        log.info("Executing query: {}", sql);
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql.append("ORDER BY ").append(sortBy).append(" ");
+            if (sortType != null && (sortType.equalsIgnoreCase("ASC") || sortType.equalsIgnoreCase("DESC"))) {
+                sql.append(sortType).append(" ");
+            }
+        }
+        
+        log.warn("실행된 쿼리문 : {}", sql);
+        
         return jdbcTemplate.query(sql.toString(), params.toArray(), new RowMapper<ListVo>() {
             @Override
             public ListVo mapRow(ResultSet rs, int rowNum) throws SQLException {
                 ListVo listVo = new ListVo();
+                listVo.setCarNo(rs.getInt("CAR_NO"));
                 listVo.setCarName(rs.getString("CAR_NAME"));
                 listVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
                 listVo.setPrice(rs.getInt("PRICE"));
@@ -60,4 +80,5 @@ public class ListRepository {
             }
         });
     }
+    
 }

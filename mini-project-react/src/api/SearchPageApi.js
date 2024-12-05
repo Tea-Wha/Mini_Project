@@ -19,17 +19,17 @@ const SearchApi = {
 	// -------------------------------------------------------------------------
 	carListSearch: async (name, company, price, engine, carClass, sort) => {
 		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + name + " - " + company + " - " + JSON.stringify(price) + " - " + engine + " - " + carClass + " - " + JSON.stringify(sort));
+			"검색 내용 : " + name + " - " + company.join(",") + " - " + JSON.stringify(price) + " - " + engine.join(",") + " - " + carClass.join(",") + " - " + JSON.stringify(sort));
 		const params = {
-			name: `%${name}%`,
-			manufacturer: company,
+			name: name,
+			manufacturer: company.join(","),
 			isPrice: price.isPrice,
 			maxPrice: price.max,
 			minPrice: price.min,
-			engine: engine,
-			carClass: carClass,
+			engine: engine.join(","),
+			carClass: carClass.join(","),
 			sortBy: sort.sortBy,
-			sortOrder: sort.sortType,
+			sortType: sort.sortType,
 		};
 		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
 	},

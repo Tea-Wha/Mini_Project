@@ -7,7 +7,7 @@ const SearchArrange = ({ sort, setSortBy }) => {
 		setSortBy(sortBy); // 기준에 따라 정렬 상태 변경
 	};
 	const sortList = [
-		{id: "name", name: "이름순",},
+		{id: "car_Name", name: "이름순",},
 		{id: "price", name: "가격순",},]
 	
 	return (

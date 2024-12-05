@@ -5,12 +5,15 @@ import SearchOptions from "./SearchOptions";
 import {SearchContext} from "../../context/SearchStore";
 import SearchArrange from "./SearchArrange";
 import SearchItems from "./SearchItems";
+import {Button} from "@mui/material";
 
 const BoardContainer = styled.div``
 
 const SearchContainer = styled.div``
 
 const ListContainer = styled.div``
+
+const ClearButton = styled(Button)``
 
 const sortReducer = (state, action) => {
 	switch (action.type) {
@@ -56,7 +59,7 @@ const SearchMain = () => {
 	// 받아온 정보를 배열로 받을 list
 	const [list, setList] = useState(null);
 	
-	const {name,company,price,engine,carClass} = useContext(SearchContext);
+	const {name,company,price,engine,carClass, setName, setCompany, setPrice, setEngine, setCarClass} = useContext(SearchContext);
 	
 	// 검색을 위한 search
 	const search = async () => {
@@ -68,11 +71,25 @@ const SearchMain = () => {
 			alert("검색에 서버가 응답하지 않습니다.")
 		}
 	}
-	
 		
 	useEffect(() => {
 		search();
-	}, [company, engine, carClass, sort.sortBy, sort.sortType]);
+	}, [company, engine, carClass, sort]);
+	
+	const clearLocalStorage = () => {
+		localStorage.removeItem("searchName");
+		localStorage.removeItem("searchCompany");
+		localStorage.removeItem("searchEngine");
+		localStorage.removeItem("searchCarClass");
+		localStorage.removeItem("searchPrice");
+		
+		// 상태도 초기화
+		setName("");
+		setCompany([]);
+		setEngine([]);
+		setCarClass([]);
+		setPrice({ isPrice: false, min: 0, max: 999999999 });
+	};
 	
 	useEffect(() => {
 		const fetchInitialData = async () => {
@@ -110,6 +127,7 @@ const SearchMain = () => {
 						dispatchSort({ type: "SET_SORT_BY", payload: sortBy })
 					}
 				/>
+				<ClearButton onClick={clearLocalStorage}> X </ClearButton>
 				<SearchItems list={list}/>
 			</ListContainer>
 		</BoardContainer>
