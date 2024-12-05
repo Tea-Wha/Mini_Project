@@ -15,14 +15,24 @@ import java.util.List;
 public class ListService {
     private final ListRepository listRepository;
     
-    public List<ListVo> getFilter(String carName, String manufacturer, Boolean isPrice, Integer minPrice, Integer maxPrice,
-                                    String engineType, String classification, String sortBy, String sortType) {
-        log.error("service : carName = {}, manufacturer = {}, isPrice = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, isPrice, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+    public List<ListVo> getFiltered(ListVo listVo) {
+        String carName = listVo.getCarName();
+        String manufacturer = listVo.getManufacturer();
+        Integer price = listVo.getPrice();
+        Integer minPrice = listVo.getMinPrice();
+        Integer maxPrice = listVo.getMaxPrice();
+        String engineType = listVo.getEngineType();
+        String classification = listVo.getClassification();
+        String sortBy = listVo.getSortBy();
+        String sortType = listVo.getSortType();
+        log.error("service : carName = {}, manufacturer = {}, price = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, price, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         // 가격이 활성화된 경우(가격 범위 필터 적용)
         
         log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);
         
-        // Repository에서 직접 정렬된 데이터 가져오기
-        return listRepository.getFilter(carName, manufacturer, isPrice, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        // Repository 에서 직접 정렬된 데이터 가져오기
+        return listRepository.getFilter(carName, manufacturer, price, minPrice, maxPrice, engineType, classification, sortBy, sortType);
     }
+
+
 }

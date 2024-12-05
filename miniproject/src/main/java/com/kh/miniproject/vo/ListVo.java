@@ -9,7 +9,11 @@ public class ListVo {
     private int carNo;
     private String carName;
     private String manufacturer;
-    private int price;
+    private Integer price;
+    private Integer minPrice;
+    private Integer maxPrice;
     private String engineType;
     private String classification;
+    private String sortBy;
+    private String sortType;
 }
