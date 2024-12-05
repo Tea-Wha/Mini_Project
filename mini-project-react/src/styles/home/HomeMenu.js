@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import styled, {css} from "styled-components";
+import {Link} from "react-router-dom";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const MenuGroup = styled.div`
   margin: 10px 20px;
   background-color: white;
   position: relative;
-  height: 25vh;
+  height: 32vh;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
