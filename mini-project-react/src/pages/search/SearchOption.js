@@ -16,9 +16,11 @@ const SearchOption = ({value, setter, list, visible}) => {
 	console.log(visible)
 	
 	const onClickToggleOption = e => {
-		console.log(value)
-		const newValue = e.target.value;
-		if (value.includes(newValue)) {
+		console.log("추가할 내용이 들어있는 리스트 : " + JSON.stringify(list))
+		console.log("현재 담겨있는 값들 : " + value)
+		const newValue = e.currentTarget.getAttribute('data-name'); // data-name 속성 값 가져오기
+		console.log("새로 추가할 값 : " + newValue)
+		if (value !== null && value.includes(newValue)) {
 			setter(value.filter(item => item !== newValue)); // 값이 있으면 배열에서 제거
 		} else {
 			setter([...value, newValue]); // 값이 없으면 배열에 추가
@@ -33,15 +35,11 @@ const SearchOption = ({value, setter, list, visible}) => {
 	return (
 		<OptionContainer visible={visible}>
 			{list && list.map((item, index) => (
-				<ToggleOption onClick={onClickToggleOption} key={index}>
+				<ToggleOption onClick={onClickToggleOption} key={index} data-name={item.name}>
 					<p>{item.name}</p>
 					{item.image && <Image src={item.image} alt=""/>}
 				</ToggleOption>
 			))}
-			<ToggleOption onClick={onClickToggleOption}>
-				<p>확인용</p>
-				<Image src="/testimages/001.png" alt=""/>
-			</ToggleOption>
 		</OptionContainer>
 	)
 }

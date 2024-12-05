@@ -15,7 +15,7 @@ const SearchItems = ({list}) => {
 				list.map((item) => {
 					console.log(item); // 각 항목이 제대로 렌더링되는지 확인
 					return (
-						<Link to={`/carInfo?carNo=${item.carName}`} key={item.carName}>
+						<Link to={`/carInfo/${item.carNo}`} key={item.carName}>
 							<SearchItem item={item} />
 						</Link>
 					);

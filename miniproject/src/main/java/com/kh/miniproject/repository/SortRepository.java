@@ -27,25 +27,25 @@ public class SortRepository {
 
     // 제조사 리스트 조회
     public List<OptionsVo> getManufacturer() {
-        log.warn("제조사 : " + jdbcTemplate.query(SORT_MANUFACTURERS, new ManufacturerRowMapper()));
+        log.info("리포지터리 : 제조사");
         return jdbcTemplate.query(SORT_MANUFACTURERS, new ManufacturerRowMapper());
     }
 
     // 엔진 타입 리스트 조회
     public List<OptionsVo> getEngines() {
-        log.warn("엔진 : " + jdbcTemplate.query(SORT_ENGINES, new EngineRowMapper()));
+        log.info("리포지터리 : 엔진");
         return jdbcTemplate.query(SORT_ENGINES, new EngineRowMapper());
     }
 
     // 최대 가격 조회
     public Integer getMaxPrice() {
-        log.warn("최대 가격 : "+ jdbcTemplate.queryForObject(SORT_MAX_PRICE, Integer.class));
+        log.info("리포지터리 : 가격");
         return jdbcTemplate.queryForObject(SORT_MAX_PRICE, Integer.class);
     }
 
     // 자동차 클래스 리스트 조회
     public List<OptionsVo> getCarClasses() {
-        log.warn("차종 : " + jdbcTemplate.query(SORT_CLASSIFICATIONS, new ClassificationRowMapper()));
+        log.info("리포지터리 : 차종");
         return jdbcTemplate.query(SORT_CLASSIFICATIONS, new ClassificationRowMapper());
     }
     
