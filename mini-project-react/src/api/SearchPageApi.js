@@ -19,15 +19,15 @@ const SearchApi = {
 	// -------------------------------------------------------------------------
 	carListSearch: async (name, company, price, engine, carClass, sort) => {
 		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + name + " - " + company.join(",") + " - " + JSON.stringify(price) + " - " + engine.join(",") + " - " + carClass.join(",") + " - " + JSON.stringify(sort));
+			"검색 내용 : " + name + " - " + company + " - " + JSON.stringify(price) + " - " + engine + " - " + carClass + " - " + JSON.stringify(sort));
 		const params = {
 			name: name,
-			manufacturer: company.join(","),
+			manufacturer: company,
 			isPrice: price.isPrice,
 			maxPrice: price.max,
 			minPrice: price.min,
-			engine: engine.join(","),
-			carClass: carClass.join(","),
+			engine: engine,
+			carClass: carClass,
 			sortBy: sort.sortBy,
 			sortType: sort.sortType,
 		};
