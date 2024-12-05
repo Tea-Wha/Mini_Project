@@ -1,10 +1,11 @@
 package com.kh.miniproject.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class EngineVo {
     private String engineType;
 }

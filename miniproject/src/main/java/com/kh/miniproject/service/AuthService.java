@@ -12,14 +12,9 @@ public class AuthService {
     private final AuthRepository authRepository;
 
     // UserVo의 회원가입시 정보 객체를 초기화하는 메서드 : 비밀번호는 해쉬처리한 값을 초기화한다.
-    public void registerUser(String userId, String userPw, String nickName, String email, String phoneNum) {
-        String hashedPw = BCrypt.hashpw(userPw, BCrypt.gensalt());
-        UserVo userVo = new UserVo();
-        userVo.setUserId(userId);
+    public void registerUser(UserVo userVo) {
+        String hashedPw = BCrypt.hashpw(userVo.getHashPw(), BCrypt.gensalt());
         userVo.setHashPw(hashedPw);
-        userVo.setNickName(nickName);
-        userVo.setEmail(email);
-        userVo.setPhoneNum(phoneNum);
         authRepository.registerAccount(userVo);
     }
 
@@ -27,10 +22,12 @@ public class AuthService {
     public boolean authenticate(String userId, String userPw) {
         String existHash = authRepository.findHashPassByUserId(userId);
 
-        // Repository 의 DB에 저장되어 있는 값이 Null 이라면
+        // Repository 의 DB에 저장되어 있는 값이 없으면 예외처리
         if (existHash == null) {
-            return false;
+            throw new IllegalArgumentException("존재하지 않는 ID");
         }
         return BCrypt.checkpw(userPw, existHash);
     }
+
+    // Email 인증 API 필요
 }

@@ -1,10 +1,10 @@
 /* 차량 상세 정보를 담기 위한 객체 Vo */
 package com.kh.miniproject.vo;
+import lombok.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class CarVo {
     private int carNum;

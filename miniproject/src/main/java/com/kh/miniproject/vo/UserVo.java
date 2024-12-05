@@ -3,7 +3,9 @@ package com.kh.miniproject.vo;
 
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserVo {
     private String userId;
@@ -11,8 +13,4 @@ public class UserVo {
     private String nickName;
     private String email;
     private String phoneNum;
-
-    public UserVo() {
-
-    }
 }
