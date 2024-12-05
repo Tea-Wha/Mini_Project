@@ -26,7 +26,7 @@ public class ListRepository {
                 carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
 
         if (carName != null && !carName.isEmpty()) {
-            sql.append("AND CAR_NAME LIKE ? ");
+            sql.append("AND UPPER(CAR_NAME) LIKE UPPER(?) ");
             params.add("%" + carName + "%");  // LIKE 조건에 %를 추가
         }
 

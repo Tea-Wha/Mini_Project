@@ -7,7 +7,12 @@ import SearchArrange from "./SearchArrange";
 import SearchItems from "./SearchItems";
 import {Button} from "@mui/material";
 
-const BoardContainer = styled.div``
+const BoardContainer = styled.div`
+	display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+`
 
 const SearchContainer = styled.div``
 
