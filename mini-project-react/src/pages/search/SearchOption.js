@@ -27,15 +27,11 @@ const SearchOption = ({value, setter, list, visible}) => {
 		}
 	}
 	
-	// 리스트 확인용
-	
-	
-	
 	
 	return (
 		<OptionContainer visible={visible}>
 			{list && list.map((item, index) => (
-				<ToggleOption onClick={onClickToggleOption} key={index} data-name={item.name}>
+				<ToggleOption onClick={onClickToggleOption} key={index} data-name={item.name} variant={value.includes(item.name) ? "contained" : "outlined"}>
 					<p>{item.name}</p>
 					{item.image && <Image src={item.image} alt=""/>}
 				</ToggleOption>

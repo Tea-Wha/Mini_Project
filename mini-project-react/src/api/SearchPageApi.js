@@ -23,10 +23,13 @@ const SearchApi = {
 		const params = {
 			name: name,
 			manufacturer: company,
-			price: price,
+			isPrice: price.isPrice,
+			maxPrice: price.max,
+			minPrice: price.min,
 			engine: engine,
 			carClass: carClass,
-			sort: sort
+			sortBy: sort.sortBy,
+			sortType: sort.sortType,
 		};
 		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
 	},
