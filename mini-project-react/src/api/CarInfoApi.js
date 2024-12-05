@@ -17,21 +17,6 @@ const CarInfoApi = {
 	// 가능하면 이미지 링크 + 회사이름의 객체의 배열로 받아올 수 있도록
 	// 안된다면 이름의 배열로 받아오기
 	//---------------------------------------------------------------------
-	companiesList: async () => {
-		console.log("회사 목록 불러오기")
-		return await axios.get(KH_DOMAIN + "/carList/companies");
-	},
-	enginesList: async () => {
-		console.log("엔진 목록 불러오기")
-		return await axios.get(KH_DOMAIN + "/carList/engines");
-	},
-	maxPrice: async () => {
-		console.log("최대 가격 불러오기")
-		return await axios.get(KH_DOMAIN + "/carList/maxPrice");
-	},
-	carClassList: async () => {
-		console.log("자동차 종류 불러오기")
-		return await axios.get(KH_DOMAIN + "/carList/carClasses");
-	}
+	
 }
 export default CarInfoApi

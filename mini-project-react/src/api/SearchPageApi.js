@@ -20,7 +20,7 @@ const SearchApi = {
 	carListSearch: async (name, company, price, engine, carClass, sort) => {
 		
 		const listVo = {
-			name: name,
+			carName: name,
 			manufacturer: company.join(","),
 			isPrice: price.isPrice,
 			maxPrice: price.isPrice ? price.max : null,
