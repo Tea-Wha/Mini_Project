@@ -35,7 +35,7 @@ export const MenuGroup = styled.div`
   margin: 10px 20px;
   background-color: white;
   position: relative;
-  height: 32vh;
+  height: 300px;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
