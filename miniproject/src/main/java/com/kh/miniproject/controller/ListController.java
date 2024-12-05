@@ -18,8 +18,11 @@ public class ListController {
     
     @PostMapping("/search")
     public ResponseEntity<List<ListVo>> getFiltered(@RequestBody ListVo listVo) {
+        log.warn("실행");
+        log.error(listVo.toString());
         // 서비스 로직 호출 (필터링된 자동차 목록 반환)
         List<ListVo> filteredCars = listService.getFiltered(listVo);
+        log.error(filteredCars.toString());
         // 결과 반환
         return ResponseEntity.ok(filteredCars);
     }

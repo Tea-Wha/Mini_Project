@@ -7,13 +7,23 @@ import SearchArrange from "./SearchArrange";
 import SearchItems from "./SearchItems";
 import {Button} from "@mui/material";
 
-const BoardContainer = styled.div``
+const BoardContainer = styled.div`
+		margin: 10px auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+`
+
 
 const SearchContainer = styled.div``
 
 const ListContainer = styled.div``
 
 const ClearButton = styled(Button)``
+
+const LogoButton = styled.div``
+
+const Logo = styled.img``
 
 const sortReducer = (state, action) => {
 	switch (action.type) {
@@ -117,6 +127,10 @@ const SearchMain = () => {
 	
 	return(
 		<BoardContainer>
+			<LogoButton>
+				{/*<Logo src="#" alt="CHANAWA"/>*/}
+				CHANAWA
+			</LogoButton>
 			<SearchContainer>
 				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice} classList={classList} search={search} />
 			</SearchContainer>

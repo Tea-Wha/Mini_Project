@@ -2,22 +2,38 @@ import styled, {css} from "styled-components";
 import {SearchContext} from "../../context/SearchStore";
 import {useContext, useState} from "react";
 import SearchOption from "./SearchOption";
-import {Slider} from "@mui/material";
+import {Button, Input, Slider} from "@mui/material";
 
 const OptionsContainer = styled.div``
 
-const OptionsBlock = styled.div``
+const OptionsBlock = styled.div`
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 80vw;
+		
+`
+const SliderContainer = styled.div`
+    width: 80%;
+		
+		
+`
 
-const SearchInput = styled.input``
+const SearchInput = styled(Input)``
 
-const SearchButton = styled.button``
+const SearchButton = styled(Button)``
 
-const ToggleButton = styled.button``
+const ToggleButton = styled(Button)`
+		width: 100%;
+`
 
+const InputContainer = styled.div``
 
 const PriceSlider = styled(Slider)`
-  
-		visibility: ${props => props.visible ? "visible" : "hidden"};
+		transition: display ;
+		
 `
 
 const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
@@ -53,6 +69,30 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 			list: classList,
 		},
 	]
+	
+	const marks = [
+		{
+			value: 0,
+			label: "0원"
+		},
+		{
+			value: 30000000,
+			label: "3천만원"
+		},
+		{
+			value: 60000000,
+			label: "6천만원"
+		},
+		{
+			value: 100000000,
+			label: "1억원"
+		},
+		{
+			value: 200000000,
+			label: "2억원"
+		}
+	]
+	
 	const onChangeSearch = e => {
 		setName(e.target.value);
 	}
@@ -77,26 +117,31 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 	return(
 		<OptionsContainer>
 			<OptionsBlock>
-				<SearchInput value={name} onChange={onChangeSearch} />
-				<SearchButton onClick={search}>검색</SearchButton>
+				<InputContainer>
+					<SearchInput value={name} onChange={onChangeSearch} variant="outlined" />
+					<SearchButton onClick={search} variant="outlined">검색</SearchButton>
+				</InputContainer>
 			</OptionsBlock>
 			<OptionsBlock>
-				<ToggleButton id="price" onClick={e => {onToggleButton(e);
+				<ToggleButton id="price" variant="outlined" onClick={e => {onToggleButton(e);
 				onTogglePrice();}}>가격</ToggleButton>
-				<PriceSlider
-					value={[price.min, price.max]} // 슬라이더의 두 값을 설정
-					onChange={onChangePrice} // 값 변경 처리
-					valueLabelDisplay="auto" // 값 표시
-					valueLabelFormat={value => `${value}`} // 값 포맷
-					min={0} // 최소 값
-					max={maxPrice?maxPrice:999999999} // 최대 값
-					step={1000000} // 값 간격
-					visible={visible.price} // 가시성 prop 전달
-				/>
+				<SliderContainer>
+					<PriceSlider
+						value={[price.min, price.max]} // 슬라이더의 두 값을 설정
+						onChange={onChangePrice} // 값 변경 처리
+						valueLabelDisplay="auto" // 값 표시
+						valueLabelFormat={value => `${value}`} // 값 포맷
+						min={0} // 최소 값
+						max={maxPrice?maxPrice:999999999} // 최대 값
+						step={5000000} // 값 간격
+						marks={marks} // 특정값 간격
+						sx={{ display: visible.price ? "flex" : "none" }} // 가시성 prop 전달
+					/>
+				</SliderContainer>
 			</OptionsBlock>
 			{optionList.map((item,index) =>(
 				<OptionsBlock key={index}>
-					<ToggleButton id={item.id} onClick={onToggleButton}>{item.name}</ToggleButton>
+					<ToggleButton id={item.id} variant="outlined" onClick={onToggleButton}>{item.name}</ToggleButton>
 					<SearchOption value={item.value} setter={item.setter} list={item.list} visible={visible[item.id]}/>
 				</OptionsBlock>
 			))}

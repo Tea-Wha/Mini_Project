@@ -18,20 +18,21 @@ const SearchApi = {
 	// + AND ENGINE_TYPE in engine 엔진은 안에 있는지로 검색
 	// -------------------------------------------------------------------------
 	carListSearch: async (name, company, price, engine, carClass, sort) => {
-		console.log("조건에따라 검색하기\n" +
-			"검색 내용 : " + name + " - " + company + " - " + JSON.stringify(price) + " - " + engine + " - " + carClass + " - " + JSON.stringify(sort));
-		const params = {
+		
+		const listVo = {
 			name: name,
-			manufacturer: company,
+			manufacturer: company.join(","),
 			isPrice: price.isPrice,
-			maxPrice: price.max,
-			minPrice: price.min,
-			engine: engine,
-			carClass: carClass,
+			maxPrice: price.isPrice ? price.max : null,
+			minPrice: price.isPrice ? price.min : null,
+			engineType: engine.join(","),
+			classification: carClass.join(","),
 			sortBy: sort.sortBy,
 			sortType: sort.sortType,
 		};
-		return await axios.get(KH_DOMAIN + "/carList/search",{ params });
+		console.log("조건에따라 검색하기\n" +
+			"검색 내용 : " + JSON.stringify(listVo));
+		return await axios.post(KH_DOMAIN + "/carList/search", (listVo));
 	},
 	// ------------------------- 국형씨 요청사항 ----------------------------
 	// 가능하면 이미지 링크 + 회사이름의 객체의 배열로 받아올 수 있도록
