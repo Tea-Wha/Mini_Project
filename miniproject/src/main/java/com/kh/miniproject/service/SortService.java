@@ -1,9 +1,6 @@
 package com.kh.miniproject.service;
 
 import com.kh.miniproject.repository.SortRepository;
-import com.kh.miniproject.vo.ClassificationVo;
-import com.kh.miniproject.vo.EngineVo;
-import com.kh.miniproject.vo.ManufacturerVo;
 import com.kh.miniproject.vo.OptionsVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

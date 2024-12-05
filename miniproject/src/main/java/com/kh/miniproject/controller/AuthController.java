@@ -35,7 +35,7 @@ public class AuthController {
         log.info("입력 닉네임 : {}", userVo.getNickName());
         log.info("입력 이메일 : {}", userVo.getEmail());
         log.info("입력 전화번호 : {}", userVo.getPhoneNum());
-        authService.registerUser(userVo.getUserId(), userVo.getHashPw(), userVo.getNickName(), userVo.getEmail(), userVo.getPhoneNum());
+        authService.registerUser(userVo);
         return ResponseEntity.ok("회원가입 성공적으로 완료 하였습니다.");
     }
 
