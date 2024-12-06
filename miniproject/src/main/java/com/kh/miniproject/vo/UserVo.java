@@ -1,4 +1,4 @@
-/* 사용자 계정 생성, 로그인에 필요한 정보를 담는 객체 Vo */
+/* 사용자 계정 생성, 로그인에 필요한 정보에 필요한 Vo */
 package com.kh.miniproject.vo;
 
 import lombok.*;
