@@ -3,11 +3,13 @@ package com.kh.miniproject.service;
 import com.kh.miniproject.repository.AuthRepository;
 import com.kh.miniproject.vo.UserVo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class AuthService {
     private final AuthRepository authRepository;
 
@@ -15,6 +17,7 @@ public class AuthService {
     public void registerUser(UserVo userVo) {
         String hashedPw = BCrypt.hashpw(userVo.getHashPw(), BCrypt.gensalt());
         userVo.setHashPw(hashedPw);
+        log.info("저장된 해쉬값 {}", hashedPw);
         authRepository.registerAccount(userVo);
     }
 

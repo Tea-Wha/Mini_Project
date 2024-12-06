@@ -18,4 +18,6 @@ public class CarVo {
     private int price;
     private String carDesc;
     private String summary;
+
+
 }
