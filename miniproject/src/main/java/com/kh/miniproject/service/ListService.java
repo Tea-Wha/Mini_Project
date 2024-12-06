@@ -22,15 +22,12 @@ public class ListService {
         Integer maxPrice = listVo.getMaxPrice();
         String engineType = listVo.getEngineType();
         String classification = listVo.getClassification();
-        String sortBy = listVo.getSortBy();
-        String sortType = listVo.getSortType();
-        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
-                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}",carName, manufacturer, minPrice, maxPrice, engineType, classification);
+        // 가격이 활성화된 경우(가격 범위 필터 적용)
         
-        log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);
         
         // Repository 에서 직접 정렬된 데이터 가져오기
-        return listRepository.getFilter(carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        return listRepository.getFilter(carName, manufacturer, minPrice, maxPrice, engineType, classification);
     }
 
 

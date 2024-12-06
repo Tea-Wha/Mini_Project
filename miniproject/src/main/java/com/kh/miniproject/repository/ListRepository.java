@@ -19,11 +19,11 @@ public class ListRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<ListVo> getFilter(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
-                                    String engineType, String classification, String sortBy, String sortType) {
+                                    String engineType, String classification) {
         StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
-        log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
-                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}",
+                carName, manufacturer, minPrice, maxPrice, engineType, classification);
 
         if (carName != null && !carName.isEmpty()) {
             sql.append("AND UPPER(CAR_NAME) LIKE UPPER(?) ");
@@ -74,13 +74,7 @@ public class ListRepository {
             sql.append(")");
             
         }
-
-        if (sortBy != null && !sortBy.isEmpty()) {
-            sql.append("ORDER BY ").append(sortBy).append(" ");
-            if (sortType != null && (sortType.equalsIgnoreCase("ASC") || sortType.equalsIgnoreCase("DESC"))) {
-                sql.append(sortType).append(" ");
-            }
-        }
+        
 
         log.warn("실행된 쿼리문 : {}", sql);
 

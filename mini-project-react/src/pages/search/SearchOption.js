@@ -1,32 +1,15 @@
 import styled, {css} from "styled-components";
-import {Button, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {Button, ToggleButton, ToggleButtonGroup, Tooltip} from "@mui/material";
 import {useState} from "react";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const OptionContainer = styled.div`
 		display: flex;
 		border-radius: 8px;
 		margin: 10px;
-		max-height: 0;
-		min-width: 50%;
-		overflow: hidden;
-		opacity: 0;
-		padding: 15px 30px;
-		align-items: center;
-		justify-content: center;
-		z-index: -1;
-    transition: max-height 0.6s ease-in-out, transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
-    transform: translateY(-130%);
-    ${(props) =>
-            props.visible &&
-            css`
-		            z-index: 0;
-		            opacity: 1;
-                border: 1px solid lightgray;
-		            height: auto;
-		            transform: translateY(0);
-		            max-height: 1000px;
-    `}
-`
+		justify-content: space-evenly;
+		align-items: start;
+		`
 
 
 //버튼을 일괄적으로 처리하기 위한 ToggleButton
@@ -63,6 +46,7 @@ const CloseButton = styled(Button)`
 
 const Image = styled.img`
 		width: 50px;
+		margin: 0 auto;
 `
 // value 는 제조사, 엔진, 차종별 선택사항을 저장하는 공간
 // setter 는 이를 바꿔주는 함수
@@ -82,11 +66,11 @@ const SearchOption = ({value, setter, list, visible, setVisible, id}) => {
 	const onClickValueOff = () => {
 		setter([])
 		setFormats([])
-		setVisible({[id]:false})
+		setVisible({...visible, [id]:false})
 	}
 	
 	return (
-		<OptionContainer visible={visible}>
+		<OptionContainer visible={visible[id]}>
 			<OptionGroup
 				onChange={handleFormat}
 				value={formats}>
@@ -104,10 +88,11 @@ const SearchOption = ({value, setter, list, visible, setVisible, id}) => {
 				))}
 				
 			</OptionGroup>
-			<CloseButton onClick={onClickValueOff} variant="outlined"
-			             sx={{position: "absolute",
-				             right: 10,
-				             top: 10}}>X</CloseButton>
+			<Tooltip title="선택 내용 초기화">
+				<CloseButton onClick={onClickValueOff} variant="outlined">
+					<ClearIcon/>
+				</CloseButton>
+			</Tooltip>
 		</OptionContainer>
 	)
 }

@@ -17,7 +17,7 @@ const SearchApi = {
 	// price 의 경우 최대 최소를 받아서 사용
 	// + AND ENGINE_TYPE in engine 엔진은 안에 있는지로 검색
 	// -------------------------------------------------------------------------
-	carListSearch: async (name, company, price, engine, carClass, sort) => {
+	carListSearch: async (name, company, price, engine, carClass) => {
 		
 		const listVo = {
 			carName: name,
@@ -27,8 +27,6 @@ const SearchApi = {
 			minPrice: price.isPrice ? price.min : null,
 			engineType: engine.join(","),
 			classification: carClass.join(","),
-			sortBy: sort.sortBy,
-			sortType: sort.sortType,
 		};
 		console.log("조건에따라 검색하기\n" +
 			"검색 내용 : " + JSON.stringify(listVo));
