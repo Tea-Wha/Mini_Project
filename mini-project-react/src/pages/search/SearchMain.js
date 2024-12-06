@@ -3,9 +3,10 @@ import SearchApi from "../../api/SearchPageApi"
 import styled from "styled-components";
 import SearchOptions from "./SearchOptions";
 import {SearchContext} from "../../context/SearchStore";
-import SearchArrange from "./SearchArrange";
 import SearchItems from "./SearchItems";
-import {Button} from "@mui/material";
+import {Button, Tooltip} from "@mui/material";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+
 
 //정렬용으로 만들어놓음 밑은 그냥 기능구분용
 const BoardContainer = styled.div`
@@ -124,13 +125,15 @@ const SearchMain = () => {
 				<SearchOptions companies={companies} engines={engines} maxPrice={maxPrice} classList={classList} search={search} />
 			</SearchContainer>
 			<ListContainer>
-				<SearchArrange
-					sort={sort}
-					setSortBy={(sortBy) =>
-						dispatchSort({ type: "SET_SORT_BY", payload: sortBy })
-					}
-				/>
-				<ClearButton onClick={clearLocalStorage}> X </ClearButton>
+				{/*<SearchArrange*/}
+				{/*	sort={sort}*/}
+				{/*	setSortBy={(sortBy) =>*/}
+				{/*		dispatchSort({ type: "SET_SORT_BY", payload: sortBy })*/}
+				{/*	}*/}
+				{/*/>*/}
+				<Tooltip title="모든 선택 초기화" placement="top">
+					<ClearButton variant="outlined" onClick={clearLocalStorage}> <RestartAltIcon/> </ClearButton>
+				</Tooltip>
 				<SearchItems list={list}/>
 			</ListContainer>
 		</BoardContainer>
