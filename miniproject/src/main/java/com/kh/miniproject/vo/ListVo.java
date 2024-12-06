@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListVo {
-	private String name;
-	private String image;
-	private String link;
+	private String CommonName;
+	private String CommonUrl;
+
 }

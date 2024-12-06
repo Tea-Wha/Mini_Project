@@ -19,7 +19,7 @@ public class SortRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<CategoryVo> sortInfo(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
-                                      String engineType, String classification, String sortBy, String sortType) {
+                                    String engineType, String classification, String sortBy, String sortType) {
         StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
         log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
@@ -88,14 +88,14 @@ public class SortRepository {
         return jdbcTemplate.query(sql.toString(), params.toArray(), new RowMapper<CategoryVo>() {
             @Override
             public CategoryVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                CategoryVo categoryVo = new CategoryVo();
-                categoryVo.setCarNo(rs.getInt("CAR_NO"));
-                categoryVo.setCarName(rs.getString("CAR_NAME"));
-                categoryVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
-                categoryVo.setPrice(rs.getInt("CAR_PRICE"));
-                categoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
-                categoryVo.setClassification(rs.getString("CLASSIFICATION"));
-                return categoryVo;
+                CategoryVo CategoryVo = new CategoryVo();
+                CategoryVo.setCarNo(rs.getInt("CAR_NO"));
+                CategoryVo.setCarName(rs.getString("CAR_NAME"));
+                CategoryVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
+                CategoryVo.setPrice(rs.getInt("CAR_PRICE"));
+                CategoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
+                CategoryVo.setClassification(rs.getString("CLASSIFICATION"));
+                return CategoryVo;
             }
         });
     }
