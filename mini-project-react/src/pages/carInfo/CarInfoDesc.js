@@ -1,19 +1,39 @@
 import styled from 'styled-components'
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
+import {Button, Card} from "@mui/material";
 import CarInfoTable from "./CarInfoTable";
+import AccordianComponent from "../../components/AccordionComponent";
 
-const CarDescContainer = styled.div``
+const CarDescContainer = styled.div`
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 1000px;
+		margin: 10px auto;
+`
 
-const CarDescBlock = styled.div``
+const CarDescCard = styled(Card)`
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		margin: 10px auto;
+`
 
 const CarImage = styled.img``
 
-const CarDescription = styled.div``
+const CarDescription = styled(Card)`
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		
+`
 
-const CarPriceContainer = styled.div``
+const CarCardInfoContainer = styled.div``
 
 const ManufacturerContainer = styled.div``
 
@@ -29,19 +49,24 @@ const CarDescText = styled.div``
 
 const CarSummary = styled.div``
 
+const AccordionContainer = styled.div`
+		width: 80%;
+		margin: 0 auto;
+`
+
 
 const CarInfoDesc = () => {
 	
 	const carInfo = useContext(CarInfoContext)
 	
-	
+	const [visible, setVisible] = useState({table:false})
 	
 	
 	return (
 		<CarDescContainer>
 			{carInfo &&
-				<CarDescBlock>
-					<CarImage src={carInfo.image} />
+				<CarDescCard>
+					<CarImage src={carInfo.image}/>
 					<ManufacturerContainer>
 						<Link to={`/brand/${carInfo.manufacturerCode}`}>
 							<ManufacturerButton >
@@ -49,26 +74,40 @@ const CarInfoDesc = () => {
 							</ManufacturerButton>
 						</Link>
 					</ManufacturerContainer>
-					<CustomizeContainer>
-						<Link to={`/customize/${carInfo.carNo}`}>
-							<CustomizeButton variant="outlined">
-								견적 보기
-							</CustomizeButton>
-						</Link>
-					</CustomizeContainer>
 					<CarDescription>
-						<CarPriceContainer>
+						<CarCardInfoContainer>
+							차종 : {carInfo.classification}
+						</CarCardInfoContainer>
+						<CarCardInfoContainer>
+							엔진 : {carInfo.price}
+						</CarCardInfoContainer>
+						<CarCardInfoContainer>
 							가격 : {carInfo.price}
-						</CarPriceContainer>
-						<CarDescText>
-							설명 : {carInfo.carDesc}
-						</CarDescText>
-						<CarSummary>
-							요약 : {carInfo.summary}
-						</CarSummary>
-						<CarInfoTable/>
+						</CarCardInfoContainer>
+						<CustomizeContainer>
+							<Link to={`/customize/${carInfo.carNo}`}>
+								<CustomizeButton variant="outlined">
+									견적 보기
+								</CustomizeButton>
+							</Link>
+						</CustomizeContainer>
 					</CarDescription>
-				</CarDescBlock>}
+				</CarDescCard>}
+			<CarDescription>
+				<CarDescText>
+					설명 : {carInfo.carDesc}
+				</CarDescText>
+			</CarDescription>
+			<CarDescription>
+				<CarSummary>
+					요약 : {carInfo.summary}
+				</CarSummary>
+			</CarDescription>
+			<AccordionContainer>
+				<AccordianComponent label={`실제 차량과 다를수 있습니다.`} id="table" name="재원 정보" visible={visible} setVisible={setVisible}>
+					<CarInfoTable/>
+				</AccordianComponent>
+			</AccordionContainer>
 		</CarDescContainer>
 	)
 }

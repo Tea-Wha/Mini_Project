@@ -26,13 +26,13 @@ public class CustomiseController {
         return ResponseEntity.ok(loadedCarDetail);
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/color")
     public ResponseEntity<List<ColorVo>> getColorDetail() {
         List<ColorVo> loadedColorDetail = detailService.getColorInfo();
         return ResponseEntity.ok(loadedColorDetail);
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/option")
     public ResponseEntity<List<FeatureVo>> getFeatureDetail() {
         List<FeatureVo> loadedFeatureDetail = detailService.getFeatureInfo();
         return ResponseEntity.ok(loadedFeatureDetail);
