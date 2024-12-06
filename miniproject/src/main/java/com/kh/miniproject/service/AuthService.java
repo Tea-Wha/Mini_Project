@@ -32,5 +32,5 @@ public class AuthService {
         return BCrypt.checkpw(userPw, existHash);
     }
 
-    // Email 인증 API 필요
+    // 비밀번호 변경 비즈니스로직과 이메일 인증관련 메서드
 }

@@ -24,8 +24,8 @@ public class ListService {
         String classification = listVo.getClassification();
         String sortBy = listVo.getSortBy();
         String sortType = listVo.getSortType();
-        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
-        // 가격이 활성화된 경우(가격 범위 필터 적용)
+        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
+                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         
         log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);
         

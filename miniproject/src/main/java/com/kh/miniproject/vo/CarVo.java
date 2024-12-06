@@ -1,6 +1,10 @@
-/* 차량 상세 정보를 담기 위한 객체 Vo */
+/* 차량 상세정보 및 견적시 기본옵션 항목 보여주기 위한 Vo */
 package com.kh.miniproject.vo;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -12,12 +16,13 @@ public class CarVo {
     private String classification;
     private String engineType;
     private double displacement;
-    private int power;
+    private int horsePower;
     private double torque;
     private double efficiency;
     private int price;
+    private String carUrl;
     private String carDesc;
     private String summary;
-
-
+    private String manufacturerName;
+    private String manufacturerUrl;
 }

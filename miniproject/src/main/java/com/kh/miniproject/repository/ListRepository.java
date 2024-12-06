@@ -43,12 +43,12 @@ public class ListRepository {
         
         
         if (minPrice != null) {
-            sql.append("AND PRICE >= ? ");
+            sql.append("AND CAR_PRICE >= ? ");
             params.add(minPrice);
         }
         
         if (maxPrice != null) {
-            sql.append("AND PRICE <= ? ");
+            sql.append("AND CAR_PRICE <= ? ");
             params.add(maxPrice);
         }
         
@@ -92,7 +92,7 @@ public class ListRepository {
                 listVo.setCarNo(rs.getInt("CAR_NO"));
                 listVo.setCarName(rs.getString("CAR_NAME"));
                 listVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
-                listVo.setPrice(rs.getInt("PRICE"));
+                listVo.setPrice(rs.getInt("CAR_PRICE"));
                 listVo.setEngineType(rs.getString("ENGINE_TYPE"));
                 listVo.setClassification(rs.getString("CLASSIFICATION"));
                 return listVo;
