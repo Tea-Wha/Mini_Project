@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import {ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {Button, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import {useState} from "react";
 
 const OptionContainer = styled.div`
@@ -7,6 +7,7 @@ const OptionContainer = styled.div`
 		border-radius: 8px;
 		margin: 10px;
 		max-height: 0;
+		min-width: 50%;
 		overflow: hidden;
 		opacity: 0;
 		padding: 15px 30px;
@@ -33,6 +34,7 @@ const OptionContainer = styled.div`
 const OptionGroup = styled(ToggleButtonGroup)`
     display: flex;
 		flex-wrap: wrap;
+		width: 90%;
 		
 `;
 
@@ -47,6 +49,7 @@ const ToggleOption = styled(ToggleButton)`
 
 const ToggleButtonContainer = styled.div`
 		display: flex;
+		position: relative;
 		flex-direction: column;
 		width: 100px;
 		height: 100px;
@@ -55,6 +58,8 @@ const ToggleButtonContainer = styled.div`
 		
 `
 
+const CloseButton = styled(Button)`
+`
 
 const Image = styled.img`
 		width: 50px;
@@ -63,7 +68,7 @@ const Image = styled.img`
 // setter 는 이를 바꿔주는 함수
 // list 는 전체 선택사항을 담은 리스트
 // visible 은 해당 요소가 보일지 안보일지를 결정하는 메서드
-const SearchOption = ({value, setter, list, visible}) => {
+const SearchOption = ({value, setter, list, visible, setVisible, id}) => {
 	console.log(visible)
 	
 	const [formats, setFormats] = useState(() => value);
@@ -73,13 +78,17 @@ const SearchOption = ({value, setter, list, visible}) => {
 		setFormats(newFormats);
 		setter(newFormats);
 	};
-	
+	// 상태및 요소 초기화 함수
+	const onClickValueOff = () => {
+		setter([])
+		setFormats([])
+		setVisible({[id]:false})
+	}
 	
 	return (
 		<OptionContainer visible={visible}>
 			<OptionGroup
 				onChange={handleFormat}
-				variant="text"
 				value={formats}>
 				{list && list.map((item, index) => (
 					<ToggleOption key={index}
@@ -89,10 +98,16 @@ const SearchOption = ({value, setter, list, visible}) => {
 						<ToggleButtonContainer>
 							<p>{item.name}</p>
 							{item.image && <Image src={item.image} alt=""/>}
+							
 						</ToggleButtonContainer>
 					</ToggleOption>
 				))}
+				
 			</OptionGroup>
+			<CloseButton onClick={onClickValueOff} variant="outlined"
+			             sx={{position: "absolute",
+				             right: 10,
+				             top: 10}}>X</CloseButton>
 		</OptionContainer>
 	)
 }
