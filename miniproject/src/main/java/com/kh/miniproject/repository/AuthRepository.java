@@ -22,8 +22,6 @@ public class AuthRepository {
         } catch (Exception e) {
             log.error("계정 생성 중 오류 발생: {}", e.getMessage());
         }
-
-
     }
 
     public String findHashPassByUserId(String userId) {

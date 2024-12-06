@@ -1,13 +1,12 @@
 package com.kh.miniproject.controller;
 
+import com.kh.miniproject.service.ListService;
 import com.kh.miniproject.service.SortService;
-import com.kh.miniproject.vo.OptionVo;
+import com.kh.miniproject.vo.CategoryVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,32 +16,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SortController {
     private final SortService sortService;
-
-    @GetMapping("/companies")
-    public ResponseEntity<List<OptionVo>> getSortedManufacturer() {
-        log.warn("제조사 컨트롤러 시작");
-        List<OptionVo> manufacturers = sortService.getManufacturer();
-        log.warn("제조사 : {}", manufacturers);
-        return ResponseEntity.ok(manufacturers);
-    }
-
-    @GetMapping("/engines")
-    public ResponseEntity<List<OptionVo>> getSortedEngine() {
-        log.warn("엔진 컨트롤러 시작");
-        List<OptionVo> engines = sortService.getEngines();
-        log.warn("엔진 : {}", engines);
-        return ResponseEntity.ok(engines);
-    }
-
-    @GetMapping("/maxPrice")
-    public ResponseEntity<Integer> getSortedMaxPrice() {
-        Integer maxPrice = sortService.getMaxPrice();
-        return ResponseEntity.ok(maxPrice);
-    }
-
-    @GetMapping("/carClasses")
-    public ResponseEntity<List<OptionVo>> getSortedClassification() {
-        List<OptionVo> classifications = sortService.getClassification();
-        return ResponseEntity.ok(classifications);
+    
+    @PostMapping("/search")
+    public ResponseEntity<List<CategoryVo>> setInfo(@RequestBody CategoryVo categoryVo) {
+        log.warn("실행");
+        log.error(categoryVo.toString());
+        // 서비스 로직 호출 (필터링된 자동차 목록 반환)
+        List<CategoryVo> sortedInfo = sortService.sortInfo(categoryVo);
+        log.error(sortedInfo.toString());
+        // 결과 반환
+        return ResponseEntity.ok(sortedInfo);
     }
 }

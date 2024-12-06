@@ -17,17 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("/login")
-    public ResponseEntity<String>login(@RequestBody UserVo userVo) {
-        log.info("아이디 : {}", userVo.getUserId());
-        log.info("비밀번호 : {}", userVo.getHashPw());
-        boolean isAuthenticated = authService.authenticate(userVo.getUserId(), userVo.getHashPw());
-        if (isAuthenticated) {
-            return ResponseEntity.ok("로그인 성공적으로 완료 하였습니다.");
-        }
-        return ResponseEntity.status(401).body("로그인 실패 하였습니다.");
-    }
-
     @PostMapping("/join")
     public ResponseEntity<String>signUp(@RequestBody UserVo userVo) {
         log.info("입력 아이디 : {}", userVo.getUserId());
@@ -37,6 +26,17 @@ public class AuthController {
         log.info("입력 전화번호 : {}", userVo.getPhoneNum());
         authService.registerUser(userVo);
         return ResponseEntity.ok("회원가입 성공적으로 완료 하였습니다.");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String>login(@RequestBody UserVo userVo) {
+        log.info("아이디 : {}", userVo.getUserId());
+        log.info("비밀번호 : {}", userVo.getHashPw());
+        boolean isAuthenticated = authService.authenticate(userVo.getUserId(), userVo.getHashPw());
+        if (isAuthenticated) {
+            return ResponseEntity.ok("로그인 성공적으로 완료 하였습니다.");
+        }
+        return ResponseEntity.status(401).body("로그인 실패 하였습니다.");
     }
 
 }
