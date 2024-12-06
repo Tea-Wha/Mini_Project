@@ -44,7 +44,7 @@ public class FirebaseUploadService {
     private void uploadFileToFirebase(Storage storage, Path filePath) throws IOException {
         String fileName = filePath.getFileName().toString();
         String mimeType = Files.probeContentType(filePath);
-        BlobId blobId = BlobId.of(bucketName, "HYUNDAI/IONIQ6/" + fileName);
+        BlobId blobId = BlobId.of(bucketName, "images/" + fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
                         .setContentType(mimeType)
                         .build();
