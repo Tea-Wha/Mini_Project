@@ -16,6 +16,7 @@ import {
 import { ExpandMore, Clear as ClearIcon } from "@mui/icons-material";
 import Divider from '@mui/material/Divider';
 import SearchBar from "../../components/SearchBar";
+import AccordionComponent from "../../components/AccordionComponent";
 
 
 
@@ -38,9 +39,12 @@ const InputContainer = styled.div`
 `;
 
 const SliderWidth = styled.div`
-    width: 80%;
+    display: flex;
+    border-radius: 8px;
     margin: 10px;
-    position: relative;
+		gap: 20px;
+    justify-content: space-evenly;
+    align-items: start;
 `;
 
 
@@ -74,7 +78,7 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 			list: companies,
 		},
 		{
-			name: "연료",
+			name: "엔진",
 			id: "engine",
 			value: engine,
 			setter: setEngine,
@@ -127,29 +131,17 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 				</InputContainer>
 			</OptionsBlock>
 			<OptionsBlock>
-				<Accordion expanded={visible.price} onChange={() => setVisible((prev) => ({ ...prev, price: !prev.price }))}>
-					<AccordionSummary
-						expandIcon={<ExpandMore />}
-						aria-controls="price-content"
-						id="price-header"
-					>
-						<Typography>가격</Typography>
-					</AccordionSummary>
-					<Divider>
-						<Chip label="원하는 가격 범위를 설정하세요" size="small" />
-					</Divider>
-					<AccordionDetails sx={{display: "flex", justifyContent: "space-evenly", alignItems: "start"}}>
-						<SliderWidth>
-							<PriceSlider
-								value={[price.min, price.max]}
-								onChange={onChangePrice}
-								valueLabelDisplay="auto"
-								min={0}
-								max={maxPrice || 999999999}
-								step={5000000}
-								marks={marks}
-							/>
-						</SliderWidth>
+				<AccordionComponent label={`조회하실 가격범위를 설정하세요`} name="가격 범위" id="price" visible={visible} setVisible={setVisible}>
+					<SliderWidth>
+						<PriceSlider
+							value={[price.min, price.max]}
+							onChange={onChangePrice}
+							valueLabelDisplay="auto"
+							min={0}
+							max={maxPrice || 999999999}
+							step={5000000}
+							marks={marks}
+						/>
 						<Tooltip title="선택 내용 초기화">
 							<CloseButton
 								variant="outlined"
@@ -158,34 +150,21 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 								<ClearIcon />
 							</CloseButton>
 						</Tooltip>
-					</AccordionDetails>
-				</Accordion>
+					</SliderWidth>
+				</AccordionComponent>
 			</OptionsBlock>
 			{optionList.map((item, index) => (
 				<OptionsBlock key={index}>
-					<Accordion expanded={visible[item.id]} onChange={() => setVisible({ ...visible, [item.id]: !visible[item.id] })}>
-						<AccordionSummary
-							expandIcon={<ExpandMore />}
-							aria-controls={`${item.id}-content`}
-							id={`${item.id}-header`}
-						>
-							<Typography>{item.name}</Typography>
-							
-						</AccordionSummary>
-						<Divider>
-							<Chip label={`원하는 ${item.name}들을 설정하세요`} size="small" />
-						</Divider>
-						<AccordionDetails>
-							<SearchOption
-								value={item.value}
-								setter={item.setter}
-								list={item.list}
-								id={item.id}
-								visible={visible}
-								setVisible={setVisible}
-							/>
-						</AccordionDetails>
-					</Accordion>
+					<AccordionComponent label={`조회하실 ${item.name}들을 설정하세요`} name={item.name} id={item.id} visible={visible} setVisible={setVisible}>
+						<SearchOption
+							value={item.value}
+							setter={item.setter}
+							list={item.list}
+							id={item.id}
+							visible={visible}
+							setVisible={setVisible}
+						/>
+					</AccordionComponent>
 				</OptionsBlock>
 			))}
 		</OptionsContainer>
