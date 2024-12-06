@@ -15,6 +15,7 @@ const OptionsBlock = styled.div`
 		width: 80vw;
 		overflow: hidden;
 `
+// 자연스러운 애니메이션을 위해 추가
 const SliderContainer = styled.div`
 		width: 90%;
     display: flex;
@@ -41,7 +42,8 @@ const SliderContainer = styled.div`
     `}
 `
 const SliderWidth = styled.div`
-	width: 90%;
+	width: 80%;
+		margin: 10px;
 `
 
 const SearchInput = styled(TextField)`
@@ -50,6 +52,9 @@ const SearchInput = styled(TextField)`
 
 const SearchButton = styled(Button)`
 		width: 15%;
+`
+
+const CloseButton = styled(Button)`
 `
 
 const ToggleButton = styled(Button)`
@@ -68,17 +73,19 @@ const InputContainer = styled.div`
 `
 
 const PriceSlider = styled(Slider)``
-
+// 검색 옵션을 위한 세개의 리스트와 최대 금액 그리고 검색버튼 클릭시 검색하기 위한 search 함수
 const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
+	// 전역 상태관리
 	const {name, setName, company, setCompany, engine, setEngine, price, setPrice, carClass, setCarClass } = useContext(SearchContext);
 	
+	// 검색옵션의 노출 여부를 조절하는 useState
 	const [visible, setVisible] = useState({
 		company: false,
 		price: false,
 		engine: false,
 		carClass: false,
 	});
-	
+	// map을 사용하기 위한 List화
 	const optionList =[
 		{
 			name: "제조사",
@@ -102,7 +109,7 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 			list: classList,
 		},
 	]
-	
+	// 슬라이더에 표시를 남기는 방법, value는 값, label은 값에 표시될 글자
 	const marks = [
 		{
 			value: 0,
@@ -129,11 +136,11 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 			label: "2억원"
 		}
 	]
-	
+	// 검색칸에 글을 적을때 값이 변하도록 만드는 함수
 	const onChangeSearch = e => {
 		setName(e.target.value);
 	}
-	
+	// 슬라이더를 바꿀 때 값이 변하도록 만드는 함수
 	const onChangePrice = (event, newValue) => {
 		setPrice({
 			...price,
@@ -141,14 +148,19 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 			max: newValue[1], // max 값 업데이트
 		});
 	};
-	
+	// 버튼 클릭으로 노출여부를 결정하는 함수
 	const onToggleButton = e => {
 		console.log(visible)
 		setVisible({...visible, [e.target.id]: !visible[e.target.id]});
 	}
-	
-	const onTogglePrice = () => {
-		setPrice({...price, isPrice: !price.isPrice});
+	// 검색시 가격요소를 적용시키는 함수
+	const onClickPriceOn = () => {
+		setPrice({...price, isPrice: true});
+	}
+	// 가격 요소를 지우고 상태도 초기화하는 함수
+	const onClickPriceOff = () => {
+		setPrice({min: 0, max: maxPrice ? maxPrice : 999999999, isPrice: false});
+		setVisible({...visible, price: false});
 	}
 	
 	return(
@@ -161,7 +173,7 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 			</OptionsBlock>
 			<OptionsBlock>
 				<ToggleButton id="price" variant="outlined" onClick={e => {onToggleButton(e);
-				onTogglePrice();}}>가격</ToggleButton>
+				onClickPriceOn();}}>가격</ToggleButton>
 				<SliderContainer visible={visible.price}>
 					<SliderWidth>
 						<PriceSlider
@@ -176,12 +188,19 @@ const SearchOptions = ({companies, engines, maxPrice, classList, search}) => {
 							sx={{zIndex : 0}}
 						/>
 					</SliderWidth>
+					<CloseButton variant="outlined" onClick={(e) => {
+						onToggleButton(e);
+						onClickPriceOff();
+					}}
+					sx={{position: "absolute",
+						right: 10,
+						top: 10,}}> X </CloseButton>
 				</SliderContainer>
 			</OptionsBlock>
 			{optionList.map((item,index) =>(
 				<OptionsBlock key={index}>
 					<ToggleButton id={item.id} variant="outlined" onClick={onToggleButton}>{item.name}</ToggleButton>
-					<SearchOption value={item.value} setter={item.setter} list={item.list} visible={visible[item.id]}/>
+					<SearchOption value={item.value} setter={item.setter} list={item.list} visible={visible[item.id]} setVisible={setVisible} id={item.id} />
 				</OptionsBlock>
 			))}
 		</OptionsContainer>
