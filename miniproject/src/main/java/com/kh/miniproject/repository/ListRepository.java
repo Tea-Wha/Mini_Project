@@ -9,95 +9,66 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Repository
 @RequiredArgsConstructor
-@Slf4j
 public class ListRepository {
+
     private final JdbcTemplate jdbcTemplate;
+    private static final String GET_MANUFACTURERS = "SELECT MANUFACTURER_NAME, IMAGE_URL FROM MANUFACTURERS";
+    private static final String GET_ENGINES = "SELECT ENGINE_TYPE FROM ENGINES";
+    private static final String GET_MAX_PRICE = "SELECT MAX(PRICE) AS MAX_PRICE FROM CARS";
+    private static final String GET_CLASSIFICATIONS = "SELECT CLASSIFICATION FROM CLASSIFICATIONS";
 
-    public List<ListVo> getFilter(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
-                                    String engineType, String classification, String sortBy, String sortType) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
-        List<Object> params = new ArrayList<>();
-        log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
-                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+    // 제조사 리스트 조회
+    public List<ListVo> getManufacturer() {
+        log.info("리포지터리 : 제조사");
+        return jdbcTemplate.query(GET_MANUFACTURERS, new ManufacturerRowMapper());
+    }
 
-        if (carName != null && !carName.isEmpty()) {
-            sql.append("AND UPPER(CAR_NAME) LIKE UPPER(?) ");
-            params.add("%" + carName + "%");  // LIKE 조건에 %를 추가
+    // 엔진 타입 리스트 조회
+    public List<ListVo> getEngines() {
+        log.info("리포지터리 : 엔진");
+        return jdbcTemplate.query(GET_ENGINES, new EngineRowMapper());
+    }
+
+    // 최대 가격 조회
+    public Integer getMaxPrice() {
+        log.info("리포지터리 : 가격");
+        return jdbcTemplate.queryForObject(GET_MAX_PRICE, Integer.class);
+    }
+
+    // 자동차 클래스 리스트 조회
+    public List<ListVo> getCarClasses() {
+        log.info("리포지터리 : 차종");
+        return jdbcTemplate.query(GET_CLASSIFICATIONS, new ClassificationRowMapper());
+    }
+    
+    
+    
+
+    private static class ManufacturerRowMapper implements RowMapper<ListVo> {
+        @Override
+        public ListVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new ListVo(rs.getString("MANUFACTURER_NAME"), rs.getString("IMAGE_URL"),null);
         }
+    }
 
-        if (manufacturer != null && !manufacturer.isEmpty()) {
-            List<String> manufacturerList = List.of(manufacturer.split(","));
-            sql.append("AND ( 1=-1");
-            for (String e : manufacturerList) {
-                sql.append(" OR MANUFACTURER_NAME = ? ");
-                params.add(e);
-            }
-            sql.append(")");
-            
+    private static class EngineRowMapper implements RowMapper<ListVo> {
+        @Override
+        public ListVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new ListVo(rs.getString("ENGINE_TYPE"),null,null);
         }
-        
-        
-        if (minPrice != null) {
-            sql.append("AND CAR_PRICE >= ? ");
-            params.add(minPrice);
-        }
-        
-        if (maxPrice != null) {
-            sql.append("AND CAR_PRICE <= ? ");
-            params.add(maxPrice);
-        }
-        
+    }
 
-        if (engineType != null && !engineType.isEmpty()) {
-            List<String> engineList = List.of(engineType.split(","));
-            sql.append("AND ( 1=-1");
-            for (String e : engineList) {
-                sql.append(" OR ENGINE_TYPE = ? ");
-                params.add(e);
-            }
-            sql.append(")");
-            
+    private static class ClassificationRowMapper implements RowMapper<ListVo> {
+        @Override
+        public ListVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new ListVo(rs.getString("CLASSIFICATION"),null,null);
         }
-
-        if (classification != null && !classification.isEmpty()) {
-            List<String> classificationList = List.of(classification.split(","));
-            sql.append("AND ( 1=-1");
-            for (String e : classificationList) {
-                sql.append(" OR CLASSIFICATION = ? ");
-                params.add(e);
-            }
-            sql.append(")");
-            
-        }
-
-        if (sortBy != null && !sortBy.isEmpty()) {
-            sql.append("ORDER BY ").append(sortBy).append(" ");
-            if (sortType != null && (sortType.equalsIgnoreCase("ASC") || sortType.equalsIgnoreCase("DESC"))) {
-                sql.append(sortType).append(" ");
-            }
-        }
-
-        log.warn("실행된 쿼리문 : {}", sql);
-
-        // 쿼리 실행 후 결과 반환
-        return jdbcTemplate.query(sql.toString(), params.toArray(), new RowMapper<ListVo>() {
-            @Override
-            public ListVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                ListVo listVo = new ListVo();
-                listVo.setCarNo(rs.getInt("CAR_NO"));
-                listVo.setCarName(rs.getString("CAR_NAME"));
-                listVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
-                listVo.setPrice(rs.getInt("CAR_PRICE"));
-                listVo.setEngineType(rs.getString("ENGINE_TYPE"));
-                listVo.setClassification(rs.getString("CLASSIFICATION"));
-                return listVo;
-            }
-        });
     }
 }
+
+
 
