@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import CarInfoApi from "../../api/CarInfoApi";
 import {CarInfoContext} from "../../context/CarInfoStore";
+import CarInfoDesc from "./CarInfoDesc";
 
 const CarInfoContainer = styled.div``
 
@@ -38,7 +39,8 @@ const CarInfoMain = () => {
 	
 	return(
 		<CarInfoContainer>
-		
+			<CarInfoDesc/>
+			
 		</CarInfoContainer>
 	)
 }
