@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const BrandImageButton = styled.fieldset`
   background-image: url(${(props) => props.imageLink});
@@ -48,6 +48,7 @@ export const StyledLabel = styled.label`
   width: 80px;
   height: 40px;
   border-radius: 10px;
-  right: 10px;
-  top: -10px;
+  right: 5px;
+  top: 0px;
+  /* border: 1px solid black; */
 `;
