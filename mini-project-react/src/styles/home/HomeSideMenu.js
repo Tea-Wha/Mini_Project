@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const MenuSideContainer = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ export const MenuSideContainer = styled.div`
   // 보이기용
   height: 100vh;
   z-index: -1;
+  box-sizing: border-box;
 
   transition: transform 0.3s ease-in-out;
 
@@ -15,6 +17,7 @@ export const MenuSideContainer = styled.div`
     props.isSubOpen &&
     css`
       transform: translateX(100%);
+      /* overflow-y: auto; */
     `}
 `;
 
@@ -27,13 +30,12 @@ export const MenuGroup = styled.div`
   position: relative;
   height: 50vh;
   border-radius: 10px;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   ${(props) =>
     props.isSubOpen &&
     css`
       background-color: white;
+      overflow-y: auto;
     `}
 `;
 
@@ -54,6 +56,28 @@ export const MenuItem = styled.button`
       background-color: white;
       color: black;
     `}
+`;
+
+export const MenuItemBrand = styled.button`
+  // 그리기용
+  width: 200px;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: transparent;
+  ${(props) =>
+    props.isSubOpen &&
+    css`
+      background-color: white;
+      color: black;
+    `}
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const MenuItemSmall = styled.button`
@@ -78,4 +102,36 @@ export const FindGroup = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+`;
+
+export const MenuLogo = styled.div`
+  position: absolute;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+  right: 0px;
+  border: none;
+  z-index: 2;
+  top: 10px;
+  ${(props) =>
+    props.isSubOpen &&
+    css`
+      background-image: url(${(props) => props.logo});
+      background-color: white;
+      border-radius: 0px;
+      border: none;
+    `}
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 `;
