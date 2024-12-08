@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class FirebaseUploadService {
+public class FirebaseUploadService_SingleFolder {
 
     private final String firebaseCredentialsPath = "src/main/resources/firebase-service-account.json";
     // 토큰 경로 설정 나중에 Firebase 여러 개 사용 예정이라면 하드 코딩 말고 -> 여러 개를 가져올 수 있게끔 코드 변형해야함
