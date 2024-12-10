@@ -34,14 +34,14 @@ public class CustomiseRepository {
         return jdbcTemplate.query(GET_FEATURE_IN, new FeatureRowMapper());
     }
 
-    // 차량 상세정보, 견적시에 페이지에서 보여줄 객체 맵핑후 컨트롤러로 전달
+    // 차량 상세정보, 견적시에 페이지에서 보여줄 객체 맵핑후 컨트롤러로 전달 (차량 전면부 사진은 null 처리)
     private static class CarRowMapper implements RowMapper<CarVo> {
         @Override
         public CarVo mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new CarVo(rs.getInt("CAR_NO"), rs.getString("CAR_NAME"), rs.getString("CLASSIFICATION"),
-                    rs.getString("ENGINE_TYPE"), rs.getDouble("DISPLACEMENT"), rs.getInt("HORSEPOWER"),
-                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("PRICE"),
-                    rs.getString("CAR_URL"), rs.getString("CAR_DESC"), rs.getString("CAR_SUMMARY"),
+                   null, rs.getString("ENGINE_TYPE"), rs.getDouble("DISPLACEMENT"), rs.getInt("HORSEPOWER"),
+                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("PRICE"), null,
+                    rs.getString("CAR_AROUND_URL"), null, rs.getString("CAR_DESC"), rs.getString("CAR_SUMMARY"),
                     rs.getString("MANUFACTURER"), rs.getString("MANUFACTURER_URL"));
         }
     }

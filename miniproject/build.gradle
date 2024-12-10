@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mindrot:jbcrypt:0.4' // 비밀번호 해쉬 검증
+	implementation 'org.apache.commons:commons-csv:1.9.0'	// csv 사용 라이브러리
 	implementation 'com.google.firebase:firebase-admin:9.4.1' // firebase dependency
 	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2' // 연결을 위한 추가적인 dependency
 	implementation 'org.apache.httpcomponents.core5:httpcore5:5.2' // 연결을 위한 추가적인 dependency
