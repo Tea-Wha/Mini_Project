@@ -14,7 +14,7 @@ import HomeSideMenu from "./HomeSideMenu";
 const HomeMenu = ({ setMenuOpen, subPageOpen, setSubPageOpen, menuOpen }) => {
   const menuList = [
     { name: "Search", link: "/search" },
-    { name: "Customizing", link: "/estimate" },
+    { name: "Customizing", link: "/customize/1" },
   ];
 
   const toggleList = [

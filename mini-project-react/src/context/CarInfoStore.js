@@ -23,17 +23,15 @@ const CarInfoStore= ({children}) => {
 	const [colors, setColors] = useState([]);
 	const [options, setOptions] = useState([]);
 	
-	const [carPreview, setCarPreview] = useState({});
-	
-	
-	const [carNo, setCarNo] = useSyncedState("carNo",-1);
-	const [carPrice, setCarPrice] = useSyncedState("carPrice",{});
+	const [carPrice, setCarPrice] = useSyncedState("carPrice",[{name: "기본 금액", value:0, id:"carNo", price: 0},
+		{name: "색상 금액", value:"", id:"color" , price: 0},{name: "옵션 금액", value:"", id:"options", price: 0}],);
 	const [carColor, setCarColor] = useSyncedState("carColor","");
 	const [carOptions, setCarOptions] = useSyncedState("carOptions",[]);
 	const [isEditing, setIsEditing] = useSyncedState("isEditing",false);
 	
 	return (
-		<CarInfoContext.Provider value={{carInfo, setCarInfo, colors, setColors, options, setOptions, carNo, setCarNo, carColor, setCarColor, carOptions, setCarOptions, isEditing, setIsEditing, carPrice, setCarPrice}}>
+		<CarInfoContext.Provider value={{carInfo, setCarInfo, colors, setColors, options, setOptions,
+			carColor, setCarColor, carOptions, setCarOptions, isEditing, setIsEditing, carPrice, setCarPrice}}>
 			{children}
 		</CarInfoContext.Provider>
 	)

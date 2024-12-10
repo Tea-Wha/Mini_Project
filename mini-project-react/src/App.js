@@ -4,9 +4,8 @@ import HomeMain from "./pages/home/HomeMain";
 import TestLogin from "./pages/testLogin";
 import SearchMain from "./pages/search/SearchMain";
 import CarInfoMain from "./pages/carInfo/CarInfoMain";
-import SearchStore from "./context/SearchStore";
-import UserStore from "./context/UserStore";
 import Providers from "./Providers";
+import CustomizeMain from "./pages/customize/CustomizeMain";
 
 
 function App() {
@@ -15,11 +14,12 @@ function App() {
       <Providers>
         <Router>
           <Routes>
-            <Route path="/" element={<HomeMain />} />
-            <Route path="/loginpage" element={<TestLogin />} />
-            <Route path="/api/test" element={<TestApi />} />
+            <Route path="/" element={<HomeMain/>} />
+            <Route path="/loginpage" element={<TestLogin/>} />
+            <Route path="/api/test" element={<TestApi/>} />
             <Route path="/search" element={<SearchMain/>}/>
             <Route path="/carInfo/:carNo" element={<CarInfoMain/>}/>
+            <Route path="/customize/:carNo" element={<CustomizeMain/>}/>
           </Routes>
         </Router>
       </Providers>
