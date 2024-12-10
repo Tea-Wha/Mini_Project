@@ -6,7 +6,7 @@ import SearchMain from "./pages/search/SearchMain";
 import CarInfoMain from "./pages/carInfo/CarInfoMain";
 import Providers from "./Providers";
 import CustomizeMain from "./pages/customize/CustomizeMain";
-
+import BrandMain from "./pages/brand/BrandMain";
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
             <Route path="/search" element={<SearchMain/>}/>
             <Route path="/carInfo/:carNo" element={<CarInfoMain/>}/>
             <Route path="/customize/:carNo" element={<CustomizeMain/>}/>
+            <Route path="/brand/:brandCode" element={<BrandMain/>}/>
           </Routes>
         </Router>
       </Providers>

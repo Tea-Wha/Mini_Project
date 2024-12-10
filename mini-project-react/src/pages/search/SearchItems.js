@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ClearIcon from '@mui/icons-material/Clear';
-import {Box, TableRow, TableSortLabel} from "@mui/material";
+import {Box, IconButton, TableRow, TableSortLabel} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { StyledLink } from "../../styles/home/HomeHead";
 import {
@@ -9,8 +9,9 @@ import {
 	ItemTableHead,
 	ItemTableCell,
 	ItemContainer,
-	ItemTable, ItemTableBody
+	ItemTable, ItemTableBody, Logo
 } from "../../styles/search/SearchItemStyle";
+import {priceFormatter} from "../../Formatter";
 
 // 비교를 위한 Comparator
 const descendingComparator = (a, b, orderBy) => {
@@ -89,22 +90,44 @@ const SearchItems = ({ list }) => {
 					{stableSort(list, getComparator(order, orderBy)).map((item) => (
 						<TableRow key={item.carNo}>
 							{[
+								// 차량 이미지 클릭 시 차량 정보 페이지로 이동
 								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carNo}>
-									<Image src={item.image} alt="Car" />
+									<Image src={item.image || `/testimages/sonata_001.png`} alt="Car" />
 								</StyledLink>,
-								item.carName,
-								item.manufacturer,
-								item.engineType,
-								item.classification,
-								item.price
+								
+								
+								// 나머지 항목들도 차량 정보 페이지로 이동하게 링크 추가
+								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carName}>
+									{item.carName}
+								</StyledLink>,
+								
+								// 브랜드 이름 클릭 시 브랜드 페이지로 이동
+								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carName}>
+									<IconButton>
+										<Logo src={item.manufacturerUrl || `/testlogos/hyundai.png`} alt="logo" />
+									</IconButton>
+								</StyledLink>,
+								
+								<StyledLink to={`/carInfo/${item.carNo}`} key={item.engineType}>
+									{item.engineType}
+								</StyledLink>,
+								
+								<StyledLink to={`/carInfo/${item.carNo}`} key={item.classification}>
+									{item.classification}
+								</StyledLink>,
+								
+								<StyledLink to={`/carInfo/${item.carNo}`} key={item.price}>
+									{priceFormatter(item.price)}
+								</StyledLink>,
 							].map((value, index) => (
-								<ItemTableCell key={index} align={index === 0 ? "left":"right" }>
+								<ItemTableCell key={index} align={index === 0 ? "left" : "right"}>
 									{value}
 								</ItemTableCell>
 							))}
 						</TableRow>
 					))}
 				</ItemTableBody>
+			
 			</ItemTable>
 		</ItemContainer>
 	);

@@ -102,6 +102,7 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 	const onChangePrice = (event, newValue) => {
 		setPrice({
 			...price,
+			isPrice: true,
 			min: newValue[0],
 			max: newValue[1],
 		});
@@ -156,6 +157,8 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 							id={item.id}
 							visible={visible}
 							setVisible={setVisible}
+							keyName="commonName"
+							keyUrl="commonUrl"
 						/>
 					</AccordionComponent>
 				</OptionsBlock>
