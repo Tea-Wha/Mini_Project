@@ -1,22 +1,15 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../context/SearchStore";
-import SearchOption from "./SearchOption";
 import {
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
 	Slider,
-	TextField,
 	Button,
 	Tooltip,
-	Typography,
-	Chip
 } from "@mui/material";
 import { ExpandMore, Clear as ClearIcon } from "@mui/icons-material";
-import Divider from '@mui/material/Divider';
 import SearchBar from "../../components/SearchBar";
 import AccordionComponent from "../../components/AccordionComponent";
+import OptionComponent from "../../components/OptionComponent";
 
 
 
@@ -156,7 +149,7 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 			{optionList.map((item, index) => (
 				<OptionsBlock key={index}>
 					<AccordionComponent label={`조회하실 ${item.name}들을 설정하세요`} name={item.name} id={item.id} visible={visible} setVisible={setVisible}>
-						<SearchOption
+						<OptionComponent
 							value={item.value}
 							setter={item.setter}
 							list={item.list}
