@@ -17,7 +17,7 @@ public class FirebaseGetUrlService {
 
     private final String firebaseCredentialsPath = "src/main/resources/firebase-service-account.json";
     private static final String BUCKET_NAME = "mini-project-d9c21.firebasestorage.app";
-    private static final String FOLDER_PATH = "IMAGE/CAR_SP_IMAGE/HYUNDAI/IONIQ6/A2B/"; // Firebase의 경로 지정
+    private static final String FOLDER_PATH = "IMAGE/CAR_LOGO/"; // Firebase의 경로 지정
 
     public List<String> getImageUrls() throws IOException {
         // Firebase Storage 초기화

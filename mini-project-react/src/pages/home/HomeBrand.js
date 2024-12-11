@@ -5,6 +5,10 @@ import {
   Button,
   ButtonContainer,
 } from "../../styles/home/HomeBrand";
+import {Swiper, SwiperSlide} from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import {Navigation, Pagination} from "swiper/modules";
 
 const HomeBrand = () => {
   const brandList = [
@@ -16,18 +20,25 @@ const HomeBrand = () => {
       logo: "/testlogos/HYUNDAI.png",
     },
     {
-      name: "TUCSON",
-      image: "/testimages/tucson_009.png",
-      hoverimage: "/testimages/tucson_001.png",
-      link: "#",
-      logo: "/testlogos/HYUNDAI.png",
-    },
-    {
       name: "K9",
       image: "/testimages/abp_01.png",
-      hoverimage: "/testimages/abp_63.png",
+      hoverimage: "/testimages/abp_60.png",
       link: "#",
       logo: "/testlogos/KIA.png",
+    },
+    {
+      name: "GV80",
+      image: "/testimages/GV80/gv80-coupe-black.png",
+      hoverimage: "/testimages/GV80/gv80-coupe-black.png",
+      link: "#",
+      logo: "/testlogos/GENESIS.png",
+    },
+    {
+      name: "Q8",
+      image: "/testimages/Q8/GWM2.jpg",
+      hoverimage: "/testimages/Q8/GWM0.jpg",
+      link: "#",
+      logo: "/testlogos/AUDI.png",
     },
     {
       name: "EV6",
@@ -37,6 +48,15 @@ const HomeBrand = () => {
       logo: "/testlogos/KIA.png",
     },
   ];
+  const groupedBrandList = groupArray(brandList, 4);
+
+  function groupArray(arr, groupSize) {
+    const groups = [];
+    for (let i = 0; i < arr.length; i += groupSize) {
+      groups.push(arr.slice(i, i + groupSize));
+    }
+    return groups;
+  }
   // 반응형 웹으로 구성해야 할지 논의 필요
   // hover image 추가 -> 커서 올릴 시 다른 각도의 차 이미지로 변경하게끔 구현
   // Button 추가 예정
@@ -44,22 +64,38 @@ const HomeBrand = () => {
   return (
     <>
       <Container>
-        <SubContainer>
-          <ButtonContainer>
-            <Button />
-            <Button />
-          </ButtonContainer>
-          {brandList.map((brand) => (
-            <HomeBrandImage
-              key={brand.name}
-              name={brand.name}
-              image={brand.image}
-              hoverimage={brand.hoverimage}
-              link={brand.link}
-              logo={brand.logo}
-            />
+        <Swiper
+          navigation={{
+            nextEl: ".next",
+            prevEl: ".prev",
+          }}
+          pagination={true}
+          modules={[Navigation, Pagination]}
+          loop={true}
+          slidesPerView={1}
+          simulateTouch={true}
+        >
+          {groupedBrandList.map((group, index) => (
+            <SwiperSlide key={index}>
+              <SubContainer className="brand-group">
+                {group.map((brand) => (
+                  <HomeBrandImage
+                    key={brand.name}
+                    name={brand.name}
+                    image={brand.image}
+                    hoverimage={brand.hoverimage}
+                    link={brand.link}
+                    logo={brand.logo}
+                  />
+                ))}
+              </SubContainer>
+            </SwiperSlide>
           ))}
-        </SubContainer>
+        </Swiper>
+        <ButtonContainer>
+          <Button className="prev" />
+          <Button className="next" />
+        </ButtonContainer>
       </Container>
     </>
   );
