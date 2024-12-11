@@ -32,5 +32,22 @@ public class AuthService {
         return BCrypt.checkpw(userPw, existHash);
     }
 
-    // 비밀번호 변경 비즈니스로직과 이메일 인증관련 메서드
+    // switch 문을 통해서 key 와
+    public boolean validate(String key, String value) {
+        switch (key) {
+            case "id":
+                return !authRepository.findById(value);
+            case "email":
+                return !authRepository.findByEmail(value);
+            case "nickname":
+                return !authRepository.findByNickName(value);
+            case "phoneNum":
+                return !authRepository.findByPhoneNum(value);
+            default:
+                throw new IllegalArgumentException("Invalid key provided");
+        }
+    }
 }
+
+
+    // 비밀번호 변경 비즈니스로직과 이메일 인증관련 메서드
