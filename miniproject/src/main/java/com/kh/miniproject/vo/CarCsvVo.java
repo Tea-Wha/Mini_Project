@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CsvVo {
+public class CarCsvVo {
     private int carNo;
     private String carName;
     private String classification;

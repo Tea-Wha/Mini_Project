@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { uploadCsvFile } from "../../api/CsvUploadApi"; // API 호출을 위한 함수
+import { uploadCarCsvFile } from "../../api/CsvUploadApi"; // API 호출을 위한 함수
+import { uploadColorCsvFile } from "../../api/CsvUploadApi"; // API 호출을 위한 함수
+import { uploadFeatureCsvFile } from "../../api/CsvUploadApi"; // API 호출을 위한 함수
 
 function FileUploadPage() {
   const [file, setFile] = useState(null);
@@ -22,7 +24,7 @@ function FileUploadPage() {
 
     setIsUploading(true); // 업로드 시작 표시
     try {
-      await uploadCsvFile(file); // 응답을 받을 필요가 없으므로 바로 호출만 합니다.
+      await uploadCarCsvFile(file); // 응답을 받을 필요가 없으므로 바로 호출만 합니다.
       setUploadStatus("CSV 파일이 성공적으로 업로드되었습니다!");
     } catch (error) {
       setUploadStatus("파일 업로드 중 오류가 발생했습니다.");
@@ -33,7 +35,7 @@ function FileUploadPage() {
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px", textAlign: "center" }}>
-      <h2>CSV 파일 업로드</h2>
+      <h2>자동차 CSV 파일 업로드</h2>
       <div style={{ marginBottom: "20px" }}>
         <input type="file" accept=".csv" onChange={handleFileChange} />
       </div>
