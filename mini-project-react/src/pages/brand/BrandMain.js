@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import CarInfoApi from "../../api/CarInfoApi";
+
 import BrandDesc from "./BrandDesc";
 import {BrandContext} from "../../context/BrandStore";
+import BrandApi from "../../api/BrandApi";
 
 const BrandContainer = styled.div``
 
 
 const BrandMain = () => {
-	const {brandCode} = useParams();
+	const {brand} = useParams();
 	
-	const{setBrand, setBrandCar, setCssStyle} = useContext(BrandContext);
+	const{setBrand, setBrandCar} = useContext(BrandContext);
 	
 	
 	
@@ -19,9 +20,9 @@ const BrandMain = () => {
 		const brandInfoInitialFetch = async () => {
 			try {
 				const [brandRsp, carRsp] = await Promise.all([
-					CarInfoApi.getCarInfo(brandCode),     //
-					CarInfoApi.getCarColor(brandCode),    //
-					CarInfoApi.getCarOptions(brandCode),  //
+					BrandApi.getBrand(brand),     //
+					BrandApi.getCar(brand),    //
+					
 				]);
 				console.log(brandRsp.data);
 				setBrand(brandRsp.data);
@@ -33,7 +34,7 @@ const BrandMain = () => {
 			}
 		}
 		brandInfoInitialFetch()
-	},[brandCode])
+	},[brand])
 	
 	return(
 		<BrandContainer>

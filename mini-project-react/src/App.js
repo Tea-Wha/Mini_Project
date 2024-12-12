@@ -21,11 +21,10 @@ function App() {
             <Route path="/join" element={<Join />} />
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
-            <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route path="/" element={<HomeMain />} />
+            <Route path="/brand/:brand" element={<BrandMain />} />
             <Route path="/search" element={<SearchMain />} />
             <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route path="/customize/:carNo" element={<CustomizeMain />} />
+            <Route path="/customize/:carNo/:update" element={<CustomizeMain />} />
           </Routes>
         </Router>
       </Providers>

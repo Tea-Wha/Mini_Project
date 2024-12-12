@@ -24,9 +24,20 @@ const CarInfoStore= ({children}) => {
 	const [carOptions, setCarOptions] = useSyncedState("carOptions",[]);
 	const [isEditing, setIsEditing] = useSyncedState("isEditing",false);
 	
+	const [cartNo, setCartNo] = useSyncedState("cartNo",0);
+	
+	useEffect(() => {
+		console.log("carInfo : " + carInfo);
+	},[carInfo]);
+	
+	useEffect(() => {
+		console.log("carColor : " + carColor);
+	},[carColor]);;
+	
 	return (
 		<CarInfoContext.Provider value={{carInfo, setCarInfo, colors, setColors, options, setOptions,
-			carColor, setCarColor, carOptions, setCarOptions, isEditing, setIsEditing, carPrice, setCarPrice}}>
+			carColor, setCarColor, carOptions, setCarOptions, isEditing, setIsEditing, carPrice, setCarPrice,
+		cartNo, setCartNo}}>
 			{children}
 		</CarInfoContext.Provider>
 	)
