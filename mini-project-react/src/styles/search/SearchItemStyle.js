@@ -14,7 +14,10 @@ export const ItemTableSort = styled(TableSortLabel)``
 
 export const ItemTable = styled(Table)``
 
-export const ItemTableBody = styled(TableBody)``
+export const ItemTableBody = styled(TableBody)`
+		font-size: 1.4em;
+		font-weight: bold;
+`
 
 export const ItemTableHead = styled(TableHead)``;
 
@@ -24,6 +27,10 @@ export const ItemTableCell = styled(TableCell)`
 `;
 
 export const Image = styled.img`
-  width: 100px; /* 이미지 크기 조정 */
-  height: auto;
+  width: 300px; /* 이미지 크기 조정 */
 `;
+
+export const Logo = styled.img`
+		width: 90px;
+		
+`

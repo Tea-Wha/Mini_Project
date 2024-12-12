@@ -32,7 +32,7 @@ public class AuthService {
         return BCrypt.checkpw(userPw, existHash);
     }
 
-    // switch 문을 통해서 key 와
+    // switch 문을 통해서 key 로 해당하는 유효성검사 비즈니스로직 실행
     public boolean validate(String key, String value) {
         switch (key) {
             case "id":
@@ -44,7 +44,7 @@ public class AuthService {
             case "phoneNum":
                 return !authRepository.findByPhoneNum(value);
             default:
-                throw new IllegalArgumentException("Invalid key provided");
+                throw new IllegalArgumentException("존재하는 Key 값이 없습니다.");
         }
     }
 }

@@ -40,7 +40,6 @@ const CarInfoMain = () => {
 	return(
 		<CarInfoContainer>
 			<CarInfoDesc/>
-			
 		</CarInfoContainer>
 	)
 }

@@ -23,7 +23,7 @@ public class SortService {
         String classification = categoryVo.getClassification();
         String sortBy = categoryVo.getSortBy();
         String sortType = categoryVo.getSortType();
-        log.error("service : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
+        log.error("정보 : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
                 carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         
         log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);

@@ -18,7 +18,9 @@ const BoardContainer = styled.div`
 
 const SearchContainer = styled.div``
 
-const ListContainer = styled.div``
+const ListContainer = styled.div`
+	margin: 20px 0 100px
+`
 
 const ClearButton = styled(Button)``
 
@@ -82,7 +84,7 @@ const SearchMain = () => {
 	// 화면이 시작하자마자 검색할 내용, 의존성배열로 버튼을 누르자마자 값이 변하게 설정
 	useEffect(() => {
 		search();
-	}, [company, engine, carClass, sort]);
+	}, [company, engine, carClass, sort, price]);
 	
 	// localStorage 를 초기화하는 함수
 	const clearLocalStorage = () => {

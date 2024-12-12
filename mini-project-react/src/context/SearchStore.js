@@ -1,22 +1,11 @@
 import {createContext, useEffect, useState} from "react";
+import {useSyncedState} from "./ModdedState";
 
 
 export const SearchContext = createContext(null);
 
 
 const SearchStore= (props) => {
-	const useSyncedState = (key, defaultValue) => {
-		const [state, setState] = useState(() => {
-			const savedValue = localStorage.getItem(key);
-			return savedValue ? JSON.parse(savedValue) : defaultValue;
-		});
-		
-		useEffect(() => {
-			localStorage.setItem(key, JSON.stringify(state));
-		}, [state, key]);
-		
-		return [state, setState];
-	};
 	
 	// 이름을 통해 검색하는 name
 	// {Like 검색사용 값을 넘길때부터 %를 앞뒤에 붙여서 보낼 것임}

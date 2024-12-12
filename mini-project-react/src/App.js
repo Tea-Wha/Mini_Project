@@ -7,6 +7,8 @@ import Login from "./pages/authentication/Login";
 import Join from "./pages/authentication/Join";
 import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
+import BrandMain from "./pages/brand/BrandMain";
+
 
 function App() {
   return (

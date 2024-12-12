@@ -8,7 +8,7 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage"; // 
 
 const CustomizeImageContainer = styled.div`
     position: fixed;
-    width: 70%;
+    width: 60%;
     height: 100%;
 `;
 
