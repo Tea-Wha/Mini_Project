@@ -16,8 +16,13 @@ public class FirebaseGetUrlController {
         this.firebaseGetUrlService = firebaseGetUrlService;
     }
 
-    @GetMapping("/api/images/urls")
+    @GetMapping("/api/images/fullurls") // Custom 상황 (전체 URL 받아오기) (Ex - 로고 이미지 URL)
     public List<String> getAllImageUrls() throws IOException {
-        return firebaseGetUrlService.getImageUrls();
+        return firebaseGetUrlService.getImageFullUrls();
+    }
+
+    @GetMapping("/api/images/shorturls") // Custom 상황 (축약 URL 받아오기) (Ex - 차 대표 / 상세 이미지, 컬러칩)
+    public List<String> getShortImageUrls() throws IOException {
+        return firebaseGetUrlService.getImageShortUrls();
     }
 }
