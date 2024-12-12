@@ -1,3 +1,4 @@
+/* 차량 Search 페이지에서 불러올 차량 리스트를 repo 에서 호출 */
 package com.kh.miniproject.service;
 
 import com.kh.miniproject.repository.ListRepository;
