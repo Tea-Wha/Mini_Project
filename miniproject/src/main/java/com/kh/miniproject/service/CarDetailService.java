@@ -2,7 +2,6 @@
 package com.kh.miniproject.service;
 
 import com.kh.miniproject.repository.CarDetailRepository;
-import com.kh.miniproject.repository.CustomiseRepository;
 import com.kh.miniproject.vo.CarVo;
 import com.kh.miniproject.vo.ColorVo;
 import com.kh.miniproject.vo.FeatureVo;

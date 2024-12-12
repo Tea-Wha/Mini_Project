@@ -8,6 +8,11 @@ const CartApi = {
 		return await axios.get(KH_DOMAIN + "/cart/getCart",userId);
 	},
 	
+	postCart: async (cartVo) => {
+		console.log("견적 저장 : " + JSON.stringify(cartVo));
+		return await axios.post(KH_DOMAIN + "/cart/postCart", {cartVo});
+	},
+	
 	deleteCart: async (cartNo) => {
 		console.log("카트 삭제 : " + cartNo);
 		return await axios.post(KH_DOMAIN + "/cart/deleteCart",cartNo);
