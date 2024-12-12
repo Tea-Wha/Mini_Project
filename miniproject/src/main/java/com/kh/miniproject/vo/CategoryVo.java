@@ -16,6 +16,5 @@ public class CategoryVo {
     private Integer maxPrice;
     private String engineType;
     private String classification;
-    private String sortBy;
-    private String sortType;
+    private String manufacturerUrl;
 }

@@ -8,6 +8,7 @@ import Join from "./pages/authentication/Join";
 import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
+import CartMain from "./pages/cart/CartMain";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/search" element={<SearchMain />} />
             <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
             <Route path="/customize/:carNo/:update" element={<CustomizeMain />} />
+            <Route path="/cart" element={<CartMain />} />
           </Routes>
         </Router>
       </Providers>

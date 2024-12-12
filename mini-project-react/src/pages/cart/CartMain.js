@@ -3,18 +3,29 @@ import {UserContext} from "../../context/UserStore";
 import CartApi from "../../api/CartApi";
 import styled from "styled-components";
 import CartItem from "./CartItem";
+import {useNavigate} from "react-router-dom";
 
 const CartContainer = styled.div`
 		display: flex;
 		background-color: bisque;
 `
+const PageContainer = styled.div`
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+`
 
 
 const CartMain = () => {
 	
-	const {userId} = useContext(UserContext)
+	const [pageFlag, setPageFlag] = useState(false);
+	
+	const {userId, nickname} = useContext(UserContext)
 	
 	const [cart, setCart] = useState([])
+	
+	const navigate = useNavigate();
 	
 	useEffect(() => {
 		const cartInitialFetch = async () => {
@@ -29,14 +40,21 @@ const CartMain = () => {
 				console.log(e);
 			}
 		}
-		cartInitialFetch()
-	}, [userId]);
+		if (!userId) {
+			alert("로그인이 되어있지 않습니다.");
+			navigate("/login");
+		}
+		else cartInitialFetch()
+	}, [userId, pageFlag]);
 	
 	
 	return (
-		<CartContainer>
-			{cart && cart.map((item, idx) => (<CartItem cart={item} key={idx}/>))}
-		</CartContainer>
+		<PageContainer>
+			<h1>{nickname}님의 장바구니</h1>
+			<CartContainer>
+				{cart && cart.map((item, idx) => (<CartItem cart={item} key={idx} idx={idx} setPageFlag={setPageFlag} pageFlag={pageFlag}/>))}
+			</CartContainer>
+		</PageContainer>
 	)
 }
 

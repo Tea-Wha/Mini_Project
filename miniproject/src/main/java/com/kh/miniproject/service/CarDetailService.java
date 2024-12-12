@@ -19,17 +19,17 @@ public class CarDetailService {
     private final CarDetailRepository carDetailRepository;
 
     // 견적페이지 : repository 의 차량 불러오는 메서드 호출
-    public List<CarVo> getCarInfo() {
-        return carDetailRepository.getCarInfo();
+    public List<CarVo> getCarInfo(int carNo) {
+        return carDetailRepository.getCarInfo(carNo);
     }
 
     // 견적페이지 : repository 의 차량색상 불러오는 메서드 호출
-    public List<ColorVo> getColorInfo() {
-        return carDetailRepository.getColorInfo();
+    public List<ColorVo> getColorInfo(int carNo) {
+        return carDetailRepository.getColorInfo(carNo);
     }
 
     // 견적페이지 : repository 의 차량옵션 불러오는 메서드 호출
-    public List<FeatureVo> getFeatureInfo() {
-        return carDetailRepository.getFeatureInfo();
+    public List<FeatureVo> getFeatureInfo(int carNo) {
+        return carDetailRepository.getFeatureInfo(carNo);
     }
 }

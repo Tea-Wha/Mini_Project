@@ -13,7 +13,7 @@ const CarInfoApi = {
 	// -------------------------------------------------------------------------
 	getCarInfo: async (carNo) => {
 		console.log("자동차 번호 : ", carNo);
-		return await axios.get(KH_DOMAIN + "/carInfo/getInfo",carNo);
+		return await axios.get(KH_DOMAIN + "/detail/spec/"+ carNo);
 	},
 	// 헤딩 지동차의 색상
 	// ------------------------- 국형씨 요청사항 ----------------------------
@@ -22,12 +22,12 @@ const CarInfoApi = {
 	//---------------------------------------------------------------------
 	getCarColor: async (carNo) => {
 		console.log("색상 조회 : " + carNo);
-		return await axios.get(KH_DOMAIN + "/carInfo/getColor",carNo);
+		return await axios.get(KH_DOMAIN + "/detail/color/"+ carNo);
 	},
 	// 해당 자동차의 옵션들
 	getCarOptions: async (carNo) => {
 		console.log("옵션 조회 : " + carNo);
-		return await axios.get(KH_DOMAIN + "/carInfo/getOptions",carNo);
+		return await axios.get(KH_DOMAIN + "/detail/option/"+ carNo);
 	},
 	
 	getCarCustomize: async (carNo, color) => {
@@ -41,7 +41,7 @@ const CarInfoApi = {
 	
 	postCustomize: async (cartVo) => {
 		console.log("견적 저장 : " + JSON.stringify(cartVo));
-		return await axios.post(KH_DOMAIN + "/customize/postCustomize", cartVo);
+		return await axios.post(KH_DOMAIN + "/customize/postCustomize", {cartVo});
 	}
 }
 export default CarInfoApi
