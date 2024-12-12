@@ -21,15 +21,13 @@ public class SortService {
         Integer maxPrice = categoryVo.getMaxPrice();
         String engineType = categoryVo.getEngineType();
         String classification = categoryVo.getClassification();
-        String sortBy = categoryVo.getSortBy();
-        String sortType = categoryVo.getSortType();
-        log.error("정보 : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
-                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
         
-        log.info("정렬 기준: {} 정렬 방향: {}", sortBy, sortType);
+        log.error("정보 : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}",
+                carName, manufacturer, minPrice, maxPrice, engineType, classification);
+        
         
         // Repository 에서 직접 정렬된 데이터 가져오기
-        return sortRepository.sortInfo(carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        return sortRepository.sortInfo(carName, manufacturer, minPrice, maxPrice, engineType, classification);
     }
 
 

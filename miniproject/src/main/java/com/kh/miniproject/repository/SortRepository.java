@@ -19,11 +19,11 @@ public class SortRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<CategoryVo> sortInfo(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
-                                    String engineType, String classification, String sortBy, String sortType) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
+                                    String engineType, String classification) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM VM_LIST_CAR WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
-        log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
-                carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
+        log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}",
+                carName, manufacturer, minPrice, maxPrice, engineType, classification);
 
         if (carName != null && !carName.isEmpty()) {
             sql.append("AND UPPER(CAR_NAME) LIKE UPPER(?) ");
@@ -74,13 +74,7 @@ public class SortRepository {
             sql.append(")");
             
         }
-
-        if (sortBy != null && !sortBy.isEmpty()) {
-            sql.append("ORDER BY ").append(sortBy).append(" ");
-            if (sortType != null && (sortType.equalsIgnoreCase("ASC") || sortType.equalsIgnoreCase("DESC"))) {
-                sql.append(sortType).append(" ");
-            }
-        }
+        
 
         //쿼리 날린 후에 값 보기 
         log.warn("쿼리문 : {}", sql);
@@ -95,6 +89,7 @@ public class SortRepository {
                 CategoryVo.setPrice(rs.getInt("CAR_PRICE"));
                 CategoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
                 CategoryVo.setClassification(rs.getString("CLASSIFICATION"));
+                CategoryVo.setManufacturerUrl(rs.getString("MANUFACTURER_URL"));
                 return CategoryVo;
             }
         });

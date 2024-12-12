@@ -22,11 +22,21 @@ const CarInfoStore= ({children}) => {
 		{name: "색상 금액", value:"0", id:"color" , price: 0},{name: "옵션 금액", value:"", id:"options", price: 0}],);
 	const [carColor, setCarColor] = useSyncedState("carColor","");
 	const [carOptions, setCarOptions] = useSyncedState("carOptions",[]);
-	const [isEditing, setIsEditing] = useSyncedState("isEditing",false);
+	
+	
+	const [cartNo, setCartNo] = useSyncedState("cartNo",0);
+	
+	useEffect(() => {
+		console.log("carInfo : " + JSON.stringify(carInfo));
+	},[carInfo]);
+	
+	useEffect(() => {
+		console.log("carColor : " + carColor);
+	},[carColor]);;
 	
 	return (
 		<CarInfoContext.Provider value={{carInfo, setCarInfo, colors, setColors, options, setOptions,
-			carColor, setCarColor, carOptions, setCarOptions, isEditing, setIsEditing, carPrice, setCarPrice}}>
+			carColor, setCarColor, carOptions, setCarOptions, carPrice, setCarPrice, cartNo, setCartNo}}>
 			{children}
 		</CarInfoContext.Provider>
 	)

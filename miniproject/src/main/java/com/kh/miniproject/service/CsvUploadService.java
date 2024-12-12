@@ -181,13 +181,13 @@ public class CsvUploadService {
                 return records;
             }
             String[] header = lines.get(0);
-            if (header.length != 7) {
+            if (header.length != 6) {
                 log.error("옵션 CSV 헤더의 열 수가 올바르지 않습니다. 예상: 열 7 개 중 현재 : {}", header.length);
                 throw new IOException("옵션 CSV 헤더의 열 수가 올바르지 않습니다.");
             }
             for (int i = 1; i < lines.size(); i++) {
                 String[] line = lines.get(i);
-                if (line.length != 7) {
+                if (line.length != 6) {
                     log.warn("옵션 CSV 행의 열 수가 올바르지 않습니다. 행 번호: {}, 데이터 {}", i + 1, Arrays.toString(line));
                     continue; // 행스킵
                 }
@@ -197,9 +197,8 @@ public class CsvUploadService {
                             Integer.parseInt(line[1].trim()), // FEATURE_PRICE
                             line[2].trim(), // FEATURE_TYPE
                             line[3].trim(), // FEATURE_VALUE
-                            line[4].trim(), // FEATURE_URL
-                            Integer.parseInt(line[5].trim()), // CAR_NO
-                            line[6].trim() // FEATURE_DESC
+                            Integer.parseInt(line[4].trim()), // CAR_NO
+                            line[5].trim() // FEATURE_DESC
                     );
                     records.add(featureCsvVo);
                     log.info("옵션의 행 {} 매핑 성공: {}", i + 1, featureCsvVo);

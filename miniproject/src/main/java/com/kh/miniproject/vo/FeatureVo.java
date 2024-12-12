@@ -14,6 +14,5 @@ public class FeatureVo {
     private String featureType;
     private String featureValue;
     private int featurePrice;
-    private String featureUrl;
     private String featureDesc;
 }

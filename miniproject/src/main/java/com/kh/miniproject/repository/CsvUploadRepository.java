@@ -79,7 +79,7 @@ public class CsvUploadRepository {
 
     public void saveAllForFeature(List<FeatureCsvVo> records) {
         log.info("총 {}개의 옵션 레코드를 DB에 삽입 시도 중", records.size());
-        String INSERT_FEATURES = "INSERT INTO CAR_FEATURES (FEATURE_NO, FEATURE_PRICE, FEATURE_TYPE, FEATURE_VALUE, FEATURE_URL, CAR_NO, FEATURE_DESC) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String INSERT_FEATURES = "INSERT INTO CAR_FEATURES (FEATURE_NO, FEATURE_PRICE, FEATURE_TYPE, FEATURE_VALUE, CAR_NO, FEATURE_DESC) VALUES (?, ?, ?, ?, ?, ?)";
 
         List<Object[]> batchArgs = new ArrayList<>();
         for (FeatureCsvVo featureCsvVo : records) {
@@ -88,7 +88,6 @@ public class CsvUploadRepository {
                     featureCsvVo.getFeaturePrice(),
                     featureCsvVo.getFeatureType(),
                     featureCsvVo.getFeatureValue(),
-                    featureCsvVo.getFeatureUrl(),
                     featureCsvVo.getCarNo(),
                     featureCsvVo.getFeatureDesc(),
             });
