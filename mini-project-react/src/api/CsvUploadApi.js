@@ -3,9 +3,9 @@ import axios from "axios";
 const KH_DOMAIN = "http://localhost:8111";
 
 // 차량 CSV 파일 업로드 API 함수
-export const uploadCarCsvFile = async (file) => {
+export const uploadCarCsvFile = async (fileForCar) => {
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("fileForCar", fileForCar);
 
   try {
     const response = await axios.post(KH_DOMAIN + "/csv/uploadCar", formData, {
@@ -21,9 +21,9 @@ export const uploadCarCsvFile = async (file) => {
 };
 
 // 색상 CSV 파일 업로드 API 함수
-export const uploadColorCsvFile = async (file) => {
+export const uploadColorCsvFile = async (fileForColor) => {
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("fileForColor", fileForColor);
 
   try {
     const response = await axios.post(KH_DOMAIN + "/csv/uploadColor", formData, {
@@ -39,9 +39,9 @@ export const uploadColorCsvFile = async (file) => {
 };
 
 // 옵션 CSV 파일 업로드 API 함수
-export const uploadFeatureCsvFile = async (file) => {
+export const uploadFeatureCsvFile = async (fileForFeature) => {
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("fileForFeature", fileForFeature);
 
   try {
     const response = await axios.post(KH_DOMAIN + "/csv/uploadFeature", formData, {
