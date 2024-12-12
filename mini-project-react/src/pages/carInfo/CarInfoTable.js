@@ -17,7 +17,7 @@ const CarDescTableBody = styled(TableBody)``
 
 const CarInfoTable = () => {
 	
-	const carInfo = useContext(CarInfoContext)
+	const {carInfo} = useContext(CarInfoContext)
 	
 	const resourceList = [
 		{
@@ -42,7 +42,7 @@ const CarInfoTable = () => {
 		},
 		{
 			name: "출력(hp)",
-			value: "Power",
+			value: "horsePower",
 		},
 	]
 	

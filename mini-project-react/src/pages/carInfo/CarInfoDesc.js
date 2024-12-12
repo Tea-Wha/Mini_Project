@@ -85,12 +85,13 @@ const CarInfoDesc = () => {
 	
 	const [visible, setVisible] = useState({table:false})
 	
+	console.log(carInfo)
 	
 	return (
 		<CarDescContainer>
 			{carInfo &&
 				<CarDescCard>
-					<CarImage src={carInfo.carFrontUrl || "/testimages/sonata_001.png"}/>
+					<CarImage src={carInfo.carFrontUrl}/>
 					<ManufacturerContainer>
 						<Link to={`/brand/${carInfo.manufacturerName}`}>
 							<ManufacturerButton >
