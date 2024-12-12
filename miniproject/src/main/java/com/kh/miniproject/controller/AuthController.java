@@ -1,3 +1,6 @@
+/* 회원과 관련된 컨트롤러로, 각각 회원가입, 로그인, 회원가입시 유효성 체크, 비밀번호 찾기
+*  를 리액트에서 요청받아 서비스 로직, 비즈니스 로직으로 전달 후 서버로 재통신 하는 컨트롤러 */
+
 package com.kh.miniproject.controller;
 
 import com.kh.miniproject.service.AuthService;
@@ -40,10 +43,12 @@ public class AuthController {
         }
     }
 
+    /* 로그인 컨트롤러 RequestBody 로 값을 전달 받아 서비스로 전달 이후 해쉬값을 입혀 DB에 저장 */
     @PostMapping("/login")
     public ResponseEntity<String>login(@RequestBody UserVo userVo) {
         log.info("아이디 : {}", userVo.getUserId());
         log.info("비밀번호 : {}", userVo.getHashPw());
+        // boolean 값으로 id와 비밀번호가 매칭이 되면 true 값을 서버로 전달
         boolean isAuthenticated = authService.authenticate(userVo.getUserId(), userVo.getHashPw());
         log.warn("값" + isAuthenticated);
         if (isAuthenticated) {
