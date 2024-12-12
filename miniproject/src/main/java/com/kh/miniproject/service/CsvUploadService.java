@@ -197,9 +197,8 @@ public class CsvUploadService {
                             Integer.parseInt(line[1].trim()), // FEATURE_PRICE
                             line[2].trim(), // FEATURE_TYPE
                             line[3].trim(), // FEATURE_VALUE
-                            line[4].trim(), // FEATURE_URL
-                            Integer.parseInt(line[5].trim()), // CAR_NO
-                            line[6].trim() // FEATURE_DESC
+                            Integer.parseInt(line[4].trim()), // CAR_NO
+                            line[5].trim() // FEATURE_DESC
                     );
                     records.add(featureCsvVo);
                     log.info("옵션의 행 {} 매핑 성공: {}", i + 1, featureCsvVo);

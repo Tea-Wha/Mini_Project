@@ -59,7 +59,7 @@ public class CarDetailRepository {
         @Override
         public FeatureVo mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new FeatureVo(rs.getString("FEATURE_TYPE"), rs.getString("FEATURE_VALUE"), rs.getInt("FEATURE_PRICE"),
-                    rs.getString("FEATURE_URL"), rs.getString("FEATURE_DESC"));
+                     rs.getString("FEATURE_DESC"));
         }
     }
 
