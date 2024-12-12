@@ -2,44 +2,64 @@ import styled from 'styled-components'
 import {useContext, useState} from "react";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import {Link} from "react-router-dom";
-import {Button, Card} from "@mui/material";
+import {Button, Card, IconButton} from "@mui/material";
 import CarInfoTable from "./CarInfoTable";
-import AccordianComponent from "../../components/AccordionComponent";
+import AccordionComponent from "../../components/AccordionComponent";
+import CarInfoColor from "./CarInfoColor";
+import CarInfoCustom from "./CarInfoCustom";
+import {priceFormatter} from "../../Formatter";
+
 
 const CarDescContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 1000px;
+		width: 1200px;
 		margin: 10px auto;
 `
 
 const CarDescCard = styled(Card)`
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		align-items: center;
 		width: 100%;
+		font-size: 1.4em;
+		font-weight: bold;
 		margin: 10px auto;
+		position: relative;
 `
 
-const CarImage = styled.img``
+const CarImage = styled.img`
+		width: 500px;
+`
 
 const CarDescription = styled(Card)`
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-evenly;
 		align-items: center;
-		
+		height: 200px;
+		margin: 10px;
+		padding: 10px 30px;
 `
 
 const CarCardInfoContainer = styled.div``
 
-const ManufacturerContainer = styled.div``
+const ManufacturerContainer = styled.div`
+	position: absolute;
+		left: 10px;
+		top: 10px;
+`
 
-const ManufacturerButton = styled.button``
+const ManufacturerButton = styled(IconButton)`
+		width: 60px;
+		height: 60px;
+`
 
-const ManufacturerLogo = styled.img``
+const ManufacturerLogo = styled.img`
+		width: 100%;
+`
 
 const CustomizeContainer = styled.div``
 
@@ -47,11 +67,15 @@ const CustomizeButton = styled(Button)``
 
 const CarDescText = styled.div``
 
-const CarSummary = styled.div``
+const CarSummary = styled.div`
+		font-weight: bold;
+		font-size: 1.4em;
+		font-style: italic;
+`
 
 const AccordionContainer = styled.div`
 		width: 80%;
-		margin: 0 auto;
+		margin: 30px auto;
 `
 
 
@@ -66,23 +90,26 @@ const CarInfoDesc = () => {
 		<CarDescContainer>
 			{carInfo &&
 				<CarDescCard>
-					<CarImage src={carInfo.image}/>
+					<CarImage src={carInfo.image || "/testimages/sonata_001.png"}/>
 					<ManufacturerContainer>
 						<Link to={`/brand/${carInfo.manufacturerCode}`}>
 							<ManufacturerButton >
-								<ManufacturerLogo src={carInfo.manufacturerName} />
+								<ManufacturerLogo src={carInfo.manufacturerName || "/testlogos/hyundai.png"} />
 							</ManufacturerButton>
 						</Link>
 					</ManufacturerContainer>
 					<CarDescription>
 						<CarCardInfoContainer>
-							차종 : {carInfo.classification}
+							{carInfo.name || "소나타"}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							엔진 : {carInfo.price}
+							차종 : {carInfo.classification || "세단"}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							가격 : {carInfo.price}
+							엔진 : {carInfo.engineType || "가솔린"}
+						</CarCardInfoContainer>
+						<CarCardInfoContainer>
+							가격 : {carInfo.price ? priceFormatter(carInfo.price) : priceFormatter(30000000)}
 						</CarCardInfoContainer>
 						<CustomizeContainer>
 							<Link to={`/customize/${carInfo.carNo}`}>
@@ -94,19 +121,23 @@ const CarInfoDesc = () => {
 					</CarDescription>
 				</CarDescCard>}
 			<CarDescription>
+				<CarSummary>
+					"{carInfo.summary || "Stylish sedan with excellent fuel efficiency and performance."}"
+				</CarSummary>
 				<CarDescText>
-					설명 : {carInfo.carDesc}
+					{carInfo.carDesc || "The Hyundai Sonata is a stylish and efficient sedan with a powerful gasoline engine and great fuel efficiency."}
 				</CarDescText>
 			</CarDescription>
-			<CarDescription>
-				<CarSummary>
-					요약 : {carInfo.summary}
-				</CarSummary>
-			</CarDescription>
 			<AccordionContainer>
-				<AccordianComponent label={`실제 차량과 다를수 있습니다.`} id="table" name="재원 정보" visible={visible} setVisible={setVisible}>
+				<CarInfoColor/>
+			</AccordionContainer>
+			<AccordionContainer>
+				<CarInfoCustom/>
+			</AccordionContainer>
+			<AccordionContainer>
+				<AccordionComponent label={`실제 차량 정보와 다를 수 있습니다.`} id="table" name="재원 정보" visible={visible} setVisible={setVisible}>
 					<CarInfoTable/>
-				</AccordianComponent>
+				</AccordionComponent>
 			</AccordionContainer>
 		</CarDescContainer>
 	)
