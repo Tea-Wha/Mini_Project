@@ -81,7 +81,7 @@ const AccordionContainer = styled.div`
 
 const CarInfoDesc = () => {
 	
-	const carInfo = useContext(CarInfoContext)
+	const {carInfo} = useContext(CarInfoContext)
 	
 	const [visible, setVisible] = useState({table:false})
 	
@@ -90,17 +90,17 @@ const CarInfoDesc = () => {
 		<CarDescContainer>
 			{carInfo &&
 				<CarDescCard>
-					<CarImage src={carInfo.image || "/testimages/sonata_001.png"}/>
+					<CarImage src={carInfo.carFrontUrl || "/testimages/sonata_001.png"}/>
 					<ManufacturerContainer>
-						<Link to={`/brand/${carInfo.manufacturerCode}`}>
+						<Link to={`/brand/${carInfo.manufacturerName}`}>
 							<ManufacturerButton >
-								<ManufacturerLogo src={carInfo.manufacturerName || "/testlogos/hyundai.png"} />
+								<ManufacturerLogo src={carInfo.manufacturerUrl || "/testlogos/hyundai.png"} />
 							</ManufacturerButton>
 						</Link>
 					</ManufacturerContainer>
 					<CarDescription>
 						<CarCardInfoContainer>
-							{carInfo.name || "소나타"}
+							{carInfo.carName || "소나타"}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
 							차종 : {carInfo.classification || "세단"}
@@ -109,7 +109,7 @@ const CarInfoDesc = () => {
 							엔진 : {carInfo.engineType || "가솔린"}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							가격 : {carInfo.price ? priceFormatter(carInfo.price) : priceFormatter(30000000)}
+							가격 : {carInfo.carPrice ? priceFormatter(carInfo.carPrice) : priceFormatter(30000000)}
 						</CarCardInfoContainer>
 						<CustomizeContainer>
 							<Link to={`/customize/${carInfo.carNo}`}>

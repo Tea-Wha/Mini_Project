@@ -2,12 +2,12 @@ import {useContext, useState} from "react";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import styled from "styled-components";
 import AccordionComponent from "../../components/AccordionComponent";
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
-
+import {IconButton, Table, TableBody, TableCell, TableHead, TableRow, Tooltip} from "@mui/material";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {ShoppingCartCheckout} from "@mui/icons-material";
 
 const PriceContainer = styled.div`
 		display: flex;
-		flex-direction: column-reverse;
 		justify-content: center;
 		align-items: center;
 		position: fixed;
@@ -18,7 +18,7 @@ const PriceContainer = styled.div`
 
 
 
-const CustomizeResult = () => {
+const CustomizeResult = ({onClickSubmit, updateFlag}) => {
 	const [visible, setVisible] = useState({result:true});
 	
 	const {carPrice} = useContext(CarInfoContext);
@@ -28,8 +28,12 @@ const CustomizeResult = () => {
 		: 0;
 	
 	
+	
 	return (
 		<PriceContainer>
+			<Tooltip title={updateFlag ? `수정하기`:`추가하기`}>
+				<IconButton onClick={onClickSubmit} sx={{marginRight: 2}}>{updateFlag ? <ShoppingCartCheckout/> : <AddShoppingCartIcon/>}</IconButton>
+			</Tooltip>
 			<AccordionComponent name={`총 가격 : ${totalPrice}`} id="result" label="선택하신 요소별 금액입니다." visible={visible} setVisible={setVisible} reversed={true}>
 				<Table>
 				<TableHead>
