@@ -16,7 +16,8 @@ public class FirebaseGetUrlController {
     public FirebaseGetUrlController(FirebaseGetUrlService firebaseGetUrlService) {
         this.firebaseGetUrlService = firebaseGetUrlService;
     }
-
+    
+    // 컬러칩
     @GetMapping("/api/images/fullurls") // Custom 상황 (전체 URL 받아오기) (Ex - 로고 이미지 URL)
     public List<String> getAllImageUrls() throws IOException {
         return firebaseGetUrlService.getImageFullUrls();
@@ -26,14 +27,18 @@ public class FirebaseGetUrlController {
     public List<String> getShortImageUrls() throws IOException {
         return firebaseGetUrlService.getImageShortUrls();
     }
-
+    
     @GetMapping("/api/images/fullurls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
     public List<List<String>> getAllImageUrlsDistribution() throws IOException {
         return firebaseGetUrlService.getImageFullUrlsDistribution();
     }
 
-    @GetMapping("/api/images/shorturls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
-    public List<String> getShortImageUrlsDistribution() throws IOException {
+    @GetMapping("/api/images/shorturls/distribution") // Custom 상황 (전체 URL 받아오기) (단일 경로)
+    public List<List<String>> getShortImageUrlsDistribution() throws IOException {
         return firebaseGetUrlService.getImageShortUrlsDistribution();
+    }
+    @GetMapping("/api/images/names/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
+    public List<List<String>> getShortImageNamesDistribution() throws IOException {
+        return firebaseGetUrlService.getImageNamesDistribution();
     }
 }

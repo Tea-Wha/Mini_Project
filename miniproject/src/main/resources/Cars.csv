@@ -1,0 +1,125 @@
+﻿CAR_NO,CAR_NAME,CLASSIFICATION,MANUFACTURER_CODE,ENGINE_TYPE,DISPLACEMENT,HORSEPOWER,TORQUE,EFFICIENCY,CAR_PRICE,CAR_FRONT_URL,CAR_AROUND_URL,CAR_3D_URL,CAR_DESC,CAR_SUMMARY
+1,IONIQ6,세단,1,전기모터,130,111,350,6.2,46950000,asd,asd,asd,asd,asd
+2,더 뉴 아이오닉 5,SUV,1,전기모터,130,124.9,350,5.2,47000000,asd,asd,asd,asd,asd
+3,아반떼 N,세단,1,가솔린,130,280,40,10.6,33600000,asd,asd,asd,asd,asd
+4,쏘나타 디 엣지,세단,1,가솔린,130,160,20,13.5,28310000,asd,asd,asd,asd,asd
+5,그렌저,세단,1,가솔린,130,198,25.3,11.7,37680000,asd,asd,asd,asd,asd
+6,TUCSON,SUV,1,가솔린,130,180,27,14.3,27710000,asd,asd,asd,asd,asd
+7,코나,SUV,1,가솔린,130,198,27,13.6,24660000,asd,asd,asd,asd,asd
+8,싼타페,SUV,1,가솔린,130,281,43,11,35460000,asd,asd,asd,asd,asd
+9,레이 EV,경차,2,전기모터,130,64.3,147,5,27750000,asd,asd,asd,asd,asd
+10,EV3,SUV,2,전기모터,130,150,283,5.4,42080000,asd,asd,asd,asd,asd
+11,EV6,SUV,2,전기모터,130,168,350,5.2,55400000,asd,asd,asd,asd,asd
+12,EV9,SUV,2,전기모터,130,150,350,4.2,77280000,asd,asd,asd,asd,asd
+13,모닝,경차,2,가솔린,130,76,9.7,14.7,13250000,asd,asd,asd,asd,asd
+14,K5,세단,2,가솔린,130,160,20,19.8,27660000,asd,asd,asd,asd,asd
+15,K8,세단,2,가솔린,130,198,25.3,18.1,37360000,asd,asd,asd,asd,asd
+16,K9,세단,2,가솔린,130,315,40.5,9,59330000,asd,asd,asd,asd,asd
+17,셀토스,SUV,2,가솔린,130,198,27,12.9,21470000,asd,asd,asd,asd,asd
+18,스포티지,SUV,2,가솔린,130,180,27,16.3,28360000,asd,asd,asd,asd,asd
+19,쏘렌토,SUV,2,가솔린,130,281,43,15.7,36050000,asd,asd,asd,asd,asd
+20,G90 BLACK,세단,3,가솔린,130,415,56,8.2,138000000,asd,asd,asd,asd,asd
+21,GV80 COUPE BLACK,SUV,3,가솔린,130,304,43,8.3,100300000,asd,asd,asd,asd,asd
+22,G90,세단,3,가솔린,130,380,54,9.3,95400000,asd,asd,asd,asd,asd
+23,G80,세단,3,가솔린,130,304,43,10.8,58900000,asd,asd,asd,asd,asd
+24,G70,세단,3,가솔린,130,304,43,11.2,43470000,asd,asd,asd,asd,asd
+25,GV80,SUV,3,가솔린,130,304,43,9.3,69450000,asd,asd,asd,asd,asd
+26,GV70,SUV,3,가솔린,130,304,43,10.2,53800000,asd,asd,asd,asd,asd
+27,G-CLASS,SUV,4,전기모터,130,432,118.7,3,239010000,asd,asd,asd,asd,asd
+28,A-CLASS,세단,4,가솔린,130,190,30.6,12.5,48800000,asd,asd,asd,asd,asd
+29,S-CLASS,세단,4,가솔린,130,313,66.3,9.9,150000000,asd,asd,asd,asd,asd
+30,GLA,SUV,4,가솔린,130,224,35.7,10.9,68600000,asd,asd,asd,asd,asd
+31,GLS,SUV,4,가솔린,130,367,76.5,10.4,155330000,asd,asd,asd,asd,asd
+32,BMW i7,세단,5,전기모터,130,455,66.26,3.8,182500000,asd,asd,asd,asd,asd
+33,BMW i5,세단,5,전기모터,130,340,40.8,4.6,92900000,asd,asd,asd,asd,asd
+34,BMW iX,SUV,5,전기모터,130,326,64.24,3.7,153600000,asd,asd,asd,asd,asd
+35,BMW X7,SUV,5,가솔린,130,381,55.1,7.8,149700000,asd,asd,asd,asd,asd
+36,BMW 8시리즈 쿠페,스포츠카,5,가솔린,130,530,76.48,7.6,150500000,asd,asd,asd,asd,asd
+37,e-tron GT quattro,세단,6,전기모터,130,476,64.3,3.7,145200000,asd,asd,asd,asd,asd
+38,A6,세단,6,가솔린,130,204,40.79,11,72200000,asd,asd,asd,asd,asd
+39,A7 Sportback,세단,6,가솔린,130,340,50.99,9.5,107800000,asd,asd,asd,asd,asd
+40,A8 L,세단,6,가솔린,130,340,50.99,8.3,160700000,asd,asd,asd,asd,asd
+41,Q8,SUV,6,가솔린,130,340,51,8.2,126800000,asd,asd,asd,asd,asd
+42,Arteon,세단,7,가솔린,130,200,40.8,13.7,58700000,asd,asd,asd,asd,asd
+43,Jetta,세단,7,가솔린,130,160,25.5,12.3,38100000,asd,asd,asd,asd,asd
+44,Tiguan,SUV,7,가솔린,130,150,36.7,15.6,45480000,asd,asd,asd,asd,asd
+45,Touareg,SUV,7,가솔린,130,286,61.22,10.8,100990000,asd,asd,asd,asd,asd
+46,ID.4,SUV,7,전기모터,130,150,31.6,4.9,54900000,asd,asd,asd,asd,asd
+47,718 Cayman GTS 4.0,스포츠카,8,가솔린,130,407,43.8,8.4,130500000,asd,asd,asd,asd,asd
+48,911 Carrera GTS Coupe ,스포츠카,8,가솔린,130,485,58.1,8.1,229800000,asd,asd,asd,asd,asd
+49,911 Targa 4 GTS,스포츠카,8,가솔린,130,485,58.1,7.7,256000000,asd,asd,asd,asd,asd
+50,911 GT3,스포츠카,8,가솔린,130,510,45.9,7.65,270500000,asd,asd,asd,asd,asd
+51,Taycan,스포츠카,8,전기모터,130,300,41.8,4.7,129900000,asd,asd,asd,asd,asd
+52,Panamera 4,스포츠카,8,가솔린,130,360,51,8.3,176700000,asd,asd,asd,asd,asd
+53,Accord Turbo,세단,9,가솔린,130,190,26.5,12.9,44400000,asd,asd,asd,asd,asd
+54,CR-V Turbo,SUV,9,가솔린,130,190,24.5,12.1,42600000,asd,asd,asd,asd,asd
+55,Odyssey,미니밴,9,가솔린,130,284,36.2,9,60500000,asd,asd,asd,asd,asd
+56,Pilot,SUV,9,가솔린,130,289,36.2,8.4,69400000,asd,asd,asd,asd,asd
+57,프리우스,경차,10,가솔린,130,196,20.9,19.4,43700000,asd,asd,asd,asd,asd
+58,크라운,세단,10,하이브리드,130,239,22.5,17.2,59200000,asd,asd,asd,asd,asd
+59,캠리,세단,10,하이브리드,130,211,22.5,17.1,39000000,asd,asd,asd,asd,asd
+60,하이랜더,SUV,10,하이브리드,130,246,34.9,13.8,66600000,asd,asd,asd,asd,asd
+61,RAV4,SUV,10,하이브리드,130,222,22.5,15.1,50200000,asd,asd,asd,asd,asd
+62,ALPHARD,미니밴,10,하이브리드,130,250,24.4,13.5,99200000,asd,asd,asd,asd,asd
+63,SIENNA,미니밴,10,하이브리드,130,246,24.1,13.7,70500000,asd,asd,asd,asd,asd
+64,UX 300h,SUV,11,하이브리드,130,199,19.2,18,52400000,asd,asd,asd,asd,asd
+65,RZ 450e,SUV,11,전기모터,130,312,44.4,5.4,93000000,asd,asd,asd,asd,asd
+66,ES 300h,세단,11,하이브리드,130,218,22.5,17.2,71600000,asd,asd,asd,asd,asd
+67,LS 500h,세단,11,하이브리드,130,359,35.7,9.6,178300000,asd,asd,asd,asd,asd
+68,LM 500h,미니밴,11,하이브리드,130,368,46.9,10.1,196000000,asd,asd,asd,asd,asd
+69,RENEGADE,SUV,12,가솔린,130,173,27.6,10.4,45500000,asd,asd,asd,asd,asd
+70,WRANGLER SPORT S,SUV,12,가솔린,130,272,40.8,8.2,69700000,asd,asd,asd,asd,asd
+71,GRAND CHEROKEE AWD,SUV,12,가솔린,130,286,35.1,7.4,76900000,asd,asd,asd,asd,asd
+72,GRAND CHEROKEE 4XE,SUV,12,하이브리드,130,272,40.8,8.8,94400000,asd,asd,asd,asd,asd
+73,GRAND CHEROKEE L,SUV,12,가솔린,130,286,35.1,7.7,98800000,asd,asd,asd,asd,asd
+74,EXPLORER,SUV,13,가솔린,130,370,54,8.3,112700000,asd,asd,asd,asd,asd
+75,EXPEDITION,SUV,13,가솔린,130,405,66,7.4,69000000,asd,asd,asd,asd,asd
+76,BRONCO,SUV,13,가솔린,130,279,44,8.4,74000000,asd,asd,asd,asd,asd
+77,MUSTANG GT,스포츠카,13,가솔린,130,493,57,7.2,79900000,asd,asd,asd,asd,asd
+78,TRAILBLAZER,SUV,14,가솔린,130,156,24.1,12.9,27990000,asd,asd,asd,asd,asd
+79,TRAVERSE,SUV,14,가솔린,130,314,36.8,8.3,56400000,asd,asd,asd,asd,asd
+80,TAHOE,SUV,14,가솔린,130,426,63.6,6.4,93900000,asd,asd,asd,asd,asd
+81,TRAX,SUV,14,가솔린,130,139,22.4,12.7,21880000,asd,asd,asd,asd,asd
+82,Model S Plaid,세단,15,전기모터,130,1020,132.7,4.1,128754900,asd,asd,asd,asd,asd
+83,Model 3 RWD,경차,15,전기모터,130,283,251,5.7,51990000,asd,asd,asd,asd,asd
+84,Model X Plaid,SUV,15,전기모터,130,613,93.1,4.1,141354900,asd,asd,asd,asd,asd
+85,Model Y RWD,경차,15,전기모터,130,293,310,5.1,52990000,asd,asd,asd,asd,asd
+86,Huracan EVO 스파이더,스포츠카,16,가솔린,130,610,57.1,5.8,328900000,asd,asd,asd,asd,asd
+87,Urusu 퍼포만테,스포츠카,16,가솔린,130,666,86.7,6.3,328900000,asd,asd,asd,asd,asd
+88,Purosangue,스포츠카,17,가솔린,130,725,73,5.1,549000000,asd,asd,asd,asd,asd
+89,Roma,스포츠카,17,가솔린,130,620,77.5,7.4,320000000,asd,asd,asd,asd,asd
+90,SF90 Stradale,스포츠카,17,하이브리드,130,780,81.6,7.4,640000000,asd,asd,asd,asd,asd
+91,Grecale 2.0 GT,SUV,18,가솔린,130,300,45.9,9.9,107910000,asd,asd,asd,asd,asd
+92,Gran Turismo,스포츠카,18,가솔린,130,490,61.2,8.4,244250000,asd,asd,asd,asd,asd
+93,Range Rover,SUV,20,가솔린,130,530,76.5,7.8,237900000,asd,asd,asd,asd,asd
+94,Range Rover HEV,SUV,20,하이브리드,130,550,81.6,8.7,234700000,asd,asd,asd,asd,asd
+95,Range Rover Sports Dynamic,SUV,20,가솔린,130,360,51,8.3,140300000,asd,asd,asd,asd,asd
+96,Range Rover Sports Dynamic HEV,SUV,20,하이브리드,130,550,81.6,8.7,183400000,asd,asd,asd,asd,asd
+97,Defender 110,SUV,20,가솔린,130,400,56.1,6.9,149800000,asd,asd,asd,asd,asd
+98,Cullinan Series II,SUV,22,가솔린,130,571,86.7,5.5,577000000,asd,asd,asd,asd,asd
+99,Cullinan Series II Black Badge,SUV,22,가솔린,130,600,91.8,5.4,670000000,asd,asd,asd,asd,asd
+100,Spectre,스포츠카,22,전기모터,130,585,91.8,3.2,622000000,asd,asd,asd,asd,asd
+101,Ghost Standard Wheel Base,세단,22,가솔린,130,571,86.7,5.7,471000000,asd,asd,asd,asd,asd
+102,Ghost Black Badge,세단,22,가솔린,130,600,91.8,5.6,555000000,asd,asd,asd,asd,asd
+103,Continental GT,스포츠카,23,가솔린,130,550,78.5,8,328900000,asd,asd,asd,asd,asd
+104,Flying Spur,세단,23,가솔린,130,550,78.5,7.1,329200000,asd,asd,asd,asd,asd
+105,Bentayga,SUV,23,가솔린,130,550,78.5,7,263500000,asd,asd,asd,asd,asd
+106,Vantage,스포츠카,24,가솔린,130,510,69.8,9.7,215000000,asd,asd,asd,asd,asd
+107,DBX,SUV,24,가솔린,130,550,71.4,6.9,248000000,asd,asd,asd,asd,asd
+108,Cooper S 3-DOOR,경차,25,가솔린,130,120,25.5,12.5,37400000,asd,asd,asd,asd,asd
+109,Cooper S 5-DOOR,경차,25,가솔린,130,150,30.6,12.4,49700000,asd,asd,asd,asd,asd
+110,Countryman,SUV,25,가솔린,130,150,30.6,10.8,49900000,asd,asd,asd,asd,asd
+111,XC60,SUV,26,가솔린,130,250,35.7,10.1,64400000,asd,asd,asd,asd,asd
+112,XC40,SUV,26,가솔린,130,197,30.6,10.3,49500000,asd,asd,asd,asd,asd
+113,S90,세단,26,가솔린,130,250,35.7,11.7,64000000,asd,asd,asd,asd,asd
+114,XC90,SUV,26,가솔린,130,300,42.8,9.1,87200000,asd,asd,asd,asd,asd
+115,S60,세단,26,가솔린,130,250,35.7,12,56900000,asd,asd,asd,asd,asd
+116,408,SUV,27,가솔린,130,131,23.5,12.9,42900000,asd,asd,asd,asd,asd
+117,e-2008,SUV,27,전기모터,130,136,26.5,4.9,38900000,asd,asd,asd,asd,asd
+118,5008,SUV,27,가솔린,130,131,23.5,12.1,46000000,asd,asd,asd,asd,asd
+119,e-208,경차,27,전기모터,130,136,26.5,5.4,39900000,asd,asd,asd,asd,asd
+120,3008,SUV,27,가솔린,130,131,23.5,12.2,42200000,asd,asd,asd,asd,asd
+121,그랑 콜레오스 HEV,SUV,28,하이브리드,130,144,23.5,15.7,37770000,asd,asd,asd,asd,asd
+122,QM6,SUV,28,가솔린,130,144,20.4,11.6,30950000,asd,asd,asd,asd,asd
+123,아르카나,SUV,28,하이브리드,130,86,13.9,17.4,28450000,asd,asd,asd,asd,asd
+124,SM6,세단,28,가솔린,1332,156,26.5,13.6,29250000,asd,asd,asd,asd,asd
