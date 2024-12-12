@@ -24,7 +24,7 @@ public class CsvUploadController {
 
     // 자동차 CSV 파일을 업로드하는 POST 매핑
     @PostMapping("/uploadCar")
-    public ResponseEntity<String> uploadCarCsv(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadCarCsv(@RequestParam("fileForCar") MultipartFile file) {
         log.warn("차량 파일 요청 {} ", file.getOriginalFilename());
         try {
             log.warn("차량 scv 파일 전달전 {}",file.getOriginalFilename());
@@ -38,7 +38,7 @@ public class CsvUploadController {
 
     // 색상 CSV 파일을 업로드하는 POST 매핑
     @PostMapping("/uploadColor")
-    public ResponseEntity<String> uploadColorCsv(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadColorCsv(@RequestParam("fileForColor") MultipartFile file) {
         log.warn("색상 파일 요청 {} ", file.getOriginalFilename());
         try {
             log.warn("색상 scv 파일 전달전 {}",file.getOriginalFilename());
@@ -52,7 +52,7 @@ public class CsvUploadController {
 
     // 옵션 CSV 파일을 업로드하는 POST 매핑
     @PostMapping("/uploadFeature")
-    public ResponseEntity<String> uploadFeatureCsv(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFeatureCsv(@RequestParam("fileForFeature") MultipartFile file) {
         log.warn("옵션 파일 요청 {} ", file.getOriginalFilename());
         try {
             log.warn("옵션 scv 파일 전달전 {}",file.getOriginalFilename());
