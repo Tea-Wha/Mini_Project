@@ -18,8 +18,8 @@ const CarInfoStore= ({children}) => {
 		{name: "두번째 테스트 입니다", desc: "테스트용 옵션의 \n 두번째입니다\n 이번엔\n여러줄을\n시험\n해보려고\n이렇게\n했습니다.\n"}
 	]);
 	
-	const [carPrice, setCarPrice] = useSyncedState("carPrice",[{name: "기본 금액", value:0, id:"carNo", price: 0},
-		{name: "색상 금액", value:"0", id:"color" , price: 0},{name: "옵션 금액", value:"", id:"options", price: 0}],);
+	const [carPrice, setCarPrice] = useSyncedState("carPrice",[{name: "기본 금액", id:"carNo", price: 0},
+		{name: "색상 금액", id:"color" , price: 0},{name: "옵션 금액" , id:"options", price: 0}],);
 	const [carColor, setCarColor] = useSyncedState("carColor","");
 	const [carOptions, setCarOptions] = useSyncedState("carOptions",[]);
 	

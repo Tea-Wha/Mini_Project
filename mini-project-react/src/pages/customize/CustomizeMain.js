@@ -28,7 +28,7 @@ const CustomizeMain = () => {
 	
 	const {carNo} = useParams();
 	
-	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, carPrice, cartNo} = useContext(CarInfoContext);
+	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, carInfo, carPrice, cartNo} = useContext(CarInfoContext);
 	
 	const navigate = useNavigate();
 	
@@ -46,7 +46,10 @@ const CustomizeMain = () => {
 				setColors(colorRsp.data);
 				console.log(optionsRsp.data);
 				setOptions(optionsRsp.data);
+				console.log(carPrice);
 				
+				setCarPrice(carPrice.map((item) =>
+					item.id === "carNo" ? { ...item,  price: infoRsp.data.carPrice} : item));
 			} catch (error) {
 				alert("자동차 정보를 불러오는데 실패했습니다.")
 				console.log(error)
@@ -72,7 +75,7 @@ const CustomizeMain = () => {
 				item.id === "options" ? { ...item,  price: optionPrice()} : item))
 		}
 		optionPriceUpdater()
-	},[carOptions])
+	},[carOptions, carInfo])
 	
 	const onClickSubmit = async () => {
 		const params = {

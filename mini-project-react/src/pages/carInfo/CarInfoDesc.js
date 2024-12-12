@@ -113,7 +113,7 @@ const CarInfoDesc = () => {
 							가격 : {carInfo.carPrice ? priceFormatter(carInfo.carPrice) : priceFormatter(30000000)}
 						</CarCardInfoContainer>
 						<CustomizeContainer>
-							<Link to={`/customize/${carInfo.carNo}`}>
+							<Link to={`/customize/${carInfo.carNo}/false`}>
 								<CustomizeButton variant="outlined">
 									견적 보기
 								</CustomizeButton>

@@ -30,18 +30,13 @@ const CarInfoApi = {
 		return await axios.get(KH_DOMAIN + "/detail/option/"+ carNo);
 	},
 	
-	getCarCustomize: async (carNo, color) => {
+	getCarCustomize: async (carNo) => {
 		const params = {
 			carNo: carNo,
-			color: color,
 		};
 		console.log("커스텀 가능한 요소 조회 : " + JSON.stringify(params));
-		return await axios.get(KH_DOMAIN + "/customize/getCustomize", {params});
+		return await axios.get(KH_DOMAIN + "/customize/spec/"+ carNo);
 	},
 	
-	postCustomize: async (cartVo) => {
-		console.log("견적 저장 : " + JSON.stringify(cartVo));
-		return await axios.post(KH_DOMAIN + "/customize/postCustomize", {cartVo});
-	}
 }
 export default CarInfoApi
