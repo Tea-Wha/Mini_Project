@@ -88,7 +88,6 @@ public class CsvUploadRepository {
                     featureCsvVo.getFeaturePrice(),
                     featureCsvVo.getFeatureType(),
                     featureCsvVo.getFeatureValue(),
-                    featureCsvVo.getFeatureUrl(),
                     featureCsvVo.getCarNo(),
                     featureCsvVo.getFeatureDesc(),
             });

@@ -1,3 +1,4 @@
+/* 컨트롤러로 부터 요청 받아 서비스 로직(파싱후에 repo 를 호출하여 비즈니스 로직 실행) */
 package com.kh.miniproject.service;
 
 import com.kh.miniproject.repository.CsvUploadRepository;
@@ -196,9 +197,8 @@ public class CsvUploadService {
                             Integer.parseInt(line[1].trim()), // FEATURE_PRICE
                             line[2].trim(), // FEATURE_TYPE
                             line[3].trim(), // FEATURE_VALUE
-                            line[4].trim(), // FEATURE_URL
-                            Integer.parseInt(line[5].trim()), // CAR_NO
-                            line[6].trim() // FEATURE_DESC
+                            Integer.parseInt(line[4].trim()), // CAR_NO
+                            line[5].trim() // FEATURE_DESC
                     );
                     records.add(featureCsvVo);
                     log.info("옵션의 행 {} 매핑 성공: {}", i + 1, featureCsvVo);

@@ -193,7 +193,7 @@ const HomeBrand = () => {
       image: "/image/MainPage_Brand/VOLVO/S90/2.avif",
       hoverimage: "/image/MainPage_Brand/VOLVO/S90/1.avif",
       link: "#",
-      logo: "/testlogos/TOYOTA.png",
+      logo: "/testlogos/VOLVO.png",
     },
   ];
   const groupedBrandList = groupArray(brandList, 4);

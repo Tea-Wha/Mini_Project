@@ -16,25 +16,25 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/carList")
+@RequestMapping("/customise")
 public class CustomiseController {
-    private final CustomiseService detailService;
+    private final CustomiseService customiseService;
 
-    @GetMapping("/detail")
+    @GetMapping("/spec")
     public ResponseEntity<List<CarVo>> getCarDetail() {
-        List<CarVo> loadedCarDetail = detailService.getCarInfo();
+        List<CarVo> loadedCarDetail = customiseService.getCarInfo();
         return ResponseEntity.ok(loadedCarDetail);
     }
 
     @GetMapping("/color")
     public ResponseEntity<List<ColorVo>> getColorDetail() {
-        List<ColorVo> loadedColorDetail = detailService.getColorInfo();
+        List<ColorVo> loadedColorDetail = customiseService.getColorInfo();
         return ResponseEntity.ok(loadedColorDetail);
     }
 
     @GetMapping("/option")
     public ResponseEntity<List<FeatureVo>> getFeatureDetail() {
-        List<FeatureVo> loadedFeatureDetail = detailService.getFeatureInfo();
+        List<FeatureVo> loadedFeatureDetail = customiseService.getFeatureInfo();
         return ResponseEntity.ok(loadedFeatureDetail);
     }
 }

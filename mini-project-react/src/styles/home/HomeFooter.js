@@ -7,5 +7,14 @@ export const FootContainer = styled.div`
   position: relative;
   bottom: 0;
   margin: 0 auto;
-  background-color: bisque;
+  background-color: #f0f0f0;
+`;
+export const Initial = styled.div`
+  margin: 0 auto;
+  color: white;
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 1.6rem;
+  display: flex;
+  text-align: center;
 `;
