@@ -7,11 +7,11 @@ export const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   // 크기 설정용
-  width: 100%;
+  width: 100vw;
   height: 400px;
   // 영역 확인용
   background-color: transparent;
-  border: 1px solid black;
+  border: none;
 
   .swiper {
     background-color: transparent;
@@ -73,7 +73,7 @@ export const Button = styled.button`
     background-color: #e9e9e9;
   }
   & + & {
-    margin-left: 35px;
+    margin-left: 20px;
   }
   &::before {
     content: "";

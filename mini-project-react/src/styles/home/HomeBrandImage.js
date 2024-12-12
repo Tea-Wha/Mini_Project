@@ -7,8 +7,8 @@ export const BrandImageButton = styled.fieldset`
   position: relative;
   object-fit: contain;
   width: 23vw;
-  height: 200px;
-  border: 3px solid #f0f0f0;
+  height: 250px;
+  border: none;
   border-radius: 10px;
   font-weight: bold;
   font-size: 1rem;
@@ -39,7 +39,6 @@ export const StyledLabel = styled.label`
   background-image: url(${(props) => props.logoimageLink});
   display: flex;
   position: absolute;
-  object-fit: cover;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -47,9 +46,12 @@ export const StyledLabel = styled.label`
   height: 40px;
   border-radius: 10px;
   right: 5px;
-  top: -10px;
+  top: -25px;
   z-index: 3;
   /* border: 1px solid black; */
+  @media (max-width: 768px) {
+    background-size: contain;
+  }
 `;
 
 export const StyledImage = styled.div`
@@ -59,9 +61,8 @@ export const StyledImage = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: 100%;
-  border: none;
-  background-size: cover;
+  height: 90%;
+  background-size: contain;
   cursor: pointer;
   transition: background-image 0.3s ease;
   @media (max-width: 768px) {
