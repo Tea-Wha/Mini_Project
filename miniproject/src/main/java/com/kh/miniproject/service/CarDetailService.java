@@ -19,7 +19,7 @@ public class CarDetailService {
     private final CarDetailRepository carDetailRepository;
 
     // 견적페이지 : repository 의 차량 불러오는 메서드 호출
-    public List<CarVo> getCarInfo(int carNo) {
+    public CarVo getCarInfo(int carNo) {
         return carDetailRepository.getCarInfo(carNo);
     }
 

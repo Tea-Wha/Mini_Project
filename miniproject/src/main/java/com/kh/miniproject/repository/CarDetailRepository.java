@@ -22,8 +22,8 @@ public class CarDetailRepository {
     private final String GET_COLOR_INFO_FOR_DETAIL = "SELECT * FROM CAR_COLORS WHERE CAR_NO = ?";
     private final String GET_FEATURE_INFO_FOR_DETAIL = "SELECT * FROM CAR_FEATURES WHERE CAR_NO = ?";
 
-    public List<CarVo> getCarInfo(int carNo) {
-        return jdbcTemplate.query(GET_CAR_INFO_FOR_DETAIL, new Object[]{carNo} , new CarRowMapper());
+    public CarVo getCarInfo(int carNo) {
+        return jdbcTemplate.queryForObject(GET_CAR_INFO_FOR_DETAIL, new Object[]{carNo} , new CarRowMapper());
     }
 
     public List<ColorVo> getColorInfo(int carNo) {

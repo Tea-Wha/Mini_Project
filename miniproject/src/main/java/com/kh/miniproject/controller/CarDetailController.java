@@ -23,8 +23,8 @@ public class CarDetailController {
     private final CarDetailService carDetailService;
 
     @GetMapping("/spec/{carNo}")
-    public ResponseEntity<List<CarVo>> getCarDetail(@PathVariable("carNo") int carNo) {
-        List<CarVo> loadedCarDetail = carDetailService.getCarInfo(carNo);
+    public ResponseEntity<CarVo> getCarDetail(@PathVariable("carNo") int carNo) {
+        CarVo loadedCarDetail = carDetailService.getCarInfo(carNo);
         return ResponseEntity.ok(loadedCarDetail);
     }
 

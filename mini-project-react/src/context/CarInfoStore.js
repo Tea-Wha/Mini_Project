@@ -27,7 +27,7 @@ const CarInfoStore= ({children}) => {
 	const [cartNo, setCartNo] = useSyncedState("cartNo",0);
 	
 	useEffect(() => {
-		console.log("carInfo : " + carInfo);
+		console.log("carInfo : " + JSON.stringify(carInfo));
 	},[carInfo]);
 	
 	useEffect(() => {
