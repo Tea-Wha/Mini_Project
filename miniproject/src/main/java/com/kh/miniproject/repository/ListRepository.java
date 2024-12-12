@@ -15,7 +15,7 @@ import java.util.List;
 public class ListRepository {
 
     private final JdbcTemplate jdbcTemplate;
-    private static final String GET_MANUFACTURER = "SELECT MANUFACTURER_NAME, IMAGE_URL FROM MANUFACTURERS";
+    private static final String GET_MANUFACTURER = "SELECT MANUFACTURER_NAME, MANUFACTURER_URL FROM MANUFACTURERS";
     private static final String GET_ENGINES = "SELECT ENGINE_TYPE FROM ENGINES";
     private static final String GET_MAX_PRICE = "SELECT MAX(CAR_PRICE) AS MAX_PRICE FROM CARS";
     private static final String GET_CLASSIFICATION = "SELECT CLASSIFICATION FROM CLASSIFICATIONS";

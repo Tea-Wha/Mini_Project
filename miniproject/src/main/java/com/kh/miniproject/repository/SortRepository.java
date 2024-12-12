@@ -20,7 +20,7 @@ public class SortRepository {
 
     public List<CategoryVo> sortInfo(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
                                     String engineType, String classification, String sortBy, String sortType) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM VM_FILTER_CAR WHERE 1=1 ");
+        StringBuilder sql = new StringBuilder("SELECT * FROM VM_LIST_CAR WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
         log.error("repository : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}, sort = {}, sortType = {}",
                 carName, manufacturer, minPrice, maxPrice, engineType, classification, sortBy, sortType);
