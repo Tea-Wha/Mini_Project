@@ -82,9 +82,9 @@ public class SortRepository {
             }
         }
 
-        log.warn("실행된 쿼리문 : {}", sql);
+        //쿼리 날린 후에 값 보기 
+        log.warn("쿼리문 : {}", sql);
 
-        // 쿼리 실행 후 결과 반환
         return jdbcTemplate.query(sql.toString(), params.toArray(), new RowMapper<CategoryVo>() {
             @Override
             public CategoryVo mapRow(ResultSet rs, int rowNum) throws SQLException {

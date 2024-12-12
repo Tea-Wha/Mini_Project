@@ -3,6 +3,7 @@ import {
   BrandImageButton,
   StyledLegend,
   StyledLabel,
+  StyledImage,
 } from "../../styles/home/HomeBrandImage";
 
 // 차량별 로고 추가 및 글 위치 변경 필요 (div로 감싸서 name 위치 바꾸기 등)
@@ -11,9 +12,13 @@ import {
 const HomeBrandImage = ({name, image, hoverimage, link, logo}) => {
   return (
     <StyledLink to={link}>
-      <BrandImageButton imageLink={image} hoverimageLink={hoverimage}>
+      <BrandImageButton>
         <StyledLegend>{name}</StyledLegend>
         <StyledLabel logoimageLink={logo}></StyledLabel>
+        <StyledImage
+          imageLink={image}
+          hoverimageLink={hoverimage}
+        ></StyledImage>
       </BrandImageButton>
     </StyledLink>
   );

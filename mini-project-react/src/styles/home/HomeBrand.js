@@ -3,13 +3,32 @@ import {Link} from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
+  position: relative;
   justify-content: space-evenly;
   align-items: center;
   // 크기 설정용
   width: 100%;
   height: 400px;
   // 영역 확인용
-  background-color: white;
+  background-color: transparent;
+  border: 1px solid black;
+
+  .swiper {
+    background-color: transparent;
+    width: 100%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .swiper-slide {
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const SubContainer = styled.div`
@@ -20,7 +39,8 @@ export const SubContainer = styled.div`
   width: 98%;
   height: 90%;
   background-color: #f0f0f0;
-  border: 2px solid black;
+  background-color: transparent;
+  border: none;
   border-radius: 10px;
 `;
 
@@ -31,9 +51,10 @@ export const ButtonContainer = styled.div`
   right: 20px;
   width: 100px;
   height: 50px;
-  background-color: none;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
+  z-index: 5;
 `;
 
 export const Button = styled.button`
@@ -46,12 +67,13 @@ export const Button = styled.button`
   border-radius: 50%;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   background-color: white;
+  z-index: 10;
   &:hover {
     /* background-color: rgba(128, 128, 128, 0.3); */
     background-color: #e9e9e9;
   }
   & + & {
-    margin-left: 20px;
+    margin-left: 35px;
   }
   &::before {
     content: "";
