@@ -14,6 +14,7 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/auth/login", UserVo);
   },
+
   join: async (id, pw, nName, eMail, telNum) => {
     console.log("아이디: ", id);
     console.log("비밀번호: ", pw);
@@ -31,18 +32,12 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/auth/join", UserVo);
   },
-  
-  idValidate: async (id) => {
-    return await axios.get(KH_DOMAIN + `/auth/validate/${id}`);
-  },
-  emailValidate: async (email) => {
-    return await axios.get(KH_DOMAIN + `/auth/validate/${email}`);
-  },
-  nickNameValidate: async (nickName) => {
-    return await axios.get(KH_DOMAIN + `/auth/validate/${nickName}`);
-  },
-  phoneNumValidate: async (phoneNum) => {
-    return await axios.get(KH_DOMAIN + `/auth/validate/${phoneNum}`);
+
+  validate: async (key, value) => {
+    const response = await axios.post(`${KH_DOMAIN}/auth/validate`, null, {
+      params: { key, value },
+    });
+    return response;
   },
 };
 

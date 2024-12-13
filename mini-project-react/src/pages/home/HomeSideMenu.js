@@ -1,19 +1,10 @@
-import {
-  FindGroup,
-  MenuGroup,
-  MenuItem,
-  MenuItemSmall,
-  MenuSideContainer,
-  MenuLogo,
-  StyledLink,
-  MenuItemBrand,
-} from "../../styles/home/HomeSideMenu";
+import { FindGroup, MenuGroup, MenuItem, MenuItemSmall, MenuSideContainer, MenuLogo, StyledLink, MenuItemBrand } from "../../styles/home/HomeSideMenu";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 
 const HomeSideMenu = ({ id, isSubOpen, idx }) => {
-  const nickname = localStorage.getItem("nickname");
+  const nickname = localStorage.getItem("nickName");
   const selector = () => {
     switch (id) {
       case "myPage":
@@ -268,11 +259,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
                 <StyledLink to={menu.link}>
                   <MenuItemBrand isSubOpen={isSubOpen} key={menu.name}>
                     {menu.name}
-                    <MenuLogo
-                      isSubOpen={isSubOpen}
-                      key={menu.name}
-                      logo={menu.logoImageLink}
-                    ></MenuLogo>
+                    <MenuLogo isSubOpen={isSubOpen} key={menu.name} logo={menu.logoImageLink}></MenuLogo>
                   </MenuItemBrand>
                 </StyledLink>
               ) : (

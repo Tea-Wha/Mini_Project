@@ -32,19 +32,37 @@ public class AuthService {
         return BCrypt.checkpw(userPw, existHash);
     }
 
+    public String getNickName(String userId) {
+        log.info("Repo 에서 가져온 닉네임 값 : {}", authRepository.findNickName(userId));
+        return authRepository.findNickName(userId);
+    }
+
     // switch 문을 통해서 key 로 해당하는 유효성검사 비즈니스로직 실행
     public boolean validate(String key, String value) {
-        switch (key) {
-            case "id":
-                return !authRepository.findById(value);
-            case "email":
-                return !authRepository.findByEmail(value);
-            case "nickname":
-                return !authRepository.findByNickName(value);
-            case "phoneNum":
-                return !authRepository.findByPhoneNum(value);
-            default:
-                throw new IllegalArgumentException("존재하는 Key 값이 없습니다.");
+        try {
+            log.info("키 : {}", key);
+            log.info("값 : {}", value);
+            switch (key) {
+                case "userId":
+                    log.info("아이디 유효성 비즈니스 로직{} : ",authRepository.findById(value));
+                    return !authRepository.findById(value);
+                case "email":
+                    log.info("이메일 유효성 비즈니스 로직{} : ",authRepository.findByEmail(value));
+                    return !authRepository.findByEmail(value);
+                case "nickName":
+                    log.info("닉네임 유효성 비즈니스 로직{} : ",authRepository.findByNickName(value));
+                    return !authRepository.findByNickName(value);
+                case "phoneNum":
+                    log.info("전화번호 유효성 비즈니스 로직{} : ",authRepository.findByPhoneNum(value));
+                    return !authRepository.findByPhoneNum(value);
+                default:
+                    log.error("존재 key 값 없음");
+                    throw new IllegalArgumentException("존재하는 Key 값이 없습니다.");
+            }
+        } catch (Exception e) {
+            log.error("스위치문 시작 불가");
+            // 예외 처리 로직 추가
+            throw new RuntimeException("Validation 실패: " + e.getMessage());
         }
     }
 }
