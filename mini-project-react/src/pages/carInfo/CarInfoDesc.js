@@ -2,12 +2,14 @@ import styled from 'styled-components'
 import {useContext, useState} from "react";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import {Link} from "react-router-dom";
-import {Button, Card, IconButton} from "@mui/material";
+import {Button, Card, IconButton, Skeleton} from "@mui/material";
 import CarInfoTable from "./CarInfoTable";
 import AccordionComponent from "../../components/AccordionComponent";
 import CarInfoColor from "./CarInfoColor";
 import CarInfoCustom from "./CarInfoCustom";
 import {priceFormatter} from "../../Formatter";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 
 const CarDescContainer = styled.div`
@@ -44,6 +46,12 @@ const CarDescription = styled(Card)`
 		padding: 10px 30px;
 `
 
+const CarImageContainer = styled.div`
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+`
+
 const CarCardInfoContainer = styled.div``
 
 const ManufacturerContainer = styled.div`
@@ -65,13 +73,6 @@ const CustomizeContainer = styled.div``
 
 const CustomizeButton = styled(Button)``
 
-const CarDescText = styled.div``
-
-const CarSummary = styled.div`
-		font-weight: bold;
-		font-size: 1.4em;
-		font-style: italic;
-`
 
 const AccordionContainer = styled.div`
 		width: 80%;
@@ -81,17 +82,41 @@ const AccordionContainer = styled.div`
 
 const CarInfoDesc = () => {
 	
-	const {carInfo} = useContext(CarInfoContext)
+	
+	const {carInfo, colors} = useContext(CarInfoContext)
+	
+	const [index, setIndex] = useState(0)
 	
 	const [visible, setVisible] = useState({table:false})
 	
 	console.log(carInfo)
 	
+	const onDragImage = (direction) => {
+		// 인덱스 이동 (다음, 이전 이미지)
+		setIndex((prevIdx) => {
+			if (direction === "next") {
+				return (prevIdx + 1) % colors.length; // 다음 이미지
+			} else {
+				return (prevIdx - 1 + colors.length) % colors.length; // 이전 이미지
+			}
+		});
+	};
+	
 	return (
 		<CarDescContainer>
-			{carInfo &&
+			{carInfo && Object.keys(carInfo).length > 0 ?
 				<CarDescCard>
-					<CarImage src={carInfo.carFrontUrl}/>
+					{colors && colors.length > 0 ?
+						<CarImageContainer>
+							<IconButton onClick={() => onDragImage("prev")}>
+								<ArrowBackIosIcon />
+							</IconButton>
+							<CarImage src={colors[index].carUrl}/>
+							<IconButton onClick={() => onDragImage("next")}>
+								<ArrowForwardIosIcon />
+							</IconButton>
+						</CarImageContainer> :
+						<Skeleton variant="rectangular" width={500} height={200} />}
 					<ManufacturerContainer>
 						<Link to={`/brand/${carInfo.manufacturerName}`}>
 							<ManufacturerButton >
@@ -101,16 +126,16 @@ const CarInfoDesc = () => {
 					</ManufacturerContainer>
 					<CarDescription>
 						<CarCardInfoContainer>
-							{carInfo.carName || "소나타"}
+							{carInfo.carName}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							차종 : {carInfo.classification || "세단"}
+							차종 : {carInfo.classification}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							엔진 : {carInfo.engineType || "가솔린"}
+							엔진 : {carInfo.engineType}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							가격 : {carInfo.carPrice ? priceFormatter(carInfo.carPrice) : priceFormatter(30000000)}
+							가격 : {priceFormatter(carInfo.carPrice)}
 						</CarCardInfoContainer>
 						<CustomizeContainer>
 							<Link to={`/customize/${carInfo.carNo}/false`}>
@@ -120,15 +145,9 @@ const CarInfoDesc = () => {
 							</Link>
 						</CustomizeContainer>
 					</CarDescription>
-				</CarDescCard>}
-			<CarDescription>
-				<CarSummary>
-					"{carInfo.summary || "Stylish sedan with excellent fuel efficiency and performance."}"
-				</CarSummary>
-				<CarDescText>
-					{carInfo.carDesc || "The Hyundai Sonata is a stylish and efficient sedan with a powerful gasoline engine and great fuel efficiency."}
-				</CarDescText>
-			</CarDescription>
+				</CarDescCard> :
+				<CarDescCard><Skeleton variant="rectangular" width={1200} height={250}/></CarDescCard>
+			}
 			<AccordionContainer>
 				<CarInfoColor/>
 			</AccordionContainer>

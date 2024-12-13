@@ -25,8 +25,6 @@ public class FirebaseDirService {
 		return getImageUrls(firebaseDirRepository.getCarDir(carNo, color));
 	}
 	
-	
-	
 	public List<String> getImageUrls(String directory) {
 		
 		List<String> imageUrls = new ArrayList<>();
@@ -42,15 +40,29 @@ public class FirebaseDirService {
 		
 		// 디렉토리 내 모든 파일을 가져옵니다.
 		Iterable<Blob> blobs = bucket.list(Storage.BlobListOption.prefix(directory)).iterateAll();
+		
 		for (Blob blob : blobs) {
+			// 디렉토리가 아닌 경우에만 처리
 			if (!blob.isDirectory()) {
-				// Firebase Storage의 URL 형식으로 파일 경로를 인코딩하여 URL을 생성합니다.
-				String encodedPath = blob.getName().replace("/", "%2F"); // '/'를 '%2F'로 인코딩
-				String publicUrl = String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media",
-					bucket.getName(), encodedPath);
-				imageUrls.add(publicUrl); // 이미지 URL 추가
+				String fileName = blob.getName();
+				
+				// 파일 확장자가 txt인 경우, URL을 추가하지 않고 파일 이름만 추가
+				if (fileName.endsWith(".txt")) {
+					log.warn("텍스트 파일 이름: " + fileName);
+					imageUrls.add(fileName); // 파일 이름만 추가
+				} else {
+					// Firebase Storage의 URL 형식으로 파일 경로를 인코딩하여 URL을 생성
+					String encodedPath = fileName.replace("/", "%2F"); // '/'를 '%2F'로 인코딩
+					
+					String publicUrl = String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media",
+						bucket.getName(), encodedPath);
+					imageUrls.add(publicUrl); // 이미지 URL 추가
+				}
 			}
 		}
+		
+		
+		// URL 목록 반환
 		return imageUrls;
 	}
 }

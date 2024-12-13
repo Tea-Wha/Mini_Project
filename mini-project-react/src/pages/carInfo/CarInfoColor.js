@@ -28,17 +28,18 @@ const ColorsContainer = styled.div`
 
 const CarInfoColor = () => {
 	
+
 	const {colors} = useContext(CarInfoContext)
 	const [visible, setVisible] = React.useState({color: false})
-	
+	console.log(colors)
 	
 	return (
 		<AccordionComponent label="차량의 색상들입니다." id="color" name="색상" visible={visible} setVisible={setVisible}>
 			<ColorsContainer>
 				{colors && colors.map((color, index) => (
-					<Tooltip title={color.commonName} key={index}>
+					<Tooltip title={color.colorName} key={index}>
 						<ImageContainer>
-							<Image src={color.commonUrl} alt={color.commonName}/>
+							<Image src={color.colorUrl} alt={color.colorName}/>
 						</ImageContainer>
 					</Tooltip>
 				))}
