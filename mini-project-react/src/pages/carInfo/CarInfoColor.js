@@ -11,6 +11,7 @@ const ImageContainer = styled.div`
 		overflow: hidden;
 		margin: 20px 0 50px;
 		border-radius: 8px;
+		
 `
 const Image = styled.img`
 		width: 100%;
@@ -24,6 +25,24 @@ const ColorsContainer = styled.div`
 		align-items: center;
 		
 `
+
+const ColorChip = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: ${({ color }) => color}; /* color 값을 배경색으로 설정 */
+    position: relative; /* ::after의 위치를 위한 relative positioning */
+
+    &::after {
+        content: ""; /* 내용은 빈 문자열 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-40deg, transparent 35%, rgba(255, 255, 255, .25) 55%, transparent 75%); /* 그라데이션 배경 */
+        pointer-events: none; /* 그라데이션이 클릭되지 않도록 */
+    }
+`;
 
 
 const CarInfoColor = () => {
@@ -39,7 +58,7 @@ const CarInfoColor = () => {
 				{colors && colors.map((color, index) => (
 					<Tooltip title={color.colorName} key={index}>
 						<ImageContainer>
-							<Image src={color.colorUrl} alt={color.colorName}/>
+							{color.colorUrl.includes("txt") ? <ColorChip color={color.colorUrl.replace(".txt", "")} /> : <Image src={color.colorUrl} alt={color.colorName}/>}
 						</ImageContainer>
 					</Tooltip>
 				))}
