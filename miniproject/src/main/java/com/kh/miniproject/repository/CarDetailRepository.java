@@ -50,8 +50,7 @@ public class CarDetailRepository {
                     rs.getString("MANUFACTURER_NAME"), rs.getString("MANUFACTURER_URL"));
         }
     }
-
-    // 차량 색상정보, 각 차량 상세 페이지에서 보여줄 객체 맵핑
+    
     public static class ColorRowMapper implements RowMapper<ColorVo> {
         
         private final FirebaseDirService firebaseDirService;
@@ -63,8 +62,15 @@ public class CarDetailRepository {
         
         @Override
         public ColorVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            String colorUrl = firebaseDirService.getImageUrls("IMAGE/CAR_COLORCHIP/" + rs.getString("COLOR_URL")).get(0);
-            String carUrl = firebaseDirService.getImageUrls("IMAGE/CAR_IMAGE/" + rs.getString("COLOR_URL")).get(0);
+            // 첫 번째 이미지 URL을 안전하게 가져오는 로직
+            final String URL = rs.getString("COLOR_URL");
+            log.warn("URL : {}", URL);
+            List<String> colorUrls = firebaseDirService.getImageUrls("IMAGE/CAR_COLORCHIP/" + URL);
+            List<String> carUrls = firebaseDirService.getImageUrls("IMAGE/CAR_REP_IMAGE/" + URL);
+            
+            String colorUrl = (colorUrls != null && !colorUrls.isEmpty()) ? colorUrls.get(0) : null;
+            String carUrl = (carUrls != null && !carUrls.isEmpty()) ? carUrls.get(0) : null;
+            
             return new ColorVo(
               rs.getString("COLOR_NAME"),
               rs.getInt("COLOR_PRICE"),
@@ -74,7 +80,8 @@ public class CarDetailRepository {
         }
     }
     
-
+    
+    
     // 차량 옵션정보, 각 차량 상세 페이지에서 보여줄 객체 맵핑
     private static class FeatureRowMapper implements RowMapper<FeatureVo> {
         @Override
