@@ -36,7 +36,7 @@ const CustomizeMain = () => {
 		const carCustomInitialFetch = async () => {
 			try {
 				const [infoRsp, colorRsp, optionsRsp] = await Promise.all([
-					CarInfoApi.getCarCustomize(carNo, carColor),
+					CarInfoApi.getCarInfo(carNo),
 					CarInfoApi.getCarColor(carNo),
 					CarInfoApi.getCarOptions(carNo),
 				]);
@@ -86,7 +86,7 @@ const CustomizeMain = () => {
 		}
 		console.log(params);
 		try {
-			const rsp = await CarInfoApi.postCustomize(params)
+			const rsp = await CartApi.postCart(params)
 			console.log("결과 : " + rsp.data);
 			if (rsp.data) {
 				navigate("/cart");
@@ -124,7 +124,7 @@ const CustomizeMain = () => {
 	
 	return (
 		<CustomizeContainer>
-			<CustomizePreview/>
+			<CustomizePreview carNo={carNo}/>
 			<CustomizeOptions/>
 			<CustomizeResult onClickSubmit={updateFlag? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
 		</CustomizeContainer>

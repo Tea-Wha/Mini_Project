@@ -25,6 +25,7 @@ const CartMain = () => {
 	
 	const [cart, setCart] = useState([])
 	
+	
 	const navigate = useNavigate();
 	
 	useEffect(() => {
