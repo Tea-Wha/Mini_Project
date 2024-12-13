@@ -22,6 +22,7 @@ public class SortService {
         String engineType = categoryVo.getEngineType();
         String classification = categoryVo.getClassification();
         
+        
         log.error("정보 : carName = {}, manufacturer = {}, min / max = {} / {}, engine = {}, classification = {}",
                 carName, manufacturer, minPrice, maxPrice, engineType, classification);
         

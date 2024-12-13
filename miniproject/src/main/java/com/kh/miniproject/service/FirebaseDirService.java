@@ -7,6 +7,7 @@ import com.google.firebase.cloud.StorageClient;
 import com.kh.miniproject.repository.FirebaseDirRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,14 +17,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FirebaseDirService {
+	
+	@Autowired
 	private final FirebaseDirRepository firebaseDirRepository;
 	
-	public List<String> getImageUrls(int carNo, String color) {
-		
-		// 디렉토리 경로를 가져옵니다.
-		String directory = firebaseDirRepository.getCarDir(carNo, color);
-		// 디렉토리 앞부분을 추가할 필요가 있으면 추가합니다.
-		// 예: directory = "IMAGE%2F" + directory;
+	public List<String> getImage3d(int carNo, String color) {
+		return getImageUrls(firebaseDirRepository.getCarDir(carNo, color));
+	}
+	
+	
+	
+	public List<String> getImageUrls(String directory) {
 		
 		List<String> imageUrls = new ArrayList<>();
 		Bucket bucket = StorageClient.getInstance().bucket();
