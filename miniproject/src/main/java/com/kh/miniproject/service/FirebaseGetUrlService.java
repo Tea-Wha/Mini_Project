@@ -7,6 +7,7 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.kh.miniproject.util.ColorChipPaths;
 import com.kh.miniproject.util.RepImagePaths;
+import com.kh.miniproject.util.SearchImagePaths;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
@@ -22,6 +23,7 @@ public class FirebaseGetUrlService {
     private static final String FOLDER_TOP_PATH = "IMAGE/CAR_SP_IMAGE/HYUNDAI/IONIQ6/"; // 상세 정보 관련 경로
     String[] FOLDER_COLOR_PATHS = ColorChipPaths.getPathsByBrand("8");
     String[] FOLDER_REP_PATHS = RepImagePaths.getFolderRepPathsPaths();
+    String[] FOLDER_SEARCH_PATHS = SearchImagePaths.getFolderSearchPathsPaths();
 
     // 전체 URL, 단일 경로 -> 컬러 칩 URL (상위 폴더에서)
     public List<String> getImageFullUrls() throws IOException {
@@ -86,6 +88,57 @@ public class FirebaseGetUrlService {
                 imageUrls.add(url); // 전체 URL 경로
             }
             result.add(imageUrls);
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    // 경로 나누기 + 전체 URL -> 차 이미지 URL (REP / SP) (다중 경로) (다중경로 설정 필요) (컬러 폴더대로 구분)
+    public List<List<String>> getImageFullSearchUrlsDistribution() throws IOException {
+        // Firebase Storage 초기화
+        Storage storage = getStorage();
+
+        // 특정 경로의 파일 가져오기
+        Bucket bucket = storage.get(BUCKET_NAME);
+        List<List<String>> result = new ArrayList<>();
+
+        for (String folderPath : FOLDER_SEARCH_PATHS) {
+
+            List<String> imageUrls = new ArrayList<>();
+            List<String> name = new ArrayList<>();
+
+            // Blob 리스트 가져오기
+            for (Blob blob : bucket.list(Storage.BlobListOption.prefix(folderPath)).iterateAll()) {
+                // Blob URL 생성
+                String encodedPath = blob.getName().replace("/", "%2F");
+                String url = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + encodedPath + "?alt=media";
+                imageUrls.add(url); // 전체 URL 경로
+            }
+            result.add(imageUrls);
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    // 경로 나누기 + 전체 URL -> 차 이미지 URL (REP / SP) (다중 경로) (다중경로 설정 필요) (컬러 폴더대로 구분)
+    public List<String> getImageFullSearchUrlsTestDistribution() throws IOException {
+        // Firebase Storage 초기화
+        Storage storage = getStorage();
+
+        // 특정 경로의 파일 가져오기
+        Bucket bucket = storage.get(BUCKET_NAME);
+        List<String> result = new ArrayList<>();
+
+        for (String folderPath : FOLDER_SEARCH_PATHS) {
+
+
+            // Blob 리스트 가져오기
+            for (Blob blob : bucket.list(Storage.BlobListOption.prefix(folderPath)).iterateAll()) {
+                // Blob URL 생성
+                String encodedPath = blob.getName().replace("/", "%2F");
+                String url = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + encodedPath + "?alt=media";
+                result.add(url); // 전체 URL 경로
+            }
         }
         System.out.println(result);
         return result;
