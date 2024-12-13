@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AxiosApi from "../../api/Authentication";
 import { Button, Container, Input } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserStore";
 
 const Login = () => {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
   const [isId, setisId] = useState(false);
   const [isPw, setisPw] = useState(false);
+
+  const { updateUserId, updateNickName } = useContext(UserContext);
 
   const handleInputChange = (e, setState, setValidState) => {
     setState(e.target.value);
@@ -20,14 +23,24 @@ const Login = () => {
     try {
       const rsp = await AxiosApi.login(inputId, inputPw);
       console.log(rsp.data);
-      if (rsp.data) {
-        navigator("/");
+
+      if (rsp.status === 200) {
+        const { nickName, userId } = rsp.data;
+
+        // 함수 호출 확인
+        console.log("Calling updateUserId with:", userId);
+        console.log("Calling updateNickName with:", nickName);
+
+        updateUserId(userId);
+        updateNickName(nickName);
+
+        navigate("/"); // 페이지 이동
       } else {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
     } catch (e) {
       alert("서버 응답 실패");
-      console.log(e);
+      console.error(e);
     }
   };
 
