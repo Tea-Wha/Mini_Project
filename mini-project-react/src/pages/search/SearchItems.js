@@ -56,7 +56,7 @@ const SearchItems = ({ list }) => {
 	const sortList = [
 		{ name: "이름", id: "carName" },
 		{ name: "제조사", id: "manufacturer" },
-		{ name: "연료", id: "engine" },
+		{ name: "연료", id: "engineType" },
 		{ name: "차종", id: "classification" },
 		{ name: "가격", id: "price" },
 	];

@@ -80,9 +80,11 @@ const BrandDesc = () => {
 				<AccordionComponent label={`${brand.name || "현대" }의 차량들입니다.`} id="table" name="차량 정보" visible={visible} setVisible={setVisible}>
 					<CarsContainer>
 						{Array.isArray(brandCar) && brandCar.map((car, index) => (
-							<Tooltip key={index} title={car.carName} >
-								<CarImage src={car.carFrontUrl}></CarImage>
-							</Tooltip>
+							<Link to={`/carInfo/${car.carNo}`} key={index}>
+								<Tooltip key={index} title={car.carName} >
+									<CarImage src={car.carFrontUrl}></CarImage>
+								</Tooltip>
+							</Link>
 						))}
 					</CarsContainer>
 				</AccordionComponent>

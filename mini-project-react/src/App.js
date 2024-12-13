@@ -8,7 +8,12 @@ import Join from "./pages/authentication/Join";
 import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
+<<<<<<< HEAD
 import UserStore from "./context/UserStore";
+=======
+import CartMain from "./pages/cart/CartMain";
+
+>>>>>>> 3a9e67aa6435e2b8a48cbe239ac160a563a7f372
 
 function App() {
   return (
@@ -21,11 +26,11 @@ function App() {
             <Route path="/join" element={<Join />} />
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
-            <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route path="/" element={<HomeMain />} />
+            <Route path="/brand/:brand" element={<BrandMain />} />
             <Route path="/search" element={<SearchMain />} />
             <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route path="/customize/:carNo" element={<CustomizeMain />} />
+            <Route path="/customize/:carNo/:update" element={<CustomizeMain />} />
+            <Route path="/cart" element={<CartMain />} />
           </Routes>
         </Router>
       </Providers>

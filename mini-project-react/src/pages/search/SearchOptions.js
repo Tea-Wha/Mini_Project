@@ -88,11 +88,9 @@ const SearchOptions = ({ companies, engines, maxPrice, classList, search }) => {
 	
 	const marks = [
 		{ value: 0, label: "0원" },
-		{ value: 30000000, label: "3천만원" },
 		{ value: 60000000, label: "6천만원" },
-		{ value: 100000000, label: "1억원" },
-		{ value: 150000000, label: "1억5천만원" },
-		{ value: 200000000, label: "2억원" },
+		{ value: 300000000, label: "3억원" },
+		{ value: 600000000, label: "6억원" },
 	];
 	
 	const onChangeSearch = (e) => {
