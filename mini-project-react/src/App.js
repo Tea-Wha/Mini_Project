@@ -8,12 +8,7 @@ import Join from "./pages/authentication/Join";
 import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
-<<<<<<< HEAD
-import UserStore from "./context/UserStore";
-=======
 import CartMain from "./pages/cart/CartMain";
-
->>>>>>> 3a9e67aa6435e2b8a48cbe239ac160a563a7f372
 
 function App() {
   return (

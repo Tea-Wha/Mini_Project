@@ -3,6 +3,8 @@ package com.kh.miniproject.vo;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class CategoryVo {
     private String engineType;
     private String classification;
     private String manufacturerUrl;
+    private String carFrontUrl;
 }

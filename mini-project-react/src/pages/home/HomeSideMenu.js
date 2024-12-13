@@ -3,32 +3,11 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 
+
+
 const HomeSideMenu = ({ id, isSubOpen, idx }) => {
   const nickname = localStorage.getItem("nickName");
-  const selector = () => {
-    switch (id) {
-      case "myPage":
-        return nickname ? "login" : "guest";
-      case "brand":
-        return "brand";
-      default:
-        console.log("코딩 에러");
-        return null;
-    }
-  };
-
-  useEffect(() => {
-    if (id === "brand" && isSubOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [id, isSubOpen]);
-
+  
   const sideMenuList = [
     {
       name: "guest",
@@ -234,43 +213,69 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       ],
     },
   ];
-  // Login 버튼 클릭 시 마이 페이지 까지 열리는 기능 코드 수정해야 합니다.
-  // Login 버튼 클릭 시 메뉴 바에서 열리게 할지, 새로운 로그인 페이지 이동 할지 논의 필요
+  
+  const selector = () => {
+    switch (id) {
+      case "myPage":
+        return nickname ? "login" : "guest";
+      case "brand":
+        return "brand";
+      default:
+        console.error("Invalid ID");
+        return null;
+    }
+  };
+  
+  useEffect(() => {
+    document.body.style.overflow = id === "brand" && isSubOpen ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [id, isSubOpen]);
+  
+  const renderMenuContent = (menu) => {
+    return menu.content.map((item) => {
+      if (item.type === "text") {
+        return <p key={item.name}>{item.name}</p>;
+      }
+      
+      if (item.half) {
+        return (
+          <FindGroup key={item.name}>
+            {item.content.map((subItem) => (
+              <Link to={subItem.link} key={subItem.name}>
+                <MenuItemSmall isSubOpen={isSubOpen}>{subItem.name}</MenuItemSmall>
+              </Link>
+            ))}
+          </FindGroup>
+        );
+      }
+      
+      if (item.featured) {
+        return (
+          <StyledLink to={item.link} key={item.name}>
+            <MenuItemBrand isSubOpen={isSubOpen}>
+              {item.name}
+              <MenuLogo isSubOpen={isSubOpen} logo={item.logoImageLink} />
+            </MenuItemBrand>
+          </StyledLink>
+        );
+      }
+      
+      return (
+        <Link to={item.link} key={item.name}>
+          <MenuItem isSubOpen={isSubOpen}>{item.name}</MenuItem>
+        </Link>
+      );
+    });
+  };
+  
+  const selectedMenu = sideMenuList.find((menu) => menu.name === selector());
+  
   return (
     <MenuSideContainer isSubOpen={isSubOpen} idx={idx}>
       <MenuGroup isSubOpen={isSubOpen}>
-        {sideMenuList
-          .filter((menu) => menu.name === selector())
-          .map((menu) =>
-            menu.content.map((menu) =>
-              menu.type === "text" ? (
-                <p>{menu.name}</p>
-              ) : menu.half ? (
-                <FindGroup>
-                  {menu.content.map((menu) => (
-                    <Link to={menu.link}>
-                      <MenuItemSmall isSubOpen={isSubOpen} key={menu.name}>
-                        {menu.name}
-                      </MenuItemSmall>
-                    </Link>
-                  ))}
-                </FindGroup>
-              ) : menu.featured ? (
-                <StyledLink to={menu.link}>
-                  <MenuItemBrand isSubOpen={isSubOpen} key={menu.name}>
-                    {menu.name}
-                    <MenuLogo isSubOpen={isSubOpen} key={menu.name} logo={menu.logoImageLink}></MenuLogo>
-                  </MenuItemBrand>
-                </StyledLink>
-              ) : (
-                <Link to={menu.link}>
-                  <MenuItem isSubOpen={isSubOpen} key={menu.name}>
-                    {menu.name}
-                  </MenuItem>
-                </Link>
-              )
-            )
-          )}
+        {selectedMenu ? renderMenuContent(selectedMenu) : null}
       </MenuGroup>
     </MenuSideContainer>
   );

@@ -22,7 +22,7 @@ public class FirebaseDirController {
 
 	@GetMapping("/getImages")
 	public ResponseEntity<List<String>> getImages(@RequestParam int carNo, @RequestParam String color) {
-		List<String> imageList = firebaseDirService.getImageUrls(carNo, color);
+		List<String> imageList = firebaseDirService.getImage3d(carNo, color);
 		log.warn("링크 리스트 : {}", imageList);
 		return ResponseEntity.ok(imageList);
 	}

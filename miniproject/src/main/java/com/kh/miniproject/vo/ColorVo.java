@@ -14,4 +14,5 @@ public class ColorVo {
     private String colorName;
     private int colorPrice;
     private String colorUrl;
+    private String carUrl;
 }

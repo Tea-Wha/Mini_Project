@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import HomeMenu from "./HomeMenu";
 import HomeImage from "./HomeImage";
 import {
@@ -10,8 +10,10 @@ import {
   Initial,
   StyledLink,
 } from "../../styles/home/HomeHead";
+import {UserContext} from "../../context/UserStore";
 
 const HomeHead = () => {
+  const { nickName } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [subPageOpen, setSubPageOpen] = useState({
     brand: false,
@@ -38,7 +40,7 @@ const HomeHead = () => {
           <Initial>CHANAWA</Initial>
           {/* <img src="#" alt="Logo" /> */}
         </StyledLink>
-        <Button onClick={onClickLogin}>Login</Button>
+        <Button onClick={onClickLogin}>{nickName ? "My Page" : "Login"}</Button>
       </NavContainer>
       <HomeImage />
 
