@@ -65,6 +65,12 @@ public class AuthService {
             throw new RuntimeException("Validation 실패: " + e.getMessage());
         }
     }
+
+    // 아이디 찾기 서비스 계층
+    public String findIdByEmail(String email) {
+        log.info("서비스에서 repo를 호출 받아 보내는 값 : {}", authRepository.getIdByEmail(email));
+        return authRepository.getIdByEmail(email).toString();
+    }
 }
 
 

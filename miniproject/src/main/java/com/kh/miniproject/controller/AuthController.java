@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,6 +82,17 @@ public class AuthController {
         Map<String, String> errorInfo = new HashMap<>();
         errorInfo.put("message", "로그인 실패 하였습니다.");
         return ResponseEntity.status(401).body(errorInfo); // 실패 메시지도 Map 형태로 반환
+    }
+
+    @PostMapping("/findId")
+    public ResponseEntity<?> findId(@RequestParam("email") String email) {
+        // 이메일을 기반으로 ID 검색
+        String userId = authService.findIdByEmail(email);
+        if (userId != null) {
+            return ResponseEntity.ok(Collections.singletonMap("userId", userId));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID를 찾을 수 없습니다.");
+        }
     }
 
 }

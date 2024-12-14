@@ -39,6 +39,13 @@ const AxiosApi = {
     });
     return response;
   },
+
+  findId: async (email) => {
+    const response = await axios.post(`${KH_DOMAIN}/auth/findId`, null, {
+      params: { email },
+    });
+    return response;
+  },
 };
 
 export default AxiosApi;

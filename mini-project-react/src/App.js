@@ -9,6 +9,10 @@ import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
 import CartMain from "./pages/cart/CartMain";
+<<<<<<< HEAD
+import FindId from "./pages/authentication/FindId";
+=======
+>>>>>>> 01f89403001a75e48a4edda00e4598d61645bca7
 
 function App() {
   return (
@@ -18,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeMain />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/findId" element={<FindId />} />
             <Route path="/join" element={<Join />} />
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
