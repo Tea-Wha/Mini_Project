@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleInputChange = (e, setState, setValidState) => {
     setState(e.target.value);
-    setValidState(e.target.value.length >= 5);
+    setValidState(e.target.value.length >= 4);
   };
 
   const onClickLogin = async () => {

@@ -3,8 +3,13 @@ import com.kh.miniproject.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -14,11 +19,12 @@ public class AuthRepository {
 
     private static final String INSERT_USER = "INSERT INTO USERS (USER_ID, HASH_PW, NICKNAME, EMAIL, PHONE) VALUES (?, ?, ?, ?, ?)";
     private static final String LOG_IN = "SELECT HASH_PW FROM USERS WHERE USER_ID = ?";
-    private static final String GET_NICKNAME = "SELECT NICKNAME FROM USERS WHERE USER_ID =?";
+    private static final String GET_NICKNAME = "SELECT NICKNAME FROM USERS WHERE USER_ID = ?";
     private static final String VALIDATE_ID = "SELECT COUNT(*) FROM USERS WHERE USER_ID = ?";
     private static final String VALIDATE_NICKNAME = "SELECT COUNT(*) FROM USERS WHERE NICKNAME = ?";
     private static final String VALIDATE_EMAIL = "SELECT COUNT(*) FROM USERS WHERE EMAIL = ?";
     private static final String VALIDATE_PHONE = "SELECT COUNT(*) FROM USERS WHERE PHONE = ?";
+    private static final String GET_ID_BY_EMAIL = "SELECT USER_ID FROM USERS WHERE EMAIL = ?";
 
     // 회원가입 쿼리문을 날려 DB에 정보를 입력
     public void registerAccount(UserVo userVo) {
@@ -79,5 +85,16 @@ public class AuthRepository {
     public boolean findByPhoneNum(String phoneNum) {
         Integer count = jdbcTemplate.queryForObject(VALIDATE_PHONE, Integer.class, phoneNum);
         return count != null && count > 0;
+    }
+
+    public Map<String, Object> getIdByEmail(String email) {
+        try {
+            return jdbcTemplate.queryForMap(GET_ID_BY_EMAIL, email);
+        } catch (EmptyResultDataAccessException e) {
+            log.warn("이메일 {}에 대한 아이디를 찾을 수 없습니다.", email);
+            Map<String, Object> response = new HashMap<>();
+            response.put("error", "아이디를 찾을 수 없습니다.");
+            return response;
+        }
     }
 }
