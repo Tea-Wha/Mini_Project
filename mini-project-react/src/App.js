@@ -24,9 +24,11 @@ function App() {
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
             <Route path="/brand/:brand" element={<BrandMain />} />
-            <Route path="/search" element={<SearchMain />} />
             <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route path="/customize/:carNo/:update" element={<CustomizeMain />} />
+            <Route
+              path="/customize/:carNo/:update"
+              element={<CustomizeMain />}
+            />
             <Route path="/cart" element={<CartMain />} />
           </Routes>
         </Router>

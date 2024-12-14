@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const BrandImageButton = styled.fieldset`
   display: flex;
@@ -30,9 +30,42 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledLegend = styled.legend`
+  @font-face {
+    font-family: "hyundai";
+    src: url("/fonts/HYUNDAI2.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "kia";
+    src: url("/fonts/KIA_Bold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "benz";
+    src: url("/fonts/MBKCorpoA.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "bmw";
+    src: url("/fonts/BMWHelvetica-Bold.otf") format("opentype");
+  }
+  @font-face {
+    font-family: "genesis";
+    src: url("/fonts/GenesisSansTextKROTFMedium.otf") format("opentype");
+  }
   color: black;
   position: relative;
   margin-left: 10px;
+  font-size: 1.2rem;
+  font-size: ${(props) => {
+    if (props.name === "BMW8 COUPE") return "1.1rem";
+    else return "1.2rem";
+  }};
+
+  font-family: ${(props) => {
+    if (props.name === "CONA") return "'hyundai', sans-serif";
+    else if (props.name === "EV6") return "'kia', sans-serif";
+    else if (props.name === "G-CLASS") return "'benz', sans-serif";
+    else if (props.name === "BMW8 COUPE") return "'bmw', sans-serif";
+    else if (props.name === "G70") return "'genesis', sans-serif";
+  }};
 `;
 
 export const StyledLabel = styled.label`
@@ -44,7 +77,7 @@ export const StyledLabel = styled.label`
   background-position: center;
   width: 80px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 0px;
   right: 5px;
   top: -25px;
   z-index: 3;
@@ -52,12 +85,20 @@ export const StyledLabel = styled.label`
   @media (max-width: 768px) {
     background-size: contain;
   }
+  height: ${(props) => {
+    if (props.name === "CONA") return "50px";
+    else if (props.name === "EV6") return "50px";
+  }};
+  top: ${(props) => {
+    if (props.name === "CONA") return "-30px";
+    else if (props.name === "EV6") return "-35px";
+  }};
 `;
 
 export const StyledImage = styled.div`
   background-image: url(${(props) => props.imageLink});
   display: flex;
-  position: relative;
+  position: absolute;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
@@ -71,4 +112,11 @@ export const StyledImage = styled.div`
   &:hover {
     background-image: url(${(props) => props.hoverimageLink});
   }
+  margin-top: ${(props) => {
+    if (props.name === "EV6") return "18px";
+    else if (props.name === "BMW8 COUPE") return "18px";
+  }};
+  bottom: ${(props) => {
+    if (props.name === "G-CLASS") return "-10px";
+  }};
 `;

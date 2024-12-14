@@ -96,7 +96,7 @@ public class SortRepository {
                 categoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
                 categoryVo.setClassification(rs.getString("CLASSIFICATION"));
                 categoryVo.setManufacturerUrl(rs.getString("MANUFACTURER_URL"));
-                categoryVo.setCarFrontUrl(rs.getString("CAR_FRONT_URL"));
+//                categoryVo.setCarFrontUrl(rs.getString("CAR_FRONT_URL"));
                 return categoryVo;
             }
         });
