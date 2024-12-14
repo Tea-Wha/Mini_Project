@@ -61,10 +61,10 @@ export const StyledLegend = styled.legend`
 
   font-family: ${(props) => {
     if (props.name === "CONA") return "'hyundai', sans-serif";
-    else if (props.name === "EV6") return "'kia', sans-serif";
-    else if (props.name === "G-CLASS") return "'benz', sans-serif";
-    else if (props.name === "BMW8 COUPE") return "'bmw', sans-serif";
-    else if (props.name === "G70") return "'genesis', sans-serif";
+    if (props.name === "EV6") return "'kia', sans-serif";
+    if (props.name === "G-CLASS") return "'benz', sans-serif";
+    if (props.name === "BMW8 COUPE") return "'bmw', sans-serif";
+    if (props.name === "G70") return "'genesis', sans-serif";
   }};
 `;
 
@@ -118,5 +118,8 @@ export const StyledImage = styled.div`
   }};
   bottom: ${(props) => {
     if (props.name === "G-CLASS") return "-10px";
+  }};
+  background-size: ${(props) => {
+    if (props.name === "Q8") return "cover";
   }};
 `;

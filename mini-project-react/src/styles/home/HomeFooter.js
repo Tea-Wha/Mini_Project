@@ -11,10 +11,15 @@ export const FootContainer = styled.div`
 `;
 export const Initial = styled.div`
   margin: 0 auto;
-  color: white;
+  color: black;
   margin-top: 0px;
   font-weight: bold;
   font-size: 1.6rem;
   display: flex;
   text-align: center;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
 `;
