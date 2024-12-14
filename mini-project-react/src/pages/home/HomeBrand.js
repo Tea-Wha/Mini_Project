@@ -5,10 +5,10 @@ import {
   Button,
   ButtonContainer,
 } from "../../styles/home/HomeBrand";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import {Navigation, Pagination} from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 
 const HomeBrand = () => {
   const brandList = [
@@ -224,6 +224,7 @@ const HomeBrand = () => {
           loop={true}
           slidesPerView={1}
           simulateTouch={true}
+          speed={1000}
         >
           {groupedBrandList.map((group, index) => (
             <SwiperSlide key={index}>
