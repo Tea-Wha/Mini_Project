@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.security.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,5 +97,38 @@ public class AuthRepository {
             response.put("error", "아이디를 찾을 수 없습니다.");
             return response;
         }
+    }
+
+    // 토큰 저장
+    public void saveToken(String email, String token, long expiresAt) {
+        String sql = "INSERT INTO password_reset_tokens (email, token, created_at, expires_at) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, email, token, System.currentTimeMillis(), expiresAt);
+    }
+    // 토큰 조회
+    public String findTokenByEmail(String email) {
+        String sql = "SELECT token FROM password_reset_tokens WHERE email = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{email}, String.class);
+        } catch (DataAccessException e) {
+            return null;
+        }
+    }
+
+    // 토큰 확인
+    public boolean validateToken(String token) {
+        String sql = "SELECT COUNT(*) FROM password_reset_tokens WHERE token = ? AND expires_at > CURRENT_TIMESTAMP";
+        Integer count = jdbcTemplate.queryForObject(sql, new Object[]{token}, Integer.class);
+        return count != null && count > 0;
+    }
+
+    // 토큰 삭제
+    public void deleteToken(String token) {
+        String sql = "DELETE FROM password_reset_tokens WHERE token = ?";
+        jdbcTemplate.update(sql, token);
+    }
+
+    public void updatePassword(String email, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        jdbcTemplate.update(sql, newPassword, email);
     }
 }
