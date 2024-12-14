@@ -22,7 +22,7 @@ public class FirebaseDirService {
 	private final FirebaseDirRepository firebaseDirRepository;
 	
 	public List<String> getImage3d(int carNo, String color) {
-		return getImageUrls(firebaseDirRepository.getCarDir(carNo, color));
+		return getImageUrls("IMAGE/CAR_SP_IMAGE/" + firebaseDirRepository.getCarDir(carNo, color));
 	}
 	
 	public List<String> getImageUrls(String directory) {

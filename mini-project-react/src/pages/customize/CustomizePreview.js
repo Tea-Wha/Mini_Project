@@ -13,12 +13,12 @@ const CustomizePreview = ({carNo}) => {
 	
 	const { carColor} = useContext(CarInfoContext)
 	const [link, setLink] = useState(null)
-	const [option, setOption] = useState(true)
+	const [option, setOption] = useState(false)
 	
 	useEffect(() => {
 		const getCarImage = async () => {
 			try {
-				const rsp = await carInfoApi.getCarImage(carNo, carColor);
+				const rsp = await carInfoApi.getCarImage(carNo, (Array.isArray(carColor) && carColor.length > 0)? carColor[0] : carColor);
 				console.log(rsp.data);
 				//setOption(rsp.data.length === 1);
 				setLink(rsp.data);

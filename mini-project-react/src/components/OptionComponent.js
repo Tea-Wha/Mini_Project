@@ -31,7 +31,7 @@ const ToggleOption = styled(ToggleButton)`
 		position: relative;
 		width: 100px;
 		height: 100px;
-  
+		
 `
 
 const ToggleButtonContainer = styled.div`
@@ -115,7 +115,12 @@ const OptionComponent = ({value, setter, list, visible, setVisible, id, keyName,
 							<Tooltip title={item[keyName]}>
 								<ToggleOption key={index} color="primary"
 								              value={item[keyName]}
-								              sx={{border: "none", padding: 0, position: "relative",
+								              sx={item[keyUrl].includes(".txt") ? {border: "none", padding: 0, position: "relative",
+									              backgroundColor:`${item[keyUrl].replace(".txt","")}`,
+										              "&:hover": {
+											              backgroundColor: `${item[keyUrl].replace(".txt","")}`, // 호버 시 배경색 제거
+											              boxShadow: "none",}} // 호버 시 그림자 제거}
+											              : {border: "none", padding: 0, position: "relative",
 									              background: `url(${item[keyUrl]}) no-repeat center/cover`,
 								              }}>
 								</ToggleOption>
