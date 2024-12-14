@@ -46,6 +46,8 @@ const SearchItems = ({ list }) => {
 	const [order, setOrder] = useState("asc");
 	const [orderBy, setOrderBy] = useState("carName");
 	
+	
+	
 	// 클릭하면 정렬시켜주는 함수
 	const handleRequestSort = (event, property) => {
 		const isAscending = orderBy === property && order === "asc";
@@ -89,10 +91,11 @@ const SearchItems = ({ list }) => {
 				<ItemTableBody>
 					{stableSort(list, getComparator(order, orderBy)).map((item) => (
 						<TableRow key={item.carNo}>
+							{console.log(item.carFront)}
 							{[
 								// 차량 이미지 클릭 시 차량 정보 페이지로 이동
 								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carNo}>
-									<Image src={item.image || `/testimages/sonata_001.png`} alt="Car" />
+									<Image src={item.carFrontUrl || `/testimages/sonata_001.png`} alt="Car" />
 								</StyledLink>,
 								
 								

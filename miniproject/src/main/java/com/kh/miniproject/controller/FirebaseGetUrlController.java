@@ -33,6 +33,18 @@ public class FirebaseGetUrlController {
     public List<List<String>> getAllColorImageUrlsDistribution() throws IOException {
         return firebaseGetUrlService.getImageFullColorUrlsDistribution();
     }
+
+    // Search Image 받아오기
+    @GetMapping("/api/images/fullsearchurls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
+    public List<List<String>> getAllSearchImageUrlsDistribution() throws IOException {
+        return firebaseGetUrlService.getImageFullSearchUrlsDistribution();
+    }
+
+    // Search Image 받아오기
+    @GetMapping("/api/images/fullsearchtesturls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
+    public List<String> getAllSearchTestImageUrlsDistribution() throws IOException {
+        return firebaseGetUrlService.getImageFullSearchUrlsTestDistribution();
+    }
     
     // 대표 이미지 받아오기
     @GetMapping("/api/images/shortrepurls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)

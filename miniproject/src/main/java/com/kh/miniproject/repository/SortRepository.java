@@ -1,8 +1,11 @@
 package com.kh.miniproject.repository;
 
+import com.kh.miniproject.service.FirebaseDirService;
+import com.kh.miniproject.util.RepImagePaths;
 import com.kh.miniproject.vo.CategoryVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,9 @@ import java.util.List;
 @Slf4j
 public class SortRepository {
     private final JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    private FirebaseDirService firebaseDirService;
 
     public List<CategoryVo> sortInfo(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
                                     String engineType, String classification) {
@@ -82,15 +88,16 @@ public class SortRepository {
         return jdbcTemplate.query(sql.toString(), params.toArray(), new RowMapper<CategoryVo>() {
             @Override
             public CategoryVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                CategoryVo CategoryVo = new CategoryVo();
-                CategoryVo.setCarNo(rs.getInt("CAR_NO"));
-                CategoryVo.setCarName(rs.getString("CAR_NAME"));
-                CategoryVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
-                CategoryVo.setPrice(rs.getInt("CAR_PRICE"));
-                CategoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
-                CategoryVo.setClassification(rs.getString("CLASSIFICATION"));
-                CategoryVo.setManufacturerUrl(rs.getString("MANUFACTURER_URL"));
-                return CategoryVo;
+                CategoryVo categoryVo = new CategoryVo();
+                categoryVo.setCarNo(rs.getInt("CAR_NO"));
+                categoryVo.setCarName(rs.getString("CAR_NAME"));
+                categoryVo.setManufacturer(rs.getString("MANUFACTURER_NAME"));
+                categoryVo.setPrice(rs.getInt("CAR_PRICE"));
+                categoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
+                categoryVo.setClassification(rs.getString("CLASSIFICATION"));
+                categoryVo.setManufacturerUrl(rs.getString("MANUFACTURER_URL"));
+                categoryVo.setCarFrontUrl(rs.getString("CAR_FRONT_URL"));
+                return categoryVo;
             }
         });
     }
