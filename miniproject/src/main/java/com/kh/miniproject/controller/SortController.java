@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SortController {
     private final SortService sortService;
-    
+
     @PostMapping("/search")
     public ResponseEntity<List<CategoryVo>> setInfo(@RequestBody CategoryVo categoryVo) {
         log.warn("실행");

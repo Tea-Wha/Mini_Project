@@ -1,19 +1,26 @@
-import { FindGroup, MenuGroup, MenuItem, MenuItemSmall, MenuSideContainer, MenuLogo, StyledLink, MenuItemBrand } from "../../styles/home/HomeSideMenu";
+import {
+  FindGroup,
+  MenuGroup,
+  MenuItem,
+  MenuItemSmall,
+  MenuSideContainer,
+  MenuLogo,
+  StyledLink,
+  MenuItemBrand,
+} from "../../styles/home/HomeSideMenu";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 
-
-
 const HomeSideMenu = ({ id, isSubOpen, idx }) => {
   const nickname = localStorage.getItem("nickName");
-  
+
   const sideMenuList = [
     {
       name: "guest",
       content: [
         { name: "Log in", link: "/login" },
-        { name: "Sign up", link: "/signup" },
+        { name: "Sign up", link: "/join" },
         {
           half: true,
           content: [
@@ -213,7 +220,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       ],
     },
   ];
-  
+
   const selector = () => {
     switch (id) {
       case "myPage":
@@ -225,32 +232,35 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
         return null;
     }
   };
-  
+
   useEffect(() => {
-    document.body.style.overflow = id === "brand" && isSubOpen ? "hidden" : "auto";
+    document.body.style.overflow =
+      id === "brand" && isSubOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [id, isSubOpen]);
-  
+
   const renderMenuContent = (menu) => {
     return menu.content.map((item) => {
       if (item.type === "text") {
         return <p key={item.name}>{item.name}</p>;
       }
-      
+
       if (item.half) {
         return (
           <FindGroup key={item.name}>
             {item.content.map((subItem) => (
               <Link to={subItem.link} key={subItem.name}>
-                <MenuItemSmall isSubOpen={isSubOpen}>{subItem.name}</MenuItemSmall>
+                <MenuItemSmall isSubOpen={isSubOpen}>
+                  {subItem.name}
+                </MenuItemSmall>
               </Link>
             ))}
           </FindGroup>
         );
       }
-      
+
       if (item.featured) {
         return (
           <StyledLink to={item.link} key={item.name}>
@@ -261,7 +271,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
           </StyledLink>
         );
       }
-      
+
       return (
         <Link to={item.link} key={item.name}>
           <MenuItem isSubOpen={isSubOpen}>{item.name}</MenuItem>
@@ -269,9 +279,9 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       );
     });
   };
-  
+
   const selectedMenu = sideMenuList.find((menu) => menu.name === selector());
-  
+
   return (
     <MenuSideContainer isSubOpen={isSubOpen} idx={idx}>
       <MenuGroup isSubOpen={isSubOpen}>
