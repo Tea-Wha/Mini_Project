@@ -9,10 +9,7 @@ import FileUploadPage from "./pages/upload/FileUploadPage";
 import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
 import CartMain from "./pages/cart/CartMain";
-<<<<<<< HEAD
 import FindId from "./pages/authentication/FindId";
-=======
->>>>>>> 01f89403001a75e48a4edda00e4598d61645bca7
 
 function App() {
   return (
