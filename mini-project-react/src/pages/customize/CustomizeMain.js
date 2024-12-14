@@ -56,7 +56,7 @@ const CustomizeMain = () => {
 			}
 		}
 		carCustomInitialFetch()
-	},[carNo, carColor])
+	},[])
 	
 	useEffect(() => {
 		const colorPriceUpdater = () => {
@@ -75,7 +75,7 @@ const CustomizeMain = () => {
 				item.id === "options" ? { ...item,  price: optionPrice()} : item))
 		}
 		optionPriceUpdater()
-	},[carOptions, carInfo])
+	},[carOptions])
 	
 	const onClickSubmit = async () => {
 		const params = {
