@@ -100,13 +100,16 @@ public class AuthRepository {
     }
 
     // 토큰 저장
-    public void saveToken(String email, String token, long expiresAt) {
-        String sql = "INSERT INTO password_reset_tokens (email, token, created_at, expires_at) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, email, token, System.currentTimeMillis(), expiresAt);
+    public void saveToken(String email, String token, long createdAt, long expiresAt) {
+        String sql = "INSERT INTO PASSWORD_RESET_TOKEN (EMAIL, TOKEN, CREATED_AT, EXPIRES_AT) VALUES (?, ?, ?, ?)";
+
+        // createdAt과 expiresAt을 long 값으로 전달
+        jdbcTemplate.update(sql, email, token, createdAt, expiresAt);
     }
+
     // 토큰 조회
     public String findTokenByEmail(String email) {
-        String sql = "SELECT token FROM password_reset_tokens WHERE email = ?";
+        String sql = "SELECT TOKEN FROM PASSWORD_RESET_TOKEN WHERE EMAIL = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{email}, String.class);
         } catch (DataAccessException e) {
@@ -116,19 +119,19 @@ public class AuthRepository {
 
     // 토큰 확인
     public boolean validateToken(String token) {
-        String sql = "SELECT COUNT(*) FROM password_reset_tokens WHERE token = ? AND expires_at > CURRENT_TIMESTAMP";
+        String sql = "SELECT COUNT(*) FROM PASSWORD_RESET_TOKEN WHERE TOKEN = ? AND EXPIRES_AT > CURRENT_TIMESTAMP";
         Integer count = jdbcTemplate.queryForObject(sql, new Object[]{token}, Integer.class);
         return count != null && count > 0;
     }
 
     // 토큰 삭제
     public void deleteToken(String token) {
-        String sql = "DELETE FROM password_reset_tokens WHERE token = ?";
+        String sql = "DELETE FROM PASSWORD_RESET_TOKEN WHERE TOKEN = ?";
         jdbcTemplate.update(sql, token);
     }
 
     public void updatePassword(String email, String newPassword) {
-        String sql = "UPDATE users SET password = ? WHERE email = ?";
+        String sql = "UPDATE USERS SET HASH_PW = ? WHERE EMAIL = ?";
         jdbcTemplate.update(sql, newPassword, email);
     }
 }

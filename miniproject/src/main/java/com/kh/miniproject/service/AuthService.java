@@ -80,7 +80,8 @@ public class AuthService {
     public String generateResetToken(String email) {
         String token = generateRandomToken();  // 랜덤 토큰 생성
         long expiresAt = System.currentTimeMillis() + 3600 * 1000; // 현재 시간 + 1시간
-        authRepository.saveToken(email, token, expiresAt);
+        long createdAt = System.currentTimeMillis();
+        authRepository.saveToken(email, token, expiresAt, createdAt);
         return token;
     }
 
