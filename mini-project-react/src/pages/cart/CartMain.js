@@ -21,7 +21,7 @@ const CartMain = () => {
 	
 	const [pageFlag, setPageFlag] = useState(false);
 	
-	const {userId, nickname} = useContext(UserContext)
+	const {userId, nickName} = useContext(UserContext)
 	
 	const [cart, setCart] = useState([])
 	
@@ -51,7 +51,7 @@ const CartMain = () => {
 	
 	return (
 		<PageContainer>
-			<h1>{nickname}님의 장바구니</h1>
+			<h1>{nickName}님의 장바구니</h1>
 			<CartContainer>
 				{cart && cart.map((item, idx) => (<CartItem cart={item} key={idx} idx={idx} setPageFlag={setPageFlag} pageFlag={pageFlag}/>))}
 			</CartContainer>

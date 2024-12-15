@@ -20,9 +20,9 @@ public class CartRepository {
 	
 	private final JdbcTemplate jdbcTemplate;
 	
-	private final static String GET_CART = "SELECT C1.CARNO, C2.CAR_PRICE, C1.USER_ID, C1.CART_NO, C1.CART_NAME, C1.CART_OPTIONS, C1.CART_COLOR FROM CARTS C1 JOIN CARS C2 ON C1.CAR_NO = C2.CAR_NO WHERE USER_ID = ?";
+	private final static String GET_CART = "SELECT C1.CAR_NO, CART_PRICE, USER_ID, CART_NO, CART_NAME, CART_OPTIONS, CART_COLOR, CAR_FRONT_URL FROM CARTS C1 JOIN CARS C2 ON C2.CAR_NO = C1.CAR_NO WHERE USER_ID = ?";
 	private final static String NUM_CART = "SELECT COUNT(*) FROM CARTS WHERE USER_ID = ?";
-	private final static String CREATE_CART = "INSERT INTO CARTS(USER_ID, CAR_NO, CAR_COLOR, CAR_OPITONS) VALUES(?,?,?,?,?)";
+	private final static String CREATE_CART = "INSERT INTO CARTS(USER_ID, CAR_NO, CART_COLOR, CART_OPTIONS, CART_PRICE, CART_NO) VALUES(?,?,?,?,?,COMMENT_NO_SEQ.NEXTVAL)";
 	private final static String NAME_CHANGE = "UPDATE CARTS SET CART_NAME = ? WHERE CART_NO = ?";
 	private final static String UPDATE_CART = "UPDATE CARTS SET CART_OPTIONS = ?, CART_COLOR = ? WHERE CART_NO = ?" ;
 	private final static String DELETE_CART = "UPDATE CARTS SET USERID = 'DELETE' WHERE CART_NO = ? "; // 쓰레기통용 계정 생성
@@ -41,27 +41,30 @@ public class CartRepository {
 	
 	public boolean createCart(CartVo cartVo) {
 		log.warn("추가하려는 카트 {}", cartVo);
-		int isSuccess = jdbcTemplate.queryForObject(CREATE_CART, Integer.class, cartVo.getUserId(), cartVo.getCartNo(), cartVo.getCartColor(), cartVo.getCartOption());
+		int isSuccess = 0;
+		if (numOfCart(cartVo.getUserId())) {
+			isSuccess = jdbcTemplate.update(CREATE_CART,  cartVo.getUserId(), cartVo.getCarNo(), cartVo.getCartColor(), cartVo.getCartOption(), cartVo.getCartPrice());
+		}
 		log.info("추가된 열 : {}", isSuccess);
 		return isSuccess > 0;
 	}
 	
 	public boolean nameChange(String name, int cartNo) {
 		log.warn("바꾸는 카트번호 : {}, 바꿀 이름 : {}", cartNo, name);
-		int isSuccess = jdbcTemplate.queryForObject(NAME_CHANGE, Integer.class, name, cartNo);
+		int isSuccess = jdbcTemplate.update(NAME_CHANGE,  name, cartNo);
 		return isSuccess > 0;
 	}
 	
 	public boolean updateCart(CartVo cartVo) {
 		log.warn("수정하려는 카트 {}", cartVo);
-		int isSuccess = jdbcTemplate.queryForObject(UPDATE_CART, Integer.class, cartVo.getCartColor(), cartVo.getCartOption(), cartVo.getCartColor(), cartVo.getCartNo());
+		int isSuccess = jdbcTemplate.update(UPDATE_CART,  cartVo.getCartColor(), cartVo.getCartOption(), cartVo.getCartColor(), cartVo.getCartNo());
 		log.info("변경된 내역 : {}", isSuccess);
 		return isSuccess > 0;
 	}
 	
 	public boolean deleteCart(int cartNo) {
 		log.warn("삭제하려는 카트의 카트번호 : {}", cartNo);
-		int isSuccess = jdbcTemplate.queryForObject(DELETE_CART, Integer.class, cartNo);
+		int isSuccess = jdbcTemplate.update(DELETE_CART,  cartNo);
 		log.info("삭제된 내역 : {}", isSuccess);
 		return isSuccess > 0;
 	}
@@ -71,7 +74,7 @@ public class CartRepository {
 	private static class CartRowMapper implements RowMapper<CartVo> {
 		@Override
 		public CartVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new CartVo(rs.getInt("CART_NO"), rs.getString("USERID"), rs.getInt("CAR_NO"), rs.getString("CART_NAME"), rs.getString("CART_OPTIONS"), rs.getString("CART_COLOR"), rs.getInt("CAR_PRICE"));
+			return new CartVo(rs.getInt("CART_NO"), rs.getString("USER_ID"), rs.getInt("CAR_NO"), rs.getString("CART_NAME"), rs.getString("CART_OPTIONS"), rs.getString("CART_COLOR"), rs.getInt("CART_PRICE"), rs.getString("CAR_FRONT_URL"));
 		}
 	}
 }

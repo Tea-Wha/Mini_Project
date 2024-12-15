@@ -31,7 +31,7 @@ const CartTable = ({cart}) => {
 						옵션
 					</TableCell>
 					<TableCell>
-						{cart.option.map((item, index) => (
+						{Array.isArray(cart.cartOption) && cart.cartOption.map((item, index) => (
 							<div key={index}>{item}</div>
 						))}
 					</TableCell>

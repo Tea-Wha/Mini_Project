@@ -24,7 +24,7 @@ public class CartController {
 		return cartService.getCarts(userId);
 	}
 	
-	@PostMapping("/createCart")
+	@PostMapping("/postCart")
 	public boolean createCart(@RequestBody CartVo cartVo) {
 		return cartService.createCart(cartVo);
 	}

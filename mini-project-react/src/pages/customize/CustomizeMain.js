@@ -87,8 +87,9 @@ const CustomizeMain = () => {
 		const params = {
 			userId: userId,
 			carNo: carNo,
-			carColor: carColor,
-			carOptions: carOptions,
+			cartColor: carColor ? carColor[0] : colors[0].carColor,
+			cartOption: JSON.stringify(carOptions),
+			cartPrice: carPrice[0].price + carPrice[1].price + carPrice[2].price,
 		}
 		console.log(params);
 		try {
