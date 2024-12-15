@@ -13,5 +13,9 @@ const BrandApi = {
 		return await axios.get(KH_DOMAIN + "/brand/getCar/" + manufacturer);
 	},
 	
+	getBrandList: async () => {
+		console.log("브랜드 전체 조회")
+		return await axios.get(KH_DOMAIN + "/brand/all");
+	}
 }
 export default BrandApi

@@ -6,6 +6,7 @@ import { SearchContext } from "../../context/SearchStore";
 import SearchItems from "./SearchItems";
 import { Button, Tooltip } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import NavComponent from "../../components/NavComponent";
 
 //정렬용으로 만들어놓음 밑은 그냥 기능구분용
 const BoardContainer = styled.div`
@@ -140,6 +141,7 @@ const SearchMain = () => {
 
   return (
     <BoardContainer>
+      <NavComponent/>
       <SearchContainer>
         <SearchOptions
           companies={companies}

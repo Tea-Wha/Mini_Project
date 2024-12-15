@@ -4,6 +4,7 @@ import CartApi from "../../api/CartApi";
 import styled from "styled-components";
 import CartItem from "./CartItem";
 import {useNavigate} from "react-router-dom";
+import NavComponent from "../../components/NavComponent";
 
 const CartContainer = styled.div`
 		display: flex;
@@ -51,6 +52,7 @@ const CartMain = () => {
 	
 	return (
 		<PageContainer>
+			<NavComponent/>
 			<h1>{nickName}님의 장바구니</h1>
 			<CartContainer>
 				{cart && cart.map((item, idx) => (<CartItem cart={item} key={idx} idx={idx} setPageFlag={setPageFlag} pageFlag={pageFlag}/>))}

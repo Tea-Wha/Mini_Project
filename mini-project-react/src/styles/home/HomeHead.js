@@ -79,9 +79,12 @@ export const Initial = styled.div`
 
 export const StyledLink = styled(Link)`
   color: black;
+		min-width: 100px;
+		min-height: 50px;
   text-decoration: none;
   display: flex;
   justify-content: end;
+		align-items: center;
   font-weight: bold;
   font-size: 1.2em;
   z-index: 10;

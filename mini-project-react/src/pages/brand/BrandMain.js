@@ -5,6 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import BrandDesc from "./BrandDesc";
 import {BrandContext} from "../../context/BrandStore";
 import BrandApi from "../../api/BrandApi";
+import NavComponent from "../../components/NavComponent";
 
 const BrandContainer = styled.div``
 
@@ -34,10 +35,15 @@ const BrandMain = () => {
 			}
 		}
 		brandInfoInitialFetch()
+		return () => {
+			setBrandCar([])
+			setBrand({})
+		}
 	},[brand])
 	
 	return(
 		<BrandContainer>
+			<NavComponent/>
 			<BrandDesc/>
 		</BrandContainer>
 	)

@@ -3,7 +3,7 @@ import {useContext, useState} from "react";
 import {UserContext} from "../context/UserStore";
 import HomeMenu from "../pages/home/HomeMenu";
 
-const NavComponent = () => {
+const NavComponent = ({color}) => {
 	const { nickName } = useContext(UserContext);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [subPageOpen, setSubPageOpen] = useState({

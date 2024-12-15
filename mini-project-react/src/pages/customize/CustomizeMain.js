@@ -8,6 +8,7 @@ import CustomizeOptions from "./CustomizeOptions";
 import CustomizeResult from "./CustomizeResult";
 import {UserContext} from "../../context/UserStore";
 import CartApi from "../../api/CartApi";
+import NavComponent from "../../components/NavComponent";
 
 const CustomizeContainer = styled.div`
 		position: relative;
@@ -57,6 +58,12 @@ const CustomizeMain = () => {
 			}
 		}
 		carCustomInitialFetch()
+		return () => {
+			setCarInfo([])
+			setColors([])
+			setOptions([])
+			setCarPrice([])
+		}
 	},[])
 	
 	useEffect(() => {
@@ -133,6 +140,7 @@ const CustomizeMain = () => {
 	
 	return (
 		<CustomizeContainer>
+			<NavComponent/>
 			<CustomizePreview carNo={carNo}/>
 			<CustomizeOptions/>
 			<CustomizeResult onClickSubmit={updateFlag ? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>

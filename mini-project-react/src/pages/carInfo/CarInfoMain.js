@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import CarInfoApi from "../../api/CarInfoApi";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import CarInfoDesc from "./CarInfoDesc";
+import NavComponent from "../../components/NavComponent";
 
 const CarInfoContainer = styled.div``
 
@@ -35,10 +36,16 @@ const CarInfoMain = () => {
 			}
 		}
 		carInfoInitialFetch()
+		return () => {
+			setCarInfo([])
+			setColors([])
+			setOptions([])
+		}
 	},[carNo])
 	
 	return(
 		<CarInfoContainer>
+			<NavComponent/>
 			<CarInfoDesc/>
 		</CarInfoContainer>
 	)

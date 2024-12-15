@@ -23,7 +23,7 @@ public class BrandListRepository {
 	private final JdbcTemplate jdbcTemplate;
 	private final static String MANUFACTURER_INFO = "SELECT MANUFACTURER_NAME, MANUFACTURER_URL, COUNTRY FROM MANUFACTURERS WHERE MANUFACTURER_NAME = ?";
 	private final static String BRAND_CARS = "SELECT CAR_NO, CAR_NAME, CAR_FRONT_URL, CAR_PRICE FROM VM_LIST_CAR WHERE MANUFACTURER_NAME = ?";
-	
+	private final static String BRAND_ALL = "SELECT MANUFACTURER_NAME, MANUFACTURER_URL, COUNTRY FROM MANUFACTURERS";
 	
 	public BrandVo getBrandInfo(String manufacturerName) {
 		log.info("제조사 : {}", manufacturerName);
@@ -35,7 +35,9 @@ public class BrandListRepository {
 		return jdbcTemplate.query(BRAND_CARS, new Object[]{manufacturerName}, new BrandCarRowMapper(firebaseDirService));
 	}
 
-	
+	public List<BrandVo> getBrandAll() {
+		return jdbcTemplate.query(BRAND_ALL, new BrandInfoRowMapper());
+	}
 	
 	public static class BrandInfoRowMapper implements RowMapper<BrandVo> {
 		

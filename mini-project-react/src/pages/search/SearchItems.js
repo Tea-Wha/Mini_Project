@@ -91,7 +91,6 @@ const SearchItems = ({ list }) => {
 				<ItemTableBody>
 					{stableSort(list, getComparator(order, orderBy)).map((item) => (
 						<TableRow key={item.carNo}>
-							{console.log(item.carFront)}
 							{[
 								// 차량 이미지 클릭 시 차량 정보 페이지로 이동
 								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carNo}>
@@ -105,8 +104,8 @@ const SearchItems = ({ list }) => {
 								</StyledLink>,
 								
 								// 브랜드 이름 클릭 시 브랜드 페이지로 이동
-								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carName}>
-									<IconButton>
+								<StyledLink to={`/brand/${item.manufacturerName}`} key={item.carName}>
+									<IconButton sx = {{height:"70px", width:"70px"}}>
 										<Logo src={item.manufacturerUrl || `/testlogos/hyundai.png`} alt="logo" />
 									</IconButton>
 								</StyledLink>,
