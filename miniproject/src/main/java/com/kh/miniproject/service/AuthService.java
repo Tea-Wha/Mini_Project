@@ -5,7 +5,6 @@ import com.kh.miniproject.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Timestamp;
@@ -15,7 +14,6 @@ import java.security.Timestamp;
 @Slf4j
 public class AuthService {
     private final AuthRepository authRepository;
-    private BCryptPasswordEncoder passwordEncoder;
 
     // UserVo의 회원가입시 정보 객체를 초기화하는 메서드 : 비밀번호는 해쉬처리한 값을 초기화한다.
     public void registerUser(UserVo userVo) {
@@ -74,48 +72,6 @@ public class AuthService {
     public String findIdByEmail(String email) {
         log.info("서비스에서 repo를 호출 받아 보내는 값 : {}", authRepository.getIdByEmail(email));
         return authRepository.getIdByEmail(email).toString();
-    }
-
-
-    public String generateResetToken(String email) {
-        String token = generateRandomToken();  // 랜덤 토큰 생성
-        long expiresAt = System.currentTimeMillis() + 3600 * 1000; // 현재 시간 + 1시간
-        long createdAt = System.currentTimeMillis();
-        authRepository.saveToken(email, token, expiresAt, createdAt);
-        return token;
-    }
-
-    public boolean validateResetToken(String token) {
-        // 토큰 유효성 확인
-        return authRepository.validateToken(token);
-    }
-
-    // 비밀번호 리셋 후 새 비밀번호 업데이트
-    public void resetPassword(String token, String newPassword) {
-        // 토큰이 유효한지 확인
-        if (!authRepository.validateToken(token)) {
-            throw new IllegalArgumentException("Invalid or expired token");
-        }
-
-        // 토큰에 해당하는 이메일 가져오기
-        String email = authRepository.findTokenByEmail(token);
-        if (email == null) {
-            throw new IllegalArgumentException("Token not found");
-        }
-
-        // 새로운 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(newPassword);
-
-        // 이메일에 해당하는 사용자 비밀번호 업데이트
-        authRepository.updatePassword(email, encodedPassword);
-
-        // 비밀번호 리셋 후 토큰 삭제
-        authRepository.deleteToken(token); // 토큰 삭제
-    }
-
-    // 임의의 토큰 생성 메서드 (간단히 구현한 예)
-    private String generateRandomToken() {
-        return java.util.UUID.randomUUID().toString();
     }
 }
 

@@ -23,7 +23,7 @@ const FindPw = () => {
     <div>
       <h2>Password Reset</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">이메일을 입력 해 주세요요:</label>
+        <label htmlFor="email">이메일을 입력 해 주세요:</label>
         <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <button type="submit">다음</button>
       </form>
