@@ -1,35 +1,54 @@
 import React, { useState } from "react";
 import AxiosApi from "../../api/Authentication";
+import { Navigate } from "react-router-dom";
+import { StyledContainer, ImageContainer, InputContainer, StyledH3, StyledInput, StyledButton, StyledH1 } from "../../styles/authentication/FindPw";
 
 const FindPw = () => {
+  const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setMessage("");
-    setError("");
-
     try {
-      await AxiosApi.requestPassword(email);
-      setMessage("리셋을 위한 링크가 성공적으로 전송 되었습니다..");
+      const result = await AxiosApi.findPw(userId, email, newPassword);
+      setSuccess(result);
+      setError("");
     } catch (err) {
-      setError("리셋을 위한 시도가 실패 하였습니다, 이메일 주소를 다시 확인 해 주세요");
+      setError(err.response?.data || "비밀번호 변경 실패");
+      setSuccess("");
     }
   };
 
+  if (success) {
+    return <Navigate to="/login" replace />;
+  }
+
   return (
-    <div>
-      <h2>Password Reset</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">이메일을 입력 해 주세요:</label>
-        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <button type="submit">다음</button>
-      </form>
-      {message && <p style={{ color: "green" }}>{message}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
+    <StyledContainer>
+      <ImageContainer image="your-image-url.jpg" />
+      <InputContainer>
+        <StyledH1>비밀번호 재설정</StyledH1>
+        <form onSubmit={submit}>
+          <div>
+            <label>아이디:</label>
+            <StyledInput type="text" value={userId} onChange={(e) => setUserId(e.target.value)} required />
+          </div>
+          <div>
+            <label>이메일:</label>
+            <StyledInput type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div>
+            <label>새 비밀번호:</label>
+            <StyledInput type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+          </div>
+          <StyledButton type="submit">비밀번호 재설정</StyledButton>
+        </form>
+        {error && <StyledH3>{error}</StyledH3>}
+      </InputContainer>
+    </StyledContainer>
   );
 };
 

@@ -1,28 +1,28 @@
-import AxiosApi from "../../api/Authentication";
 import React, { useState } from "react";
+import AxiosApi from "../../api/Authentication";
 import { useNavigate } from "react-router-dom";
+import { StyledContainer, InputContainer, StyledInput, StyledButton, StyledH1, StyledH3, Footer } from "../../styles/authentication/FindId";
 
 const FindId = () => {
   const navigate = useNavigate();
 
-  const [inputEmail, setInputEmail] = useState(""); // 사용자가 입력한 이메일
-  const [foundId, setFoundId] = useState(""); // 서버에서 받아온 ID
-  const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지
+  const [inputEmail, setInputEmail] = useState("");
+  const [foundId, setFoundId] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onClickFindId = async () => {
     try {
-      const rsp = await AxiosApi.findId(inputEmail); // 이메일만 전달
-      console.log(rsp.data); // 응답 데이터를 콘솔에 출력하여 확인
+      const rsp = await AxiosApi.findId(inputEmail); // email 파라미터로 서버에 요청청
+      console.log(rsp.data);
 
       if (rsp.status === 200) {
-        const userIdString = rsp.data.userId; // 서버에서 반환된 userId 문자열
+        const userIdString = rsp.data.userId;
         if (userIdString) {
-          // "{USER_ID=test}"와 같은 문자열에서 "test" 부분만 추출
-          const userId = userIdString.match(/USER_ID=(\w+)/); // 정규식을 사용하여 USER_ID 추출
+          const userId = userIdString.match(/USER_ID=(\w+)/);
 
           if (userId && userId[1]) {
             setFoundId(`해당하는 이메일에 대한 아이디는 : ${userId[1]} 입니다.`);
-            setErrorMessage(""); // 성공 시 오류 메시지 초기화
+            setErrorMessage("");
           } else {
             setErrorMessage("해당하는 이메일에 대한 아이디를 찾을 수 없습니다.");
             setFoundId("");
@@ -40,52 +40,27 @@ const FindId = () => {
   };
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      <h2>ID 찾기</h2>
-      <p>가입 시 사용한 이메일을 입력하세요.</p>
-      <input
-        type="email"
-        value={inputEmail}
-        placeholder="이메일 입력"
-        onChange={(e) => setInputEmail(e.target.value)}
-        style={{
-          padding: "10px",
-          width: "300px",
-          borderRadius: "5px",
-          border: "1px solid #ccc",
-        }}
-      />
-      <br />
-      <button
-        onClick={onClickFindId}
-        style={{
-          padding: "10px 20px",
-          margin: "10px",
-          backgroundColor: "#4CAF50",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        ID 찾기
-      </button>
-      {foundId && <p style={{ color: "green", fontWeight: "bold" }}>{foundId}</p>}
-      {errorMessage && <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>}
-      <button
-        onClick={() => navigate("/login")} // 로그인 페이지로 이동
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "#008CBA",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        로그인으로 이동
-      </button>
-    </div>
+    <StyledContainer>
+      <InputContainer>
+        <StyledH1>ID 찾기</StyledH1>
+        <p>가입 시 사용한 이메일을 입력하세요.</p>
+        <StyledInput
+          type="email"
+          value={inputEmail}
+          placeholder="이메일 입력"
+          onChange={(e) => setInputEmail(e.target.value)}
+        />
+        <StyledButton onClick={onClickFindId}>ID 찾기</StyledButton>
+        {foundId && <StyledH3 success>{foundId}</StyledH3>}
+        {errorMessage && <StyledH3>{errorMessage}</StyledH3>}
+        <StyledButton onClick={() => navigate("/login")} style={{ backgroundColor: "#008CBA" }}>
+          로그인으로 이동
+        </StyledButton>
+      </InputContainer>
+      <Footer>
+        <StyledH3>Footer Content</StyledH3>
+      </Footer>
+    </StyledContainer>
   );
 };
 

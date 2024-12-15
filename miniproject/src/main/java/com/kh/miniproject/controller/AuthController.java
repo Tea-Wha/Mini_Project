@@ -92,4 +92,26 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID를 찾을 수 없습니다.");
         }
     }
+
+    @PostMapping("/findPassword")
+    public ResponseEntity<?> updatePassword(
+            @RequestParam String userId,
+            @RequestParam String email,
+            @RequestParam String newPassword
+    ) {
+        try {
+            log.info("전달 받은 값들 {},{},{}", userId, email, newPassword);
+            boolean isUpdated = authService.updatePassword(userId, email, newPassword);
+            if (isUpdated) {
+                log.info("성공? 실패? {}", isUpdated);
+                return ResponseEntity.ok("비밀번호가 성공적으로 변경 되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("아이디와 이메일이 일치하지 않습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("비밀번호 업데이트 실패.");
+        }
+    }
 }

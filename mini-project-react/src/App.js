@@ -11,7 +11,6 @@ import BrandMain from "./pages/brand/BrandMain";
 import CartMain from "./pages/cart/CartMain";
 import FindId from "./pages/authentication/FindId";
 import FindPw from "./pages/authentication/FindPw";
-import ResetEmail from "./pages/authentication/ResetPassword";
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/findId" element={<FindId />} />
             <Route path="/findPw" element={<FindPw />} />
-            <Route path="/resetEmail" element={<ResetEmail />} />
             <Route path="/join" element={<Join />} />
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
