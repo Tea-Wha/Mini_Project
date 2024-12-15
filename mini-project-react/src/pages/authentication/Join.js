@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../../api/Authentication";
-import { Container, Items, Input, Button } from "../../components/JoinComponent";
+import {
+  StyledContainer,
+  StyledInput,
+  StyledButton,
+  ImageContainer,
+  InputContainer,
+  Footer,
+  StyledH1,
+  StyledH3,
+  Items,
+} from "../../styles/authentication/Join.js";
 
 const Join = () => {
   const navigate = useNavigate();
@@ -44,7 +54,8 @@ const Join = () => {
   const onChangePw = (e) => {
     const pwValue = e.target.value;
     setInputPw(pwValue);
-    const pwFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const pwFormat =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!pwFormat.test(pwValue)) {
       setPwError("올바르지 않는 비밀번호 형식입니다.");
       setPwCheck(false);
@@ -172,13 +183,26 @@ const Join = () => {
   };
 
   const onClickSignUp = async () => {
-    if (!idCheck || !pwCheck || !conPwCheck || !nickNameCheck || !emailCheck || !phoneNumCheck) {
+    if (
+      !idCheck ||
+      !pwCheck ||
+      !conPwCheck ||
+      !nickNameCheck ||
+      !emailCheck ||
+      !phoneNumCheck
+    ) {
       alert("모든 항목을 올바르게 입력해주세요.");
       return;
     }
 
     try {
-      const signUp = await AxiosApi.join(inputId, inputPw, inputNickName, inputEmail, inputPhoneNum);
+      const signUp = await AxiosApi.join(
+        inputId,
+        inputPw,
+        inputNickName,
+        inputEmail,
+        inputPhoneNum
+      );
       if (signUp.data) {
         alert("회원가입에 성공하였습니다.");
         navigate("/");
@@ -191,51 +215,138 @@ const Join = () => {
     }
   };
 
+  const image = "/login/signup.jpg";
+
   return (
-    <Container>
-      {/* 아이디 입력 */}
-      <Items variant="item2">
-        <Input type="text" placeholder="아이디" value={inputId} onChange={onChangeId} />
-      </Items>
-      <Items variant="hint">{inputId.length > 0 && <span className={`message ${idCheck ? "success" : "error"}`}>{idError}</span>}</Items>
+    <StyledContainer>
+      <ImageContainer image={image}></ImageContainer>
+      <InputContainer>
+        <StyledH1>Sign Up</StyledH1>
+        {/* 아이디 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="text"
+            placeholder="아이디"
+            value={inputId}
+            onChange={onChangeId}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputId.length > 0 && (
+            <span className={`message ${idCheck ? "success" : "error"}`}>
+              {idError}
+            </span>
+          )}
+        </Items>
 
-      {/* 패스워드 입력 */}
-      <Items variant="item2">
-        <Input type="password" placeholder="패스워드" value={inputPw} onChange={onChangePw} />
-      </Items>
-      <Items variant="hint">{inputPw.length > 0 && <span className={`message ${pwCheck ? "success" : "error"}`}>{pwError}</span>}</Items>
+        {/* 패스워드 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="password"
+            placeholder="패스워드"
+            value={inputPw}
+            onChange={onChangePw}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputPw.length > 0 && (
+            <span className={`message ${pwCheck ? "success" : "error"}`}>
+              {pwError}
+            </span>
+          )}
+        </Items>
 
-      {/* 패스워드 확인 입력 */}
-      <Items variant="item2">
-        <Input type="password" placeholder="패스워드 확인" value={inputConPw} onChange={onChangeConPw} />
-      </Items>
-      <Items variant="hint">{inputConPw.length > 0 && <span className={`message ${conPwCheck ? "success" : "error"}`}>{conPwError}</span>}</Items>
+        {/* 패스워드 확인 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="password"
+            placeholder="패스워드 확인"
+            value={inputConPw}
+            onChange={onChangeConPw}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputConPw.length > 0 && (
+            <span className={`message ${conPwCheck ? "success" : "error"}`}>
+              {conPwError}
+            </span>
+          )}
+        </Items>
 
-      {/* 닉네임 입력 */}
-      <Items variant="item2">
-        <Input type="text" placeholder="닉네임" value={inputNickName} onChange={onChangeNickName} />
-      </Items>
-      <Items variant="hint">{inputNickName.length > 0 && <span className={`message ${nickNameCheck ? "success" : "error"}`}>{nickNameError}</span>}</Items>
+        {/* 닉네임 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="text"
+            placeholder="닉네임"
+            value={inputNickName}
+            onChange={onChangeNickName}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputNickName.length > 0 && (
+            <span className={`message ${nickNameCheck ? "success" : "error"}`}>
+              {nickNameError}
+            </span>
+          )}
+        </Items>
 
-      {/* 이메일 입력 */}
-      <Items variant="item2">
-        <Input type="email" placeholder="이메일" value={inputEmail} onChange={onChangeEmail} />
-      </Items>
-      <Items variant="hint">{inputEmail.length > 0 && <span className={`message ${emailCheck ? "success" : "error"}`}>{emailError}</span>}</Items>
+        {/* 이메일 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="email"
+            placeholder="이메일"
+            value={inputEmail}
+            onChange={onChangeEmail}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputEmail.length > 0 && (
+            <span className={`message ${emailCheck ? "success" : "error"}`}>
+              {emailError}
+            </span>
+          )}
+        </Items>
 
-      {/* 전화번호 입력 */}
-      <Items variant="item2">
-        <Input type="tel" placeholder="전화번호" value={inputPhoneNum} onChange={onChangePhoneNum} />
-      </Items>
-      <Items variant="hint">{inputPhoneNum.length > 0 && <span className={`message ${phoneNumCheck ? "success" : "error"}`}>{phoneNumError}</span>}</Items>
+        {/* 전화번호 입력 */}
+        <Items variant="item2">
+          <StyledInput
+            type="tel"
+            placeholder="전화번호"
+            value={inputPhoneNum}
+            onChange={onChangePhoneNum}
+          />
+        </Items>
+        <Items variant="hint">
+          {inputPhoneNum.length > 0 && (
+            <span className={`message ${phoneNumCheck ? "success" : "error"}`}>
+              {phoneNumError}
+            </span>
+          )}
+        </Items>
 
-      {/* 회원가입 버튼 */}
-      <Items variant="item2">
-        <Button disabled={!(idCheck && pwCheck && conPwCheck && nickNameCheck && emailCheck && phoneNumCheck)} onClick={onClickSignUp}>
-          NEXT
-        </Button>
-      </Items>
-    </Container>
+        {/* 회원가입 버튼 */}
+        <Items variant="item2">
+          <StyledButton
+            disabled={
+              !(
+                idCheck &&
+                pwCheck &&
+                conPwCheck &&
+                nickNameCheck &&
+                emailCheck &&
+                phoneNumCheck
+              )
+            }
+            onClick={onClickSignUp}
+          >
+            NEXT
+          </StyledButton>
+        </Items>
+      </InputContainer>
+      <Footer>
+        <StyledH3>CHANAWA</StyledH3>
+      </Footer>
+    </StyledContainer>
   );
 };
 

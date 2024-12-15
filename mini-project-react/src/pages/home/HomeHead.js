@@ -11,7 +11,7 @@ import {
   StyledLink,
 } from "../../styles/home/HomeHead";
 import { UserContext } from "../../context/UserStore";
-import HomeImageTest from "./HomeImageTest";
+import HomeImageRev from "./HomeImageRev";
 
 const HomeHead = () => {
   const { nickName } = useContext(UserContext);
@@ -43,7 +43,7 @@ const HomeHead = () => {
         </StyledLink>
         <Button onClick={onClickLogin}>{nickName ? "My Page" : "Login"}</Button>
       </NavContainer>
-      <HomeImageTest />
+      <HomeImageRev />
 
       <HomeMenu
         setMenuOpen={setMenuOpen}
