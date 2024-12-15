@@ -10,7 +10,7 @@ const OptionsContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		right: 0;
-		top: 0;
+		top: 50px;
 		width: 30%;
 		height: 100%;
 `

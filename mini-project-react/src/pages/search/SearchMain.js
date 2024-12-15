@@ -10,6 +10,7 @@ import NavComponent from "../../components/NavComponent";
 
 //정렬용으로 만들어놓음 밑은 그냥 기능구분용
 const BoardContainer = styled.div`
+  margin: 100px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,33 +141,29 @@ const SearchMain = () => {
   }, []);
 
   return (
-    <BoardContainer>
+    <>
       <NavComponent/>
-      <SearchContainer>
-        <SearchOptions
-          companies={companies}
-          engines={engines}
-          maxPrice={maxPrice}
-          classList={classList}
-          search={search}
-        />
-      </SearchContainer>
-      <ListContainer>
-        {/*<SearchArrange*/}
-        {/*	sort={sort}*/}
-        {/*	setSortBy={(sortBy) =>*/}
-        {/*		dispatchSort({ type: "SET_SORT_BY", payload: sortBy })*/}
-        {/*	}*/}
-        {/*/>*/}
-        <Tooltip title="모든 선택 초기화" placement="top">
-          <ClearButton variant="outlined" onClick={clearLocalStorage}>
-            {" "}
-            <RestartAltIcon />{" "}
-          </ClearButton>
-        </Tooltip>
-        <SearchItems list={list} />
-      </ListContainer>
-    </BoardContainer>
+      <BoardContainer>
+        <SearchContainer>
+          <SearchOptions
+            companies={companies}
+            engines={engines}
+            maxPrice={maxPrice}
+            classList={classList}
+            search={search}
+          />
+        </SearchContainer>
+        <ListContainer>
+          <Tooltip title="모든 선택 초기화" placement="top">
+            <ClearButton variant="outlined" onClick={clearLocalStorage}>
+              {" "}
+              <RestartAltIcon />{" "}
+            </ClearButton>
+          </Tooltip>
+          <SearchItems list={list} />
+        </ListContainer>
+      </BoardContainer>
+    </>
   );
 };
 export default SearchMain;

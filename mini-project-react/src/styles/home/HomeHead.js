@@ -11,7 +11,6 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   // 영역 확인용
-  background-color: none;
   z-index: 10;
 `;
 
@@ -19,6 +18,7 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+	top: 0;
   // 크기 설정용
   width: 100%;
   position: absolute;

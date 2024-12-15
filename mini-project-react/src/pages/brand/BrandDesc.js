@@ -13,7 +13,7 @@ const CarDescContainer = styled.div`
 		justify-content: center;
 		align-items: center;
 		width: 1000px;
-		margin: 10px auto;
+		margin: 100px auto;
 `
 
 const CarDescCard = styled(Card)`

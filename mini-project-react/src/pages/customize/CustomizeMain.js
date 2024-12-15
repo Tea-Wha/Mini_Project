@@ -62,7 +62,8 @@ const CustomizeMain = () => {
 			setCarInfo([])
 			setColors([])
 			setOptions([])
-			setCarPrice([])
+			setCarPrice([{name: "기본 금액", id:"carNo", price: 0},
+				{name: "색상 금액", id:"color" , price: 0},{name: "옵션 금액" , id:"options", price: 0}])
 		}
 	},[])
 	
@@ -139,12 +140,14 @@ const CustomizeMain = () => {
 	}
 	
 	return (
-		<CustomizeContainer>
+		<>
 			<NavComponent/>
-			<CustomizePreview carNo={carNo}/>
-			<CustomizeOptions/>
-			<CustomizeResult onClickSubmit={updateFlag ? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
-		</CustomizeContainer>
+			<CustomizeContainer>
+				<CustomizePreview carNo={carNo}/>
+				<CustomizeOptions/>
+				<CustomizeResult onClickSubmit={updateFlag ? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
+			</CustomizeContainer>
+		</>
 	)
 }
 export default CustomizeMain

@@ -147,7 +147,7 @@ const OptionComponent = ({ value, setter, list, visible, setVisible, id, keyName
 								>
 									<ToggleButtonContainer>
 										<>{item[keyName]}</>
-										{item[keyUrl] ? <Image src={item[keyUrl]} alt="" /> : <span>이미지 없음</span>}
+										{item[keyUrl] ? <Image src={item[keyUrl]} alt="" /> : <></>}
 									</ToggleButtonContainer>
 								</ToggleOption>
 							)}
