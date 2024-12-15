@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.security.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class AuthRepository {
     private static final String VALIDATE_EMAIL = "SELECT COUNT(*) FROM USERS WHERE EMAIL = ?";
     private static final String VALIDATE_PHONE = "SELECT COUNT(*) FROM USERS WHERE PHONE = ?";
     private static final String GET_ID_BY_EMAIL = "SELECT USER_ID FROM USERS WHERE EMAIL = ?";
+    private static final String GET_PW = "SELECT COUNT(*) FROM USERS WHERE USER_ID = ? AND EMAIL = ?";
+    private static final String UPDATE_PW = "UPDATE USERS SET HASH_PW = ? WHERE USER_ID = ?";
+
 
     // 회원가입 쿼리문을 날려 DB에 정보를 입력
     public void registerAccount(UserVo userVo) {
@@ -97,5 +101,14 @@ public class AuthRepository {
             response.put("error", "아이디를 찾을 수 없습니다.");
             return response;
         }
+    }
+
+    public boolean getPwByIdAndEmail(String userId, String email) {
+        Integer count = jdbcTemplate.queryForObject(GET_PW, new Object[]{userId, email}, Integer.class);
+        return count != null && count > 0;
+    }
+
+    public void updatePassword(String userId, String hashedPassword) {
+        jdbcTemplate.update(UPDATE_PW, hashedPassword, userId);
     }
 }

@@ -73,7 +73,21 @@ public class AuthService {
         log.info("서비스에서 repo를 호출 받아 보내는 값 : {}", authRepository.getIdByEmail(email));
         return authRepository.getIdByEmail(email).toString();
     }
+
+    public boolean updatePassword(String userId, String email, String newPassword) {
+        log.info("전달받은 userid {}, email {}", userId, email);
+        if (authRepository.getPwByIdAndEmail(userId, email)) {
+            log.warn("repo 호출 성공");
+            // 새 비밀번호 해시화
+            String salt = BCrypt.gensalt();
+            String hashedPassword = BCrypt.hashpw(newPassword, salt);
+            log.info("해시 비번값 : {}", hashedPassword);
+
+            authRepository.updatePassword(userId, hashedPassword);
+            log.warn("해시화 성공 및 DB에 입력 완료");
+            return true;
+        }
+        log.warn("아이디 이메일 불일치");
+        return false; // 아이디나 이메일이 일치하지 않을 경우
+    }
 }
-
-
-    // 비밀번호 변경 비즈니스로직과 이메일 인증관련 메서드
