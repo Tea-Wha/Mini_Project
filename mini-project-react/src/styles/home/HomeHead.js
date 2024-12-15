@@ -40,8 +40,9 @@ export const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  color: white;
-  height: 40px;
+    color: ${props => (props.color ? "#1c1c1c" : "white")};
+
+    height: 40px;
   transition: background-color 0.5s ease, transform 0.5s ease;
   z-index: 10;
   @font-face {
@@ -58,13 +59,12 @@ export const Button = styled.button`
 export const ImageCounterContainer = styled.div`
   width: 150px;
   margin: 0 auto;
-  background-color: aquamarine;
 `;
 
 export const Initial = styled.div`
   margin: 0 auto;
   cursor: pointer;
-  color: white;
+    color: ${props => (props.color ? "#1c1c1c" : "white")};
   margin-top: 0px;
   font-weight: bold;
   font-size: 1.6rem;

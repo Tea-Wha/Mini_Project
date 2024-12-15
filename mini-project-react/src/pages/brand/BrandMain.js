@@ -43,7 +43,7 @@ const BrandMain = () => {
 	
 	return(
 		<BrandContainer>
-			<NavComponent/>
+			<NavComponent color={true}/>
 			<BrandDesc/>
 		</BrandContainer>
 	)

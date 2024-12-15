@@ -24,14 +24,14 @@ const NavComponent = ({color}) => {
 	return(
 		<>
 			<NavContainer>
-				<MenuContainer>
-					<Button onClick={onClickMenu}>Menu</Button>
+				<MenuContainer >
+					<Button color={color} onClick={onClickMenu}>Menu</Button>
 				</MenuContainer>
 				<StyledLink to="/">
-					<Initial>CHANAWA</Initial>
+					<Initial color={color}>CHANAWA</Initial>
 					{/* <img src="#" alt="Logo" /> */}
 				</StyledLink>
-				<Button onClick={onClickLogin}>{nickName ? "My Page" : "Login"}</Button>
+				<Button color={color} onClick={onClickLogin}>{nickName ? "My Page" : "Login"}</Button>
 			</NavContainer>
 			<HomeMenu
 				setMenuOpen={setMenuOpen}

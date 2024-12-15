@@ -14,6 +14,7 @@ const PreviewContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+		width: 100%;
     height: 100%;
     position: relative;
 `;
@@ -21,8 +22,11 @@ const PreviewContainer = styled.div`
 const Image = styled.img`
     max-width: 100%;
     max-height: 100%;
+		width: 100%;
+		height: 100%;
     object-fit: contain;
     cursor: grab;
+		margin: 0 auto;
 `;
 
 const CustomizeImage = ({ link }) => {
@@ -30,6 +34,7 @@ const CustomizeImage = ({ link }) => {
 	const [isDragging, setIsDragging] = useState(false);  // 드래그 상태
 	const [dragStartX, setDragStartX] = useState(0);  // 드래그 시작 위치
 	const [dragOffset, setDragOffset] = useState(0);  // 드래그된 거리
+	
 	
 	const onDragImage = (direction) => {
 		// 인덱스 이동 (다음, 이전 이미지)
@@ -41,6 +46,8 @@ const CustomizeImage = ({ link }) => {
 			}
 		});
 	};
+	
+	
 	
 	const handleMouseDown = (e) => {
 		// 마우스 클릭 시, 드래그 시작
@@ -85,10 +92,11 @@ const CustomizeImage = ({ link }) => {
 				onMouseLeave={handleMouseLeave}  // 마우스가 요소를 벗어나면
 			>
 				{/* 왼쪽 버튼 */}
-				<IconButton onClick={() => onDragImage("next")}>
+				{(Array.isArray(link) && link.length > 1) &&
+					<IconButton onClick={() => onDragImage("next")}>
 					<ArrowBackIosIcon />
 				</IconButton>
-				
+				}
 				{/* 이미지 표시 */}
 				{link && link.length > 0 ? (
 					<Image
@@ -102,9 +110,12 @@ const CustomizeImage = ({ link }) => {
 				)}
 				
 				{/* 오른쪽 버튼 */}
-				<IconButton onClick={() => onDragImage("prev")}>
-					<ArrowForwardIosIcon />
-				</IconButton>
+				{
+					(Array.isArray(link) && link.length > 1) &&
+					<IconButton onClick={() => onDragImage("prev")}>
+						<ArrowForwardIosIcon />
+					</IconButton>
+				}
 			</PreviewContainer>
 		</CustomizeImageContainer>
 	);

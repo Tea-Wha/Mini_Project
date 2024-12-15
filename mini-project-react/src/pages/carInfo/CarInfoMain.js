@@ -45,7 +45,7 @@ const CarInfoMain = () => {
 	
 	return(
 		<CarInfoContainer>
-			<NavComponent/>
+			<NavComponent color={true}/>
 			<CarInfoDesc/>
 		</CarInfoContainer>
 	)

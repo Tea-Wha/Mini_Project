@@ -15,6 +15,7 @@ const CartItemContainer = styled(Card)`
 		justify-content: space-evenly;
 		align-items: center;
 		width: 300px;
+		margin: 10px;
 `
 
 const CartImage = styled.img`

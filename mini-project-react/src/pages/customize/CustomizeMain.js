@@ -18,7 +18,12 @@ const CustomizeContainer = styled.div`
 		padding-bottom: 300px;
 `
 
-
+const Container = styled.div`
+		width: 100%;
+		height: 100vh;
+		background-color: #fefefe;
+		position: fixed;
+`
 
 const CustomizeMain = () => {
 	const {update} = useParams();
@@ -140,14 +145,14 @@ const CustomizeMain = () => {
 	}
 	
 	return (
-		<>
-			<NavComponent/>
+		<Container>
+			<NavComponent color={true}/>
 			<CustomizeContainer>
 				<CustomizePreview carNo={carNo}/>
 				<CustomizeOptions/>
 				<CustomizeResult onClickSubmit={updateFlag ? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
 			</CustomizeContainer>
-		</>
+		</Container>
 	)
 }
 export default CustomizeMain
