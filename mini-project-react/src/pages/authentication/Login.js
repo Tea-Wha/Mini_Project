@@ -1,8 +1,20 @@
 import React, { useContext, useState } from "react";
 import AxiosApi from "../../api/Authentication";
-import { Button, Container, Input } from "@mui/material";
+// import { Button, Container, Input } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
+import {
+  StyledContainer,
+  StyledInput,
+  StyledButton,
+  ImageContainer,
+  InputContainer,
+  Footer,
+  StyledH1,
+  StyledH3,
+} from "../../styles/authentication/Login.js";
+
+const image = "/login/login.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,17 +57,32 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Input placeholder="아이디" value={inputId} onChange={(e) => handleInputChange(e, setInputId, setisId)}></Input>
-      <Input placeholder="비밀번호" value={inputPw} onChange={(e) => handleInputChange(e, setInputPw, setisPw)}></Input>
-      {isId && isPw ? (
-        <Button enabled onClick={onClickLogin}>
-          로그인
-        </Button>
-      ) : (
-        <Button disabled>로그인</Button>
-      )}
-    </Container>
+    <StyledContainer>
+      <ImageContainer image={image}></ImageContainer>
+      <InputContainer>
+        <StyledH1>CHANAWA</StyledH1>
+        <StyledInput
+          placeholder="아이디"
+          value={inputId}
+          onChange={(e) => handleInputChange(e, setInputId, setisId)}
+        ></StyledInput>
+        <StyledInput
+          placeholder="비밀번호"
+          value={inputPw}
+          onChange={(e) => handleInputChange(e, setInputPw, setisPw)}
+        ></StyledInput>
+        {isId && isPw ? (
+          <StyledButton enabled onClick={onClickLogin}>
+            로그인
+          </StyledButton>
+        ) : (
+          <StyledButton disabled>로그인</StyledButton>
+        )}
+      </InputContainer>
+      <Footer>
+        <StyledH3>© 2024 CHANAWA Korea Ltd.</StyledH3>
+      </Footer>
+    </StyledContainer>
   );
 };
 

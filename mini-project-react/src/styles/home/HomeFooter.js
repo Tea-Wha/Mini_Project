@@ -8,6 +8,7 @@ export const FootContainer = styled.div`
   bottom: 0;
   margin: 0 auto;
   background-color: #f0f0f0;
+  padding-left: 10px;
 `;
 export const Initial = styled.div`
   margin: 0 auto;
