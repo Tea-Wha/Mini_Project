@@ -33,9 +33,9 @@ const CarInfoCustom = () => {
 		<AccordionComponent label="차량의 옵션들입니다." id="options" name="옵션들" visible={visible} setVisible={setVisible}>
 			<CarOptionsContainer>
 				{options && options.map((option, index) => (
-						<Tooltip title={option.desc} key={index}>
+						<Tooltip title={option.featureType} key={index}>
 							<CarOptionContainer>
-								{option.name}
+								{option.featureValue}
 							</CarOptionContainer>
 						</Tooltip>
 				))}

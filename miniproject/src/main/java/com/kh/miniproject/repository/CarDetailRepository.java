@@ -72,10 +72,10 @@ public class CarDetailRepository {
             String carUrl = (carUrls != null && !carUrls.isEmpty()) ? carUrls.get(0) : null;
             
             return new ColorVo(
-              rs.getString("COLOR_NAME"),
-              rs.getInt("COLOR_PRICE"),
-              colorUrl,
-              carUrl
+                rs.getString("COLOR_NAME"),
+                rs.getInt("COLOR_PRICE"),
+                colorUrl,
+                carUrl
             );
         }
     }
@@ -86,8 +86,7 @@ public class CarDetailRepository {
     private static class FeatureRowMapper implements RowMapper<FeatureVo> {
         @Override
         public FeatureVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new FeatureVo(rs.getString("FEATURE_TYPE"), rs.getString("FEATURE_VALUE"), rs.getInt("FEATURE_PRICE"),
-                     rs.getString("FEATURE_DESC"));
+            return new FeatureVo(rs.getString("FEATURE_TYPE"), rs.getString("FEATURE_VALUE"), rs.getInt("FEATURE_PRICE"));
         }
     }
 
