@@ -10,6 +10,8 @@ import CustomizeMain from "./pages/customize/CustomizeMain";
 import BrandMain from "./pages/brand/BrandMain";
 import CartMain from "./pages/cart/CartMain";
 import FindId from "./pages/authentication/FindId";
+import FindPw from "./pages/authentication/FindPw";
+import ResetEmail from "./pages/authentication/ResetPassword";
 
 function App() {
   return (
@@ -20,15 +22,14 @@ function App() {
             <Route path="/" element={<HomeMain />} />
             <Route path="/login" element={<Login />} />
             <Route path="/findId" element={<FindId />} />
+            <Route path="/findPw" element={<FindPw />} />
+            <Route path="/resetEmail" element={<ResetEmail />} />
             <Route path="/join" element={<Join />} />
             <Route path="/uploadFile" element={<FileUploadPage />} />
             <Route path="/search" element={<SearchMain />} />
             <Route path="/brand/:brand" element={<BrandMain />} />
             <Route path="/carInfo/:carNo" element={<CarInfoMain />} />
-            <Route
-              path="/customize/:carNo/:update"
-              element={<CustomizeMain />}
-            />
+            <Route path="/customize/:carNo/:update" element={<CustomizeMain />} />
             <Route path="/cart" element={<CartMain />} />
           </Routes>
         </Router>

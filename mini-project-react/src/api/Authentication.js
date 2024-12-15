@@ -69,7 +69,7 @@ const AxiosApi = {
     }
   },
 
-  resetPassword: async (token, newPassword) => {
+  changePassword: async (token, newPassword) => {
     try {
       const response = await axios.post(`${KH_DOMAIN}/auth/resetPassword`, { token, newPassword });
       return response.data;
