@@ -7,8 +7,12 @@ export const FootContainer = styled.div`
   position: relative;
   bottom: 0;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   background-color: #f0f0f0;
   padding-left: 10px;
+  align-items: left;
+  justify-content: left;
 `;
 export const Initial = styled.div`
   margin: 0 auto;
@@ -17,6 +21,8 @@ export const Initial = styled.div`
   font-weight: bold;
   font-size: 1.6rem;
   display: flex;
+  position: absolute;
+  bottom: 10px;
   text-align: center;
   @font-face {
     font-family: "initial";

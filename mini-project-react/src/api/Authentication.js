@@ -49,34 +49,41 @@ const AxiosApi = {
 
   requestPassword: async (email) => {
     try {
-      const response = await axios.post(`${KH_DOMAIN}/auth/resetPasswordRequest`, null, {
-        params: { email },
-      });
+      const response = await axios.post(
+        `${KH_DOMAIN}/auth/resetPasswordRequest`,
+        null,
+        {
+          params: { email },
+        }
+      );
       return response.data;
     } catch (error) {
       throw error.response.data;
     }
   },
 
-  validateToken: async (token) => {
-    try {
-      const response = await axios.get(`${KH_DOMAIN}/auth/validateToken`, {
-        params: { token },
-      });
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  },
+  // validateToken: async (token) => {
+  //   try {
+  //     const response = await axios.get(`${KH_DOMAIN}/auth/validateToken`, {
+  //       params: { token },
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // },
 
-  changePassword: async (token, newPassword) => {
-    try {
-      const response = await axios.post(`${KH_DOMAIN}/auth/resetPassword`, { token, newPassword });
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  },
+  // changePassword: async (token, newPassword) => {
+  //   try {
+  //     const response = await axios.post(`${KH_DOMAIN}/auth/resetPassword`, {
+  //       token,
+  //       newPassword,
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // },
 };
 
 export default AxiosApi;

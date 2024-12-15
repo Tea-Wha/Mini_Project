@@ -11,9 +11,13 @@ import {
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserStore";
 
 const HomeSideMenu = ({ id, isSubOpen, idx }) => {
   const nickname = localStorage.getItem("nickName");
+
+  const { logout } = useContext(UserContext);
 
   const sideMenuList = [
     {
@@ -37,6 +41,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
         { name: "내 정보", link: "/myPage" },
         { name: "위시리스트 보기", link: "/wishList" },
         { name: "장바구니 보기", link: "/cart" },
+        { name: "로그아웃", link: "/", onclick: { logout } },
       ],
     },
     {
@@ -242,7 +247,12 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
   }, [id, isSubOpen]);
 
   const renderMenuContent = (menu) => {
-    return menu.content.map((item) => {
+    const filteredContent = menu.content.filter(
+      (item) => item.name !== "로그아웃"
+    );
+    const lastItemIndex = filteredContent.length - 1;
+
+    return filteredContent.map((item, index) => {
       if (item.type === "text") {
         return <p key={item.name}>{item.name}</p>;
       }
@@ -273,9 +283,27 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       }
 
       return (
-        <Link to={item.link} key={item.name}>
-          <MenuItem isSubOpen={isSubOpen}>{item.name}</MenuItem>
-        </Link>
+        <>
+          <Link to={item.link} key={item.name}>
+            <MenuItem isSubOpen={isSubOpen}>{item.name}</MenuItem>
+          </Link>
+          {index === lastItemIndex && (
+            <MenuItem
+              as="button"
+              onClick={logout}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                cursor: "pointer",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              로그아웃
+            </MenuItem>
+          )}
+        </>
       );
     });
   };
