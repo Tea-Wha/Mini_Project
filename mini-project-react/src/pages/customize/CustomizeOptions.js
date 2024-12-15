@@ -43,7 +43,7 @@ const CustomizeOptions =() => {
 		list: options,
 		value: carOptions,
 		setter: setCarOptions,
-		keyName: "name",},
+		keyName: "featureName"},
 	]
 	
 	console.log(colors)

@@ -75,107 +75,76 @@ const Image = styled.img`
 // setter 는 이를 바꿔주는 함수
 // list 는 전체 선택사항을 담은 리스트
 // visible 은 해당 요소가 보일지 안보일지를 결정하는 메서드
-const OptionComponent = ({
-  value,
-  setter,
-  list,
-  visible,
-  setVisible,
-  id,
-  keyName,
-  keyUrl,
-  isBg,
-}) => {
-  console.log(visible);
-
-  const [formats, setFormats] = useState(() => value);
-
-  const handleFormat = (event, newFormats) => {
-    console.log(newFormats);
-    if (id === "color") {
-      // 'color'일 때는 단일 선택만 허용
-      if (newFormats.length > 1) {
-        // 마지막으로 선택한 값을 유지
-        const selected = newFormats[newFormats.length - 1];
-        setFormats([selected]);
-        setter([selected]);
-      } else {
-        setFormats(newFormats);
-        setter(newFormats);
-      }
-    } else {
-      setFormats(newFormats);
-      setter(newFormats);
-    }
-  };
-  // 상태및 요소 초기화 함수
-  const onClickValueOff = () => {
-    setter([]);
-    setFormats([]);
-    setVisible({ ...visible, [id]: false });
-  };
-
-  return (
-    <OptionContainer visible={visible[id]}>
-      <OptionGroup onChange={handleFormat} value={formats}>
-        {list &&
-          list.map((item, index) => (
-            <ToggleContainer selected={isBg && formats.includes(item[keyName])}>
-              {isBg ? (
-                <Tooltip title={item[keyName]}>
-                  <ToggleOption
-                    key={index}
-                    color="primary"
-                    value={item[keyName]}
-                    sx={
-                      item[keyUrl].includes(".txt")
-                        ? {
-                            border: "none",
-                            padding: 0,
-                            position: "relative",
-                            backgroundColor: `${item[keyUrl].replace(
-                              ".txt",
-                              ""
-                            )}`,
-                            "&:hover": {
-                              backgroundColor: `${item[keyUrl].replace(
-                                ".txt",
-                                ""
-                              )}`, // 호버 시 배경색 제거
-                              boxShadow: "none",
-                            },
-                          } // 호버 시 그림자 제거}
-                        : {
-                            border: "none",
-                            padding: 0,
-                            position: "relative",
-                            background: `url(${item[keyUrl]}) no-repeat center/cover`,
-                          }
-                    }
-                  ></ToggleOption>
-                </Tooltip>
-              ) : (
-                <ToggleOption
-                  key={index}
-                  color="primary"
-                  value={item[keyName]}
-                  sx={{ border: "none", padding: 0, position: "relative" }}
-                >
-                  <ToggleButtonContainer>
-                    <p>{item[keyName]}</p>
-                    {item[keyUrl] && <Image src={item[keyUrl]} alt="" />}
-                  </ToggleButtonContainer>
-                </ToggleOption>
-              )}
-            </ToggleContainer>
-          ))}
-      </OptionGroup>
-      <Tooltip title="선택 내용 초기화">
-        <CloseButton onClick={onClickValueOff} variant="outlined">
-          <ClearIcon />
-        </CloseButton>
-      </Tooltip>
-    </OptionContainer>
-  );
-};
+const OptionComponent = ({value, setter, list, visible, setVisible, id, keyName, keyUrl, isBg }) => {
+	console.log(visible)
+	
+	const [formats, setFormats] = useState(() => value);
+	
+	const handleFormat = (event, newFormats) => {
+		console.log(newFormats);
+		if (id === "color") {
+			// 'color'일 때는 단일 선택만 허용
+			if (newFormats.length > 1) {
+				// 마지막으로 선택한 값을 유지
+				const selected = newFormats[newFormats.length - 1];
+				setFormats([selected]);
+				setter([selected]);
+			} else {
+				setFormats(newFormats);
+				setter(newFormats);
+			}
+		} else {
+			setFormats(newFormats);
+			setter(newFormats);
+		}
+	};
+	// 상태및 요소 초기화 함수
+	const onClickValueOff = () => {
+		setter([])
+		setFormats([])
+		setVisible({...visible, [id]:false})
+	}
+	
+	return (
+		<OptionContainer visible={visible[id]}>
+			<OptionGroup
+				onChange={handleFormat}
+				value={formats}>
+				{list && list.map((item, index) => (
+					<ToggleContainer selected={isBg && formats.includes(item[keyName])}>
+						{isBg ?
+							<Tooltip title={item[keyName]}>
+								<ToggleOption key={index} color="primary"
+								              value={item[keyName]}
+								              sx={item[keyUrl].includes(".txt") ? {border: "none", padding: 0, position: "relative",
+									              backgroundColor:`${item[keyUrl].replace(".txt","")}`,
+										              "&:hover": {
+											              backgroundColor: `${item[keyUrl].replace(".txt","")}`, // 호버 시 배경색 제거
+											              boxShadow: "none",}} // 호버 시 그림자 제거}
+											              : {border: "none", padding: 0, position: "relative",
+									              background: `url(${item[keyUrl]}) no-repeat center`,
+								              }}>
+								</ToggleOption>
+							</Tooltip>
+							:
+							<ToggleOption key={index} color="primary"
+							              value={item[keyName]}
+							              sx={{border: "none", padding: 0, position: "relative"}}>
+								<ToggleButtonContainer>
+									<p>{item[keyName]}</p>
+									{item[keyUrl] && <Image src={item[keyUrl]} alt=""/>}
+								</ToggleButtonContainer>
+							</ToggleOption>}
+					</ToggleContainer>
+				))}
+			
+			</OptionGroup>
+			<Tooltip title="선택 내용 초기화">
+				<CloseButton onClick={onClickValueOff} variant="outlined">
+					<ClearIcon/>
+				</CloseButton>
+			</Tooltip>
+		</OptionContainer>
+	)
+}
 export default OptionComponent;
