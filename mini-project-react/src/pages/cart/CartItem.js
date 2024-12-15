@@ -56,7 +56,24 @@ const CartItem = ({ cart, pageFlag, setPageFlag }) => {
 	}
 	
 	const onClickNameEditToggle = () => {
+		if (nameOpen === true)
+		{const nameChange = async () => {
+			try {
+				const rsp = CartApi.nameChange(cartName)
+				if(rsp.data) {
+					console.log("이름 변경에 성공했습니다.")
+				}
+				else console.log("이름 변경에 실패했습니다.")
+			}
+			catch (e) {
+				console.log("이름 변경 통신에 실패했습니다.")
+				console.log(e);
+			}
+			
+			
+		}}
 		setNameOpen(!nameOpen);
+		
 	}
 	
 	const confirmDelete = async () => {

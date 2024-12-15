@@ -10,7 +10,7 @@ const CartApi = {
 	
 	postCart: async (cartVo) => {
 		console.log("견적 저장 : " + JSON.stringify(cartVo));
-		return await axios.post(KH_DOMAIN + "/cart/postCart", {cartVo});
+		return await axios.post(KH_DOMAIN + "/cart/postCart", cartVo);
 	},
 	
 	deleteCart: async (cartNo) => {
