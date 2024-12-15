@@ -3,10 +3,7 @@
 
 package com.kh.miniproject.controller;
 
-import com.kh.miniproject.repository.AuthRepository;
 import com.kh.miniproject.service.AuthService;
-import com.kh.miniproject.service.EmailService;
-import com.kh.miniproject.vo.TokenVo;
 import com.kh.miniproject.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +21,6 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
-    private final EmailService emailService;
 
     /* 회원 가입시 URL 을 남기지 않기 위해 PostMapping 을 사용
        RequestBody 로 각각의 값을 전달 받아 서비스로 전달
@@ -96,34 +92,4 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID를 찾을 수 없습니다.");
         }
     }
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/resetPasswordRequest")
-    public String resetPasswordRequest(@RequestParam String email) {
-        log.info("요쳥 받은이메일 : {}", email);
-        // 이메일로 토큰을 보내기 전에 유효성 체크를 할 수 있습니다.
-        String token = authService.generateResetToken(email); // 토큰 생성
-        log.info("토큰 생성값 : {}", token);
-        emailService.sendResetPasswordEmail("cook961004@gmail", token); // 테스트용 이메일 전송
-        log.warn("이메일 전송 완료");
-        return "Password reset link sent to your email.";
-    }
-
-    @GetMapping("/validateToken")
-    public String validateToken(@RequestParam String token) {
-        log.info("전달 받은 토큰 : {}", token);
-        boolean isValid = authService.validateResetToken(token);
-        log.info("토큰 유효성 : {}", isValid);
-        return isValid ? "Token is valid" : "Invalid token";
-    }
-
-    @PostMapping("/resetPassword")
-    public String resetPassword(@RequestBody TokenVo tokenVo) {
-        log.info("변경 할 비밀번호 : {}", tokenVo);
-        authService.resetPassword(tokenVo.getToken(), tokenVo.getNewPassword());
-        log.info("요청 줄 비밀번호 : {}", tokenVo);
-        
-        return "Password successfully updated.";
-    }
-
 }
