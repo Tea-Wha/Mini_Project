@@ -59,7 +59,7 @@ public class BrandListRepository {
 		@Override
 		public BrandCarVo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// 첫 번째 이미지 URL을 안전하게 가져오는 로직
-			final String URL = rs.getString("MANUFACTURER_URL");
+			final String URL = rs.getString("CAR_FRONT_URL");
 			log.warn("URL : {}", URL);
 			List<String> carUrls = firebaseDirService.getImageUrls("IMAGE/CAR_REP_IMAGE/" + URL);
 			

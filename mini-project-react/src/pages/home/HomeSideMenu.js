@@ -39,7 +39,6 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       content: [
         { name: nickname + "님 안녕하세요", link: "#", type: "text" },
         { name: "내 정보", link: "/myPage" },
-        { name: "위시리스트 보기", link: "/wishList" },
         { name: "장바구니 보기", link: "/cart" },
         { name: "로그아웃", link: "/", onclick: { logout } },
       ],

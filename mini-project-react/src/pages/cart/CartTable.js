@@ -23,7 +23,7 @@ const CartTable = ({cart}) => {
 						색상
 					</TableCell>
 					<TableCell>
-						{cart.color}
+						{cart.cartColor}
 					</TableCell>
 				</TableRow>
 				<TableRow>

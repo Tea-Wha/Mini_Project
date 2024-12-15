@@ -21,8 +21,9 @@ const CustomizeContainer = styled.div`
 
 const CustomizeMain = () => {
 	const {update} = useParams();
-	
+	console.log(update);
 	const updateFlag = update === "true";
+	console.log(updateFlag);
 	
 	const {userId} = useContext(UserContext)
 	
@@ -111,8 +112,9 @@ const CustomizeMain = () => {
 			cartNo: cartNo,
 			userId: userId,
 			carNo: carNo,
-			carColor: carColor,
-			carOptions: carOptions,
+			cartColor: carColor ? carColor[0] : colors[0].carColor,
+			cartOption: JSON.stringify(carOptions),
+			cartPrice: carPrice[0].price + carPrice[1].price + carPrice[2].price,
 		}
 		console.log(params);
 		try {
@@ -133,7 +135,7 @@ const CustomizeMain = () => {
 		<CustomizeContainer>
 			<CustomizePreview carNo={carNo}/>
 			<CustomizeOptions/>
-			<CustomizeResult onClickSubmit={updateFlag? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
+			<CustomizeResult onClickSubmit={updateFlag ? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
 		</CustomizeContainer>
 	)
 }

@@ -20,7 +20,7 @@ const CartApi = {
 	
 	updateCart: async (cartVo) => {
 		console.log("카트 업데이트 : " + JSON.stringify(cartVo));
-		return await axios.post(KH_DOMAIN + "/cart/postCart", cartVo);
+		return await axios.post(KH_DOMAIN + "/cart/updateCart", cartVo);
 	},
 	
 	nameChange: async (cartName, cartNo) => {

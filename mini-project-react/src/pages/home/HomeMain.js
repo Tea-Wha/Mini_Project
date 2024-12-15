@@ -6,6 +6,7 @@ const HomeMain = () => {
 	return (
 		<>
 			<HomeHead/>
+			
 			<HomeBrand/>
 			<Footer/>
 		</>
