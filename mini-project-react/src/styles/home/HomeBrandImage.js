@@ -78,6 +78,41 @@ export const StyledLegend = styled.legend`
     src: url("/fonts/FerroRosso.ttf") format("truetype");
   }
 
+  @font-face {
+    font-family: "maserati";
+    src: url("/fonts/BrophyOpti.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "porsche";
+    src: url("/fonts/911porschav3.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "lamb";
+    src: url("/fonts/La_Macchina.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "lexus";
+    src: url("/fonts/LexusCapsOpti-Medium.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "tesla";
+    src: url("/fonts/TESLA.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "vols";
+    src: url("/fonts/VWHead-Bold.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "normal";
+    src: url("/fonts/Gully-Bold.ttf") format("truetype");
+  }
+
   color: black;
   position: relative;
   margin-left: 10px;
@@ -106,6 +141,13 @@ export const StyledLegend = styled.legend`
     if (props.name === "ACCORD TURBO") return "'honda', sans-serif";
     if (props.name === "TRAX") return "'chevy', sans-serif";
     if (props.name === "SF90") return "'ferrari', sans-serif";
+    if (props.name === "URUS") return "'lamb', sans-serif";
+    if (props.name === "UX 300h") return "'lexus', sans-serif";
+    if (props.name === "GRAN TURISMO") return "'maserati', sans-serif";
+    if (props.name === "PANAMERA 4") return "'porsche', sans-serif";
+    if (props.name === "MODEL S") return "'tesla', sans-serif";
+    if (props.name === "ARTEON") return "'vols', sans-serif";
+    else return "'normal', sans-serif";
   }};
 `;
 
