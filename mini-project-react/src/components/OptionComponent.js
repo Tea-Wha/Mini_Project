@@ -129,6 +129,11 @@ const OptionComponent = ({ value, setter, list, visible, setVisible, id, keyName
 													position: "relative",
 													backgroundColor: `${item[keyUrl].replace(".txt", "")}`,
 													"&:hover": { backgroundColor: `${item[keyUrl].replace(".txt", "")}`, boxShadow: "none" },
+													'&.Mui-selected': {
+														borderColor: '#4285F4', // 구글 블루 테두리
+														boxShadow: '0 0 5px rgba(66, 133, 244, 0.5)', // 포커스 시 강조 효과
+														backgroundColor: `${item[keyUrl].replace(".txt", "")}`
+													}
 												}
 												: {
 													border: "none",

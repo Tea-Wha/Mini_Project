@@ -36,6 +36,7 @@ public class CarDetailRepository {
     }
 
     public List<FeatureVo> getFeatureInfo(int carNo) {
+        log.warn("옵션 조회");
         return jdbcTemplate.query(GET_FEATURE_INFO_FOR_DETAIL, new Object[]{carNo} , new FeatureRowMapper());
     }
 
@@ -45,8 +46,7 @@ public class CarDetailRepository {
         public CarVo mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new CarVo(rs.getInt("CAR_NO"), rs.getString("CAR_NAME"), rs.getString("CLASSIFICATION"),
                     null, rs.getString("ENGINE_TYPE"), rs.getDouble("DISPLACEMENT"), rs.getInt("HORSEPOWER"),
-                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("CAR_PRICE"), null,
-                    null, null, rs.getString("CAR_DESC"), rs.getString("CAR_SUMMARY"),
+                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("CAR_PRICE"), null, null, null, null,null,
                     rs.getString("MANUFACTURER_NAME"), rs.getString("MANUFACTURER_URL"));
         }
     }

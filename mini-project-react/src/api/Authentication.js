@@ -1,7 +1,8 @@
 // RESTful API를 통해 서버와 통신을 하며 로그인과 회원가입에 필요한 정보를 주고 받음
 
 import axios from "axios";
-const KH_DOMAIN = "http://localhost:8111";
+import {KH_DOMAIN} from "./Constant";
+
 
 // 사용자에게 입력 받은 id, pw 값을 서버로 전달, 서버에서 전달 받은후 비즈니스 로직을 거치고 DB와 값을 비교후에 결과 값을 전달 받음
 const AxiosApi = {

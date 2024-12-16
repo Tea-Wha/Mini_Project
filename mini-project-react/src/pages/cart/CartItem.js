@@ -8,6 +8,13 @@ import CartApi from "../../api/CartApi";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import {useNavigate} from "react-router-dom";
 import {Edit, EditOff, RemoveShoppingCart, ShoppingCartCheckout} from "@mui/icons-material";
+import {priceFormatter} from "../../Formatter";
+
+const PriceContainer = styled.div`
+	font-weight: bold;
+		font-size: 1.2em;
+		margin: 10px auto;
+`
 
 const CartItemContainer = styled(Card)`
 		display: flex;
@@ -136,9 +143,11 @@ const CartItem = ({ cart, pageFlag, setPageFlag }) => {
 					<><IconButton onClick={onClickNameEdit}><Edit/></IconButton>
 						<IconButton onClick={onClickNameClear}><EditOff/></IconButton></> :
 					<IconButton onClick={() => {setNameOpen(true)}}><Edit/></IconButton>}
-				
 			</CartNumberContainer>
 			<CartImage src={cart.cartUrl} />
+			<PriceContainer>
+				가격 : {priceFormatter(cart.cartPrice)}
+			</PriceContainer>
 			<AccordionComponent
 				label="차량의 세부 견적입니다."
 				visible={visible}

@@ -17,6 +17,7 @@ const Container = styled.div`
 
 const CartContainer = styled(Card)`
 		display: flex;
+		align-items: flex-start;
 `
 const PageContainer = styled.div`
 		display: flex;

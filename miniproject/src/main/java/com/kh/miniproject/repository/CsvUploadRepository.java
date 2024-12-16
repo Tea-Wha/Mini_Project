@@ -22,8 +22,7 @@ public class CsvUploadRepository {
     public void saveAllForCar(List<CarCsvVo> records) {
         log.info("총 {}개의 차량 레코드를 DB에 삽입 시도 중...", records.size());
         String INSERT_CARS = "INSERT INTO CARS (CAR_NO, CAR_NAME, CLASSIFICATION, MANUFACTURER_CODE, ENGINE_TYPE, " +
-                "DISPLACEMENT, HORSEPOWER, TORQUE, EFFICIENCY, CAR_PRICE, CAR_FRONT_URL, CAR_AROUND_URL, " +
-                "CAR_3D_URL, CAR_DESC, CAR_SUMMARY) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "DISPLACEMENT, HORSEPOWER, TORQUE, EFFICIENCY, CAR_PRICE, CAR_FRONT_URL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         List<Object[]> batchArgs = new ArrayList<>();
         for (CarCsvVo carCsvVo : records) {
@@ -38,11 +37,7 @@ public class CsvUploadRepository {
                     carCsvVo.getTorque(),
                     carCsvVo.getEfficiency(),
                     carCsvVo.getCarPrice(),
-                    carCsvVo.getCarFrontUrl(),
-                    carCsvVo.getCarAroundUrl().isEmpty() ? "d" : carCsvVo.getCarAroundUrl(),
-                    carCsvVo.getCar3dUrl().isEmpty() ? "d" : carCsvVo.getCar3dUrl(),
-	                  carCsvVo.getCarDesc().isEmpty() ? "d" : carCsvVo.getCarDesc(),
-                    carCsvVo.getSummary().isEmpty() ? "d" : carCsvVo.getSummary(),
+                    carCsvVo.getCarFrontUrl()
             });
         }
 
@@ -79,7 +74,7 @@ public class CsvUploadRepository {
 
     public void saveAllForFeature(List<FeatureCsvVo> records) {
         log.info("총 {}개의 옵션 레코드를 DB에 삽입 시도 중", records.size());
-        String INSERT_FEATURES = "INSERT INTO CAR_FEATURES (FEATURE_NO, FEATURE_PRICE, FEATURE_TYPE, FEATURE_VALUE, CAR_NO, FEATURE_DESC) VALUES (?, ?, ?, ?, ?, ?)";
+        String INSERT_FEATURES = "INSERT INTO CAR_FEATURES (FEATURE_NO, FEATURE_PRICE, FEATURE_TYPE, FEATURE_VALUE, CAR_NO) VALUES (?, ?, ?, ?, ?)";
 
         List<Object[]> batchArgs = new ArrayList<>();
         for (FeatureCsvVo featureCsvVo : records) {
@@ -89,7 +84,6 @@ public class CsvUploadRepository {
                     featureCsvVo.getFeatureType(),
                     featureCsvVo.getFeatureValue(),
                     featureCsvVo.getCarNo(),
-                    featureCsvVo.getFeatureDesc(),
             });
         }
         try {

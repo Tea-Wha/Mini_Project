@@ -8,6 +8,14 @@ import { Button, Tooltip } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import NavComponent from "../../components/NavComponent";
 
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+`;
+
 //정렬용으로 만들어놓음 밑은 그냥 기능구분용
 const BoardContainer = styled.div`
   margin: 100px auto;
@@ -141,8 +149,8 @@ const SearchMain = () => {
   }, []);
 
   return (
-    <>
-      <NavComponent/>
+    <Container>
+      <NavComponent color={true}/>
       <BoardContainer>
         <SearchContainer>
           <SearchOptions
@@ -163,7 +171,7 @@ const SearchMain = () => {
           <SearchItems list={list} />
         </ListContainer>
       </BoardContainer>
-    </>
+    </Container>
   );
 };
 export default SearchMain;

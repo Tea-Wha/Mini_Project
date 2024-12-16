@@ -63,14 +63,10 @@ public class BrandListRepository {
 			// 첫 번째 이미지 URL을 안전하게 가져오는 로직
 			final String URL = rs.getString("CAR_FRONT_URL");
 			log.warn("URL : {}", URL);
-			List<String> carUrls = firebaseDirService.getImageUrls("IMAGE/CAR_REP_IMAGE/" + URL);
-			
-			String carUrl = (carUrls != null && !carUrls.isEmpty()) ? carUrls.get(0) : null;
-			
 			return new BrandCarVo(
 				rs.getInt("CAR_NO"),
 				rs.getString("CAR_NAME"),
-				carUrl,
+				rs.getString("CAR_FRONT_URL"),
 				rs.getInt("CAR_PRICE")
 			);
 		}

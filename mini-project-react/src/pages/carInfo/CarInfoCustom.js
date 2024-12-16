@@ -10,13 +10,26 @@ const CarOptionContainer = styled(Paper)`
 		width: 200px;
 		overflow: hidden;
 		padding: 10px 20px;
+		margin: 20px 0;
+		
 `
-const Image = styled.img`
-		width: 100%;
+
+const Div = styled.div`
+	width: 100%;
+		text-align: center;
 `
+
+const Blink = styled.div`
+		width: 200px;
+		padding: 10px 20px;
+		margin: 20px 0;
+		
+`
+
 
 const CarOptionsContainer = styled.div`
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
 		align-items: center;
 		padding: 20px 0 50px;
@@ -26,21 +39,29 @@ const CarOptionsContainer = styled.div`
 const CarInfoCustom = () => {
 	
 	const {options} = useContext(CarInfoContext)
+	
+	console.log(options)
+	
 	const [visible, setVisible] = React.useState({options: false})
 	
 	
 	return (
 		<AccordionComponent label="차량의 옵션들입니다." id="options" name="옵션들" visible={visible} setVisible={setVisible}>
 			<CarOptionsContainer>
-				{options && options.map((option, index) => (
+				{options && Array.isArray(options) && options.length > 0 ? (
+					options.map((option, index) => (
 						<Tooltip title={option.featureType} key={index}>
-							<CarOptionContainer>
+							<CarOptionContainer sx={{backgroundColor: "#eeeeee"}}>
 								{option.featureValue}
 							</CarOptionContainer>
 						</Tooltip>
-				))}
+					))
+				) : (
+					<Div>옵션이 존재하지 않습니다</Div>
+				)}
+				<Blink/><Blink/>
 			</CarOptionsContainer>
 		</AccordionComponent>
-	)
+	);
 }
-export default CarInfoCustom;
+	export default CarInfoCustom;

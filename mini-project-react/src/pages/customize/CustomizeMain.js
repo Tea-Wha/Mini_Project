@@ -23,6 +23,7 @@ const Container = styled.div`
 		height: 100vh;
 		background-color: #fefefe;
 		position: fixed;
+		overflow-y: auto;
 `
 
 const CustomizeMain = () => {
@@ -33,9 +34,10 @@ const CustomizeMain = () => {
 	
 	const {userId} = useContext(UserContext)
 	
+	
 	const {carNo} = useParams();
 	
-	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, colors, carPrice, cartNo} = useContext(CarInfoContext);
+	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, colors, carPrice, cartNo, setCarColor, setCarOptions, options} = useContext(CarInfoContext);
 	
 	const navigate = useNavigate();
 	
@@ -47,6 +49,8 @@ const CustomizeMain = () => {
 					CarInfoApi.getCarColor(carNo),
 					CarInfoApi.getCarOptions(carNo),
 				]);
+				setCarPrice([{name: "기본 금액", id:"carNo", price: 0},
+					{name: "색상 금액", id:"color" , price: 0},{name: "옵션 금액" , id:"options", price: 0}])
 				console.log(infoRsp.data);
 				setCarInfo(infoRsp.data);
 				console.log(colorRsp.data);
@@ -87,22 +91,35 @@ const CustomizeMain = () => {
 	},[carColor])
 	
 	useEffect(() => {
-		const optionPrice = () => Array.isArray(carOptions) ?
-			carOptions.reduce((sum, item) => sum + (item.featurePrice || 0), 0)
-			: 0
+		const optionPrice = () => {
+			if (Array.isArray(carOptions)) {
+				return carOptions.reduce((sum, item) => {
+					// options 에서 각 옵션의 가격을 가져와서 합산합니다.
+					const optionInPrice = options.find((priceItem) => priceItem.name === item.featureValue);
+					return sum + (optionInPrice ? optionInPrice.featurePrice : 0); // 가격이 없으면 0으로 처리
+				}, 0);
+			}
+			return 0;
+		};
+		
 		const optionPriceUpdater = () => {
-			setCarPrice(carPrice.map((item) =>
-				item.id === "options" ? { ...item,  price: optionPrice()} : item))
-		}
-		optionPriceUpdater()
-	},[carOptions])
+			setCarPrice((prevCarPrice) =>
+				prevCarPrice.map((item) =>
+					item.id === "options" ? { ...item, price: optionPrice() } : item
+				)
+			);
+		};
+		
+		optionPriceUpdater();
+	}, [carOptions]);
 	
 	const onClickSubmit = async () => {
+		console.log("carColor : " + carColor + "");
 		const params = {
 			userId: userId,
 			carNo: carNo,
 			cartColor: carColor ? carColor[0] : colors[0].carColor,
-			cartOption: JSON.stringify(carOptions),
+			cartOption: carOptions.join(","),
 			cartPrice: carPrice[0].price + carPrice[1].price + carPrice[2].price,
 		}
 		console.log(params);
@@ -110,6 +127,8 @@ const CustomizeMain = () => {
 			const rsp = await CartApi.postCart(params)
 			console.log("결과 : " + rsp.data);
 			if (rsp.data) {
+				setCarOptions([])
+				setCarColor("")
 				navigate("/cart");
 			} else {
 				alert("카트에 해당 견적을 추가하는데 실패했습니다.");
@@ -126,7 +145,7 @@ const CustomizeMain = () => {
 			userId: userId,
 			carNo: carNo,
 			cartColor: carColor ? carColor[0] : colors[0].carColor,
-			cartOption: JSON.stringify(carOptions),
+			cartOption: carOptions.join(","),
 			cartPrice: carPrice[0].price + carPrice[1].price + carPrice[2].price,
 		}
 		console.log(params);

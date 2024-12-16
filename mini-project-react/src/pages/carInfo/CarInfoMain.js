@@ -8,6 +8,13 @@ import NavComponent from "../../components/NavComponent";
 
 const CarInfoContainer = styled.div``
 
+const BackGround = styled.div`
+	position: fixed;
+		background-color: #f5f5f5;
+		width: 100%;
+		height: 100vh;
+		top:0;
+`
 
 const CarInfoMain = () => {
 	const {carNo} = useParams();
@@ -45,6 +52,7 @@ const CarInfoMain = () => {
 	
 	return(
 		<CarInfoContainer>
+			<BackGround/>
 			<NavComponent color={true}/>
 			<CarInfoDesc/>
 		</CarInfoContainer>

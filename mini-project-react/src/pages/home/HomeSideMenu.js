@@ -45,13 +45,6 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
             { name: "내 정보", link: "/myPage" },
             { name: "장바구니 보기", link: "/cart" },
             { name: "로그아웃", link: "/", onclick: logout },
-            {
-              half: true,
-              content: [
-                { name: "아이디 찾기", link: "/findId" },
-                { name: "비밀번호 찾기", link: "/findPw" },
-              ],
-            },
           ],
         },
       ]);
@@ -168,8 +161,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
                 textAlign: "center",
                 marginTop: "10px",
               }}
-            >
-              로그아웃
+            >로그아웃
             </MenuItem>
           )}
         </>

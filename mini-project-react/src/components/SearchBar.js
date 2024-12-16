@@ -26,10 +26,10 @@ const SearchBar = ({ onSearch, value, onChange, placeholder}) => {
 				sx={{
 					'& .MuiOutlinedInput-root': {
 						borderRadius: '24px', // 둥근 모서리
-						backgroundColor: '#f1f3f4', // 밝은 배경색
+						backgroundColor: '#ffffff', // 흰색
 						paddingLeft: '40px', // 아이콘 공간 확보
 						'&:hover': {
-							backgroundColor: '#e0e0e0', // 호버 시 약간 어두운 배경색
+							backgroundColor: '#d0d0d0', // 호버 시 약간 어두운 배경색
 						},
 						'&.Mui-focused': {
 							borderColor: '#4285F4', // 구글 블루 테두리

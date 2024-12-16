@@ -12,7 +12,7 @@ const CarDescContainer = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 1000px;
+		width: 1200px;
 		margin: 100px auto;
 `
 
@@ -26,9 +26,21 @@ const CarDescCard = styled(Card)`
 `
 
 const CarImage = styled.img`
-		max-width: 300px;
+		width: 300px;
 		max-height: 150px;
 		object-fit: cover;
+		margin: 10px 0;
+`
+
+const Logo = styled.img`
+    max-width: 300px;
+    max-height: 150px;
+    object-fit: cover;
+`
+
+const Blink = styled.div`
+		width: 300px;
+		height: 100px;
 `
 
 const CarDescription = styled(Card)`
@@ -66,7 +78,7 @@ const BrandDesc = () => {
 		<CarDescContainer>
 			{brand &&
 				<CarDescCard>
-					<CarImage src={brand.brandUrl}/>
+					<Logo src={brand.brandUrl}/>
 					<CarDescription>
 						<CarCardInfoContainer>
 							{brand.brandName}
@@ -82,10 +94,11 @@ const BrandDesc = () => {
 						{Array.isArray(brandCar) && brandCar.map((car, index) => (
 							<Link to={`/carInfo/${car.carNo}`} key={index}>
 								<Tooltip key={index} title={car.carName + " " + car.carPrice} >
-									<CarImage src={car.carFrontUrl} alt="image"></CarImage>
+									<CarImage src={car.carUrl} alt="image"></CarImage>
 								</Tooltip>
 							</Link>
 						))}
+						<Blink></Blink><Blink></Blink>
 					</CarsContainer>
 				</AccordionComponent>
 			</AccordionContainer>
