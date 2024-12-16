@@ -39,7 +39,7 @@ public class FirebaseUploadService_MultiFolder {
                         // 비어있는 폴더에만 .keep 파일 업로드
                         String keepFilePath = firebaseFolderPath + ".keep";
                         InputStream dummyContent = new ByteArrayInputStream(new byte[0]);
-                        
+
                         BlobId blobId = BlobId.of(bucketName, keepFilePath);
                         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
                         storage.create(blobInfo, dummyContent);
@@ -70,19 +70,14 @@ public class FirebaseUploadService_MultiFolder {
             System.err.println("업로드 실패: "+firebasePath+" - " +e.getMessage());
         }
     }
-  
-  
-  private Storage getStorage() throws IOException {
-    // 클래스패스에서 firebase-service-account.json 파일을 읽기
-    InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase-service-account.json");
-    if (serviceAccount == null) {
-      throw new FileNotFoundException("firebase-service-account.json file not found in resources folder");
+
+
+    private Storage getStorage() throws IOException {
+        // Storage 서비스 가져오기
+        return StorageOptions.newBuilder()
+                .setCredentials(GoogleCredentials.fromStream(new FileInputStream(firebaseCredentialsPath)))
+                .build()
+                .getService();
     }
-    
-    return StorageOptions.newBuilder()
-      .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-      .build()
-      .getService();
-  }
 
 }

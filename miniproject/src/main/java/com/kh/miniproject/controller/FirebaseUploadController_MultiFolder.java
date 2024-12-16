@@ -17,7 +17,7 @@ public class FirebaseUploadController_MultiFolder {
     public FirebaseUploadController_MultiFolder(FirebaseUploadService_MultiFolder uploadServiceTest){
         this.uploadServiceTest = uploadServiceTest;
     }
-    
+
     @GetMapping("/upload-multiple-folders")
     public String uploadMultipleFolders() throws IOException {
         // 로컬 최상위 폴더 및 Firebase 기준 경로 설정
