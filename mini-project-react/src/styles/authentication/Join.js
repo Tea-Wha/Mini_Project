@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -31,7 +31,6 @@ export const ImageContainer = styled.div`
   width: 70vw;
   height: 100%;
   overflow: hidden;
-  z-index: 5;
   @media (max-width: 1100px) {
     width: 100vw;
   }
