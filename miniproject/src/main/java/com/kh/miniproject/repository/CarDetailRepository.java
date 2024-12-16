@@ -1,10 +1,12 @@
 package com.kh.miniproject.repository;
 
+import com.kh.miniproject.service.FirebaseDirService;
 import com.kh.miniproject.vo.CarVo;
 import com.kh.miniproject.vo.ColorVo;
 import com.kh.miniproject.vo.FeatureVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,9 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class CarDetailRepository {
+    
+    @Autowired
+    private FirebaseDirService firebaseDirService;
 
     private final JdbcTemplate jdbcTemplate;
     private final String GET_CAR_INFO_FOR_DETAIL = "SELECT * FROM VM_CAR_DETAIL WHERE CAR_NO = ?";
@@ -27,7 +32,7 @@ public class CarDetailRepository {
     }
 
     public List<ColorVo> getColorInfo(int carNo) {
-        return jdbcTemplate.query(GET_COLOR_INFO_FOR_DETAIL, new Object[]{carNo} ,new ColorRowMapper());
+        return jdbcTemplate.query(GET_COLOR_INFO_FOR_DETAIL, new Object[]{carNo} , new ColorRowMapper(firebaseDirService));
     }
 
     public List<FeatureVo> getFeatureInfo(int carNo) {
@@ -40,26 +45,48 @@ public class CarDetailRepository {
         public CarVo mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new CarVo(rs.getInt("CAR_NO"), rs.getString("CAR_NAME"), rs.getString("CLASSIFICATION"),
                     null, rs.getString("ENGINE_TYPE"), rs.getDouble("DISPLACEMENT"), rs.getInt("HORSEPOWER"),
-                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("CAR_PRICE"), rs.getString("CAR_FRONT_URL"),
+                    rs.getDouble("TORQUE"), rs.getDouble("EFFICIENCY"), rs.getInt("CAR_PRICE"), null,
                     null, null, rs.getString("CAR_DESC"), rs.getString("CAR_SUMMARY"),
                     rs.getString("MANUFACTURER_NAME"), rs.getString("MANUFACTURER_URL"));
         }
     }
-
-    // 차량 색상정보, 각 차량 상세 페이지에서 보여줄 객체 맵핑
-    private static class ColorRowMapper implements RowMapper<ColorVo> {
+    
+    public static class ColorRowMapper implements RowMapper<ColorVo> {
+        
+        private final FirebaseDirService firebaseDirService;
+        
+        // FirebaseDirService를 매개변수로 받는 생성자
+        public ColorRowMapper(FirebaseDirService firebaseDirService) {
+            this.firebaseDirService = firebaseDirService;
+        }
+        
         @Override
         public ColorVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new ColorVo(rs.getString("COLOR_NAME"), rs.getInt("COLOR_PRICE"), rs.getString("COLOR_URL"));
+            // 첫 번째 이미지 URL을 안전하게 가져오는 로직
+            final String URL = rs.getString("COLOR_URL");
+            log.warn("URL : {}", URL);
+            List<String> colorUrls = firebaseDirService.getImageUrls("IMAGE/CAR_COLORCHIP/" + URL);
+            List<String> carUrls = firebaseDirService.getImageUrls("IMAGE/CAR_REP_IMAGE/" + URL);
+            
+            String colorUrl = (colorUrls != null && !colorUrls.isEmpty()) ? colorUrls.get(0) : null;
+            String carUrl = (carUrls != null && !carUrls.isEmpty()) ? carUrls.get(0) : null;
+            
+            return new ColorVo(
+                rs.getString("COLOR_NAME"),
+                rs.getInt("COLOR_PRICE"),
+                colorUrl,
+                carUrl
+            );
         }
     }
-
+    
+    
+    
     // 차량 옵션정보, 각 차량 상세 페이지에서 보여줄 객체 맵핑
     private static class FeatureRowMapper implements RowMapper<FeatureVo> {
         @Override
         public FeatureVo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new FeatureVo(rs.getString("FEATURE_TYPE"), rs.getString("FEATURE_VALUE"), rs.getInt("FEATURE_PRICE"),
-                     rs.getString("FEATURE_DESC"));
+            return new FeatureVo(rs.getString("FEATURE_TYPE"), rs.getString("FEATURE_VALUE"), rs.getInt("FEATURE_PRICE"));
         }
     }
 

@@ -34,10 +34,23 @@ public class FirebaseGetUrlController {
         return firebaseGetUrlService.getImageFullColorUrlsDistribution();
     }
 
+<<<<<<< HEAD
     // SP 커스텀 URL 받아오기
     @GetMapping("/api/images/customspurls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
     public List<List<String>> getCustomSPUrlsDistribution() throws IOException {
         return firebaseGetUrlService.getCustomSPUrlsDistribution();
+=======
+    // Search Image 받아오기
+    @GetMapping("/api/images/fullsearchurls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
+    public List<List<String>> getAllSearchImageUrlsDistribution() throws IOException {
+        return firebaseGetUrlService.getImageFullSearchUrlsDistribution();
+    }
+
+    // Search Image 받아오기
+    @GetMapping("/api/images/fullsearchtesturls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
+    public List<String> getAllSearchTestImageUrlsDistribution() throws IOException {
+        return firebaseGetUrlService.getImageFullSearchUrlsTestDistribution();
+>>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
     }
     
     // 대표 이미지 받아오기

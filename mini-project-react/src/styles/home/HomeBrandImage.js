@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const BrandImageButton = styled.fieldset`
   display: flex;
@@ -27,12 +27,128 @@ export const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   position: relative;
+  padding: 10px 0px 10px 0px;
+  border: 3px solid #f0f0f0;
+  border-radius: 10px;
 `;
 
 export const StyledLegend = styled.legend`
+  @font-face {
+    font-family: "hyundai";
+    src: url("/fonts/HYUNDAI2.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "kia";
+    src: url("/fonts/KIA_Bold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "benz";
+    src: url("/fonts/MBKCorpoA.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "bmw";
+    src: url("/fonts/BMWHelvetica-Bold.otf") format("opentype");
+  }
+  @font-face {
+    font-family: "genesis";
+    src: url("/fonts/GenesisSansTextKROTFMedium.otf") format("opentype");
+  }
+  @font-face {
+    font-family: "audi";
+    src: url("/fonts/auditype_extendedbold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "astonmartin";
+    src: url("/fonts/ModifiedbyKEMAL.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "bentley";
+    src: url("/fonts/Media-Gothic.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "honda";
+    src: url("/fonts/Hundo.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "chevy";
+    src: url("/fonts/ChevyB.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "ferrari";
+    src: url("/fonts/FerroRosso.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "maserati";
+    src: url("/fonts/BrophyOpti.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "porsche";
+    src: url("/fonts/911porschav3.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "lamb";
+    src: url("/fonts/La_Macchina.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "lexus";
+    src: url("/fonts/LexusCapsOpti-Medium.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "tesla";
+    src: url("/fonts/TESLA.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "vols";
+    src: url("/fonts/VWHead-Bold.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: "normal";
+    src: url("/fonts/Gully-Bold.ttf") format("truetype");
+  }
+
   color: black;
   position: relative;
   margin-left: 10px;
+  font-size: 1.2rem;
+  font-size: ${(props) => {
+    if (props.name === "BMW8 COUPE") return "1.1rem";
+    if (props.name === "Q8") return "1.1rem";
+    if (props.name === "CONTINENTAL-GT") return "1rem";
+    if (props.name === "ACCORD TURBO") return "0.9rem";
+    if (props.name === "SF90") return "1.4rem";
+    else return "1.2rem";
+  }};
+  padding-top: ${(props) => {
+    if (props.name === "ACCORD TURBO") return "3px";
+  }};
+
+  font-family: ${(props) => {
+    if (props.name === "CONA") return "'hyundai', sans-serif";
+    if (props.name === "EV6") return "'kia', sans-serif";
+    if (props.name === "G-CLASS") return "'benz', sans-serif";
+    if (props.name === "BMW8 COUPE") return "'bmw', sans-serif";
+    if (props.name === "G70") return "'genesis', sans-serif";
+    if (props.name === "Q8") return "'audi', sans-serif";
+    if (props.name === "DBX") return "'astonmartin', sans-serif";
+    if (props.name === "CONTINENTAL-GT") return "'bentley', sans-serif";
+    if (props.name === "ACCORD TURBO") return "'honda', sans-serif";
+    if (props.name === "TRAX") return "'chevy', sans-serif";
+    if (props.name === "SF90") return "'ferrari', sans-serif";
+    if (props.name === "URUS") return "'lamb', sans-serif";
+    if (props.name === "UX 300h") return "'lexus', sans-serif";
+    if (props.name === "GRAN TURISMO") return "'maserati', sans-serif";
+    if (props.name === "PANAMERA 4") return "'porsche', sans-serif";
+    if (props.name === "MODEL S") return "'tesla', sans-serif";
+    if (props.name === "ARTEON") return "'vols', sans-serif";
+    else return "'normal', sans-serif";
+  }};
 `;
 
 export const StyledLabel = styled.label`
@@ -44,7 +160,7 @@ export const StyledLabel = styled.label`
   background-position: center;
   width: 80px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 0px;
   right: 5px;
   top: -25px;
   z-index: 3;
@@ -52,12 +168,39 @@ export const StyledLabel = styled.label`
   @media (max-width: 768px) {
     background-size: contain;
   }
+  height: ${(props) => {
+    if (props.name === "CONA") return "50px";
+    if (props.name === "EV6") return "50px";
+    if (props.name === "G70") return "60px";
+    if (props.name === "DBX") return "35px";
+    if (props.name === "ACCORD TURBO") return "35px";
+    if (props.name === "TRAX") return "25px";
+    if (props.name === "GRAND CHEROKEE") return "30px";
+    if (props.name === "RANGE ROVER") return "30px";
+    if (props.name === "UX 300h") return "50px";
+    if (props.name === "GRAN TURISMO") return "50px";
+  }};
+  top: ${(props) => {
+    if (props.name === "CONA") return "-30px";
+    if (props.name === "EV6") return "-35px";
+    if (props.name === "G70") return "-40px";
+    if (props.name === "TRAX") return "-20px";
+    if (props.name === "MUSTANG GT") return "-30px";
+    if (props.name === "UX 300h") return "-35px";
+    if (props.name === "GRAN TURISMO") return "-35px";
+    if (props.name === "COOPER") return "-30px";
+    if (props.name === "ARTEON") return "-30px";
+    if (props.name === "S90") return "-30px";
+  }};
+  right: ${(props) => {
+    if (props.name === "ACCORD TURBO") return "0px";
+  }};
 `;
 
 export const StyledImage = styled.div`
   background-image: url(${(props) => props.imageLink});
   display: flex;
-  position: relative;
+  position: absolute;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
@@ -70,5 +213,50 @@ export const StyledImage = styled.div`
   }
   &:hover {
     background-image: url(${(props) => props.hoverimageLink});
+    scale: ${(props) => {
+      if (props.name === "G70") return "1.1";
+      if (props.name === "DBX") return "1.1";
+      if (props.name === "ACCORD TURBO") return "1.1";
+      if (props.name === "TRAX") return "1.1";
+      if (props.name === "SF90") return "1.1";
+      if (props.name === "MUSTANG GT") return "1.1";
+      if (props.name === "GRAND CHEROKEE") return "1.1";
+      if (props.name === "URUS") return "1.1";
+      if (props.name === "UX 300h") return "1.1";
+      if (props.name === "GRAN TURISMO") return "1.1";
+      if (props.name === "E-2008") return "1.1";
+      if (props.name === "GRAND KOLEOS") return "1.1";
+      if (props.name === "GHOST") return "1.1";
+      if (props.name === "MODEL S") return "1.1";
+    }};
   }
+  margin-top: ${(props) => {
+    if (props.name === "EV6") return "18px";
+    if (props.name === "BMW8 COUPE") return "18px";
+    if (props.name === "RANGE ROVER") return "14px";
+  }};
+  bottom: ${(props) => {
+    if (props.name === "G-CLASS") return "-10px";
+    if (props.name === "E-2008") return "-45px";
+    if (props.name === "CROWN") return "-30px";
+  }};
+  background-size: ${(props) => {
+    if (props.name === "Q8") return "cover";
+  }};
+  width: ${(props) => {
+    if (props.name === "DBX") return "80%";
+    if (props.name === "ACCORD TURBO") return "90%";
+    if (props.name === "RANGE ROVER") return "120%";
+    if (props.name === "UX 300h") return "70%";
+    if (props.name === "COOPER") return "120%";
+    if (props.name === "E-2008") return "150%";
+    if (props.name === "CROWN") return "170%";
+  }};
+  height: ${(props) => {
+    if (props.name === "RANGE ROVER") return "110%";
+    if (props.name === "UX 300h") return "70%";
+    if (props.name === "COOPER") return "120%";
+    if (props.name === "E-2008") return "150%";
+    if (props.name === "CROWN") return "150%";
+  }};
 `;

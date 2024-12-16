@@ -11,39 +11,20 @@ import {
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserStore";
 
 const HomeSideMenu = ({ id, isSubOpen, idx }) => {
-  const nickname = localStorage.getItem("nickname");
-  const selector = () => {
-    switch (id) {
-      case "myPage":
-        return nickname ? "login" : "guest";
-      case "brand":
-        return "brand";
-      default:
-        console.log("코딩 에러");
-        return null;
-    }
-  };
+  const nickname = localStorage.getItem("nickName");
 
-  useEffect(() => {
-    if (id === "brand" && isSubOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [id, isSubOpen]);
+  const { logout } = useContext(UserContext);
 
   const sideMenuList = [
     {
       name: "guest",
       content: [
         { name: "Log in", link: "/login" },
-        { name: "Sign up", link: "/signup" },
+        { name: "Sign up", link: "/join" },
         {
           half: true,
           content: [
@@ -60,6 +41,7 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
         { name: "내 정보", link: "/myPage" },
         { name: "위시리스트 보기", link: "/wishList" },
         { name: "장바구니 보기", link: "/cart" },
+        { name: "로그아웃", link: "/", onclick: { logout } },
       ],
     },
     {
@@ -243,47 +225,95 @@ const HomeSideMenu = ({ id, isSubOpen, idx }) => {
       ],
     },
   ];
-  // Login 버튼 클릭 시 마이 페이지 까지 열리는 기능 코드 수정해야 합니다.
-  // Login 버튼 클릭 시 메뉴 바에서 열리게 할지, 새로운 로그인 페이지 이동 할지 논의 필요
+
+  const selector = () => {
+    switch (id) {
+      case "myPage":
+        return nickname ? "login" : "guest";
+      case "brand":
+        return "brand";
+      default:
+        console.error("Invalid ID");
+        return null;
+    }
+  };
+
+  useEffect(() => {
+    document.body.style.overflow =
+      id === "brand" && isSubOpen ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [id, isSubOpen]);
+
+  const renderMenuContent = (menu) => {
+    const filteredContent = menu.content.filter(
+      (item) => item.name !== "로그아웃"
+    );
+    const lastItemIndex = filteredContent.length - 1;
+
+    return filteredContent.map((item, index) => {
+      if (item.type === "text") {
+        return <p key={item.name}>{item.name}</p>;
+      }
+
+      if (item.half) {
+        return (
+          <FindGroup key={item.name}>
+            {item.content.map((subItem) => (
+              <Link to={subItem.link} key={subItem.name}>
+                <MenuItemSmall isSubOpen={isSubOpen}>
+                  {subItem.name}
+                </MenuItemSmall>
+              </Link>
+            ))}
+          </FindGroup>
+        );
+      }
+
+      if (item.featured) {
+        return (
+          <StyledLink to={item.link} key={item.name}>
+            <MenuItemBrand isSubOpen={isSubOpen}>
+              {item.name}
+              <MenuLogo isSubOpen={isSubOpen} logo={item.logoImageLink} />
+            </MenuItemBrand>
+          </StyledLink>
+        );
+      }
+
+      return (
+        <>
+          <Link to={item.link} key={item.name}>
+            <MenuItem isSubOpen={isSubOpen}>{item.name}</MenuItem>
+          </Link>
+          {index === lastItemIndex && (
+            <MenuItem
+              as="button"
+              onClick={logout}
+              style={{
+                background: "none",
+                border: "none",
+                color: "inherit",
+                cursor: "pointer",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              로그아웃
+            </MenuItem>
+          )}
+        </>
+      );
+    });
+  };
+
+  const selectedMenu = sideMenuList.find((menu) => menu.name === selector());
+
   return (
     <MenuSideContainer isSubOpen={isSubOpen} idx={idx}>
       <MenuGroup isSubOpen={isSubOpen}>
-        {sideMenuList
-          .filter((menu) => menu.name === selector())
-          .map((menu) =>
-            menu.content.map((menu) =>
-              menu.type === "text" ? (
-                <p>{menu.name}</p>
-              ) : menu.half ? (
-                <FindGroup>
-                  {menu.content.map((menu) => (
-                    <Link to={menu.link}>
-                      <MenuItemSmall isSubOpen={isSubOpen} key={menu.name}>
-                        {menu.name}
-                      </MenuItemSmall>
-                    </Link>
-                  ))}
-                </FindGroup>
-              ) : menu.featured ? (
-                <StyledLink to={menu.link}>
-                  <MenuItemBrand isSubOpen={isSubOpen} key={menu.name}>
-                    {menu.name}
-                    <MenuLogo
-                      isSubOpen={isSubOpen}
-                      key={menu.name}
-                      logo={menu.logoImageLink}
-                    ></MenuLogo>
-                  </MenuItemBrand>
-                </StyledLink>
-              ) : (
-                <Link to={menu.link}>
-                  <MenuItem isSubOpen={isSubOpen} key={menu.name}>
-                    {menu.name}
-                  </MenuItem>
-                </Link>
-              )
-            )
-          )}
+        {selectedMenu ? renderMenuContent(selectedMenu) : null}
       </MenuGroup>
     </MenuSideContainer>
   );

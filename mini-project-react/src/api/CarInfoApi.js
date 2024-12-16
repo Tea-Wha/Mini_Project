@@ -31,12 +31,16 @@ const CarInfoApi = {
 	},
 	
 	getCarCustomize: async (carNo) => {
-		const params = {
-			carNo: carNo,
-		};
-		console.log("커스텀 가능한 요소 조회 : " + JSON.stringify(params));
+		console.log("커스텀 가능한 요소 조회 : " + carNo);
 		return await axios.get(KH_DOMAIN + "/customize/spec/"+ carNo);
 	},
-	
+	getCarImage: async (carNo, color) => {
+		const params = {
+			carNo: carNo,
+			color: color,
+		}
+	console.log("이미지 조회 : " + JSON.stringify(params))
+		return await axios.get(KH_DOMAIN + "/customize/getImages", {params})
+	},
 }
 export default CarInfoApi

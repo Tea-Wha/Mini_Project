@@ -28,7 +28,7 @@ const CustomizeMain = () => {
 	
 	const {carNo} = useParams();
 	
-	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, carInfo, carPrice, cartNo} = useContext(CarInfoContext);
+	const{setCarInfo, setColors, setOptions, carColor, carOptions, setCarPrice, colors, carPrice, cartNo} = useContext(CarInfoContext);
 	
 	const navigate = useNavigate();
 	
@@ -36,7 +36,7 @@ const CustomizeMain = () => {
 		const carCustomInitialFetch = async () => {
 			try {
 				const [infoRsp, colorRsp, optionsRsp] = await Promise.all([
-					CarInfoApi.getCarCustomize(carNo, carColor),
+					CarInfoApi.getCarInfo(carNo),
 					CarInfoApi.getCarColor(carNo),
 					CarInfoApi.getCarOptions(carNo),
 				]);
@@ -56,37 +56,44 @@ const CustomizeMain = () => {
 			}
 		}
 		carCustomInitialFetch()
-	},[carNo, carColor])
+	},[])
 	
 	useEffect(() => {
 		const colorPriceUpdater = () => {
+			const colorPrice = () => {
+				console.log("carColor : " + carColor)
+				const selectedColor = colors.find((item) => item.colorName === carColor[0]);
+				console.log("선택된 색상 : " + JSON.stringify(selectedColor));
+				return selectedColor ? selectedColor.colorPrice : null; // 조건에 맞는 값이 없으면 null 반환
+			};
 			setCarPrice(carPrice.map((item) =>
-					item.id === "color" ? { ...item,  price: carColor.price} : item))
+					item.id === "color" ? { ...item,  price: colorPrice()} : item))
 		}
 		colorPriceUpdater()
 	},[carColor])
 	
 	useEffect(() => {
 		const optionPrice = () => Array.isArray(carOptions) ?
-			carOptions.reduce((sum, item) => sum + (item.price || 0), 0)
+			carOptions.reduce((sum, item) => sum + (item.featurePrice || 0), 0)
 			: 0
 		const optionPriceUpdater = () => {
 			setCarPrice(carPrice.map((item) =>
 				item.id === "options" ? { ...item,  price: optionPrice()} : item))
 		}
 		optionPriceUpdater()
-	},[carOptions, carInfo])
+	},[carOptions])
 	
 	const onClickSubmit = async () => {
 		const params = {
 			userId: userId,
 			carNo: carNo,
-			carColor: carColor,
-			carOptions: carOptions,
+			cartColor: carColor ? carColor[0] : colors[0].carColor,
+			cartOption: JSON.stringify(carOptions),
+			cartPrice: carPrice[0].price + carPrice[1].price + carPrice[2].price,
 		}
 		console.log(params);
 		try {
-			const rsp = await CarInfoApi.postCustomize(params)
+			const rsp = await CartApi.postCart(params)
 			console.log("결과 : " + rsp.data);
 			if (rsp.data) {
 				navigate("/cart");
@@ -124,7 +131,7 @@ const CustomizeMain = () => {
 	
 	return (
 		<CustomizeContainer>
-			<CustomizePreview/>
+			<CustomizePreview carNo={carNo}/>
 			<CustomizeOptions/>
 			<CustomizeResult onClickSubmit={updateFlag? onClickUpdate : onClickSubmit} updateFlag={updateFlag}/>
 		</CustomizeContainer>

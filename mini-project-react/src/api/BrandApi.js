@@ -5,12 +5,12 @@ const BrandApi = {
 	
 	getBrand: async (manufacturer) => {
 		console.log("브랜드 조회 : ", manufacturer);
-		return await axios.get(KH_DOMAIN + "/brand/getBrand",manufacturer);
+		return await axios.get(KH_DOMAIN + "/brand/getBrand/" + manufacturer);
 	},
 
 	getCar: async (manufacturer) => {
 		console.log("브랜드 차량 조회 : " + manufacturer);
-		return await axios.get(KH_DOMAIN + "/brand/getCar",manufacturer);
+		return await axios.get(KH_DOMAIN + "/brand/getCar/" + manufacturer);
 	},
 	
 }

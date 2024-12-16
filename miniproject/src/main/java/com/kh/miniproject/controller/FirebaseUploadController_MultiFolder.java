@@ -21,8 +21,8 @@ public class FirebaseUploadController_MultiFolder {
     @GetMapping("/upload-multiple-folders")
     public String uploadMultipleFolders() throws IOException {
         // 로컬 최상위 폴더 및 Firebase 기준 경로 설정
-        String localRootPath = "src/main/resources/IMAGE";
-        String firebaseRootPath = "IMAGE/";
+        String localRootPath = "src/main/resources/IMAGE/CAR_SEARCH_IMAGE";
+        String firebaseRootPath = "IMAGE/CAR_SEARCH_IMAGE/";
 
         // 대량 이미지 업로드 실행
         uploadServiceTest.uploadAllFolders(localRootPath, firebaseRootPath);

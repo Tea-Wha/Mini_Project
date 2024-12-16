@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import AccordionComponent from "../../components/AccordionComponent";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import CartTable from "./CartTable";
-import {IconButton} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
 import ConfirmModal from "../../components/ConfirmModal";
 import CartApi from "../../api/CartApi";
 import {CarInfoContext} from "../../context/CarInfoStore";
 import {useNavigate} from "react-router-dom";
-import {RemoveShoppingCart, ShoppingCartCheckout} from "@mui/icons-material";
+import {Edit, EditOff, RemoveShoppingCart, ShoppingCartCheckout} from "@mui/icons-material";
 
 const CartItemContainer = styled.div`
 		display: flex;
@@ -21,15 +21,29 @@ const CartNumberContainer = styled.div``
 
 const CartButtonContainer = styled.div``
 
+const NameContainer = styled.div``
 
-const CartItem = ({ cart, idx, pageFlag, setPageFlag }) => {
+const NameInput = styled(TextField)`
+
+`
+
+
+const CartItem = ({ cart, pageFlag, setPageFlag }) => {
+	const [cartName, setCartName] = useState("")
+	
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	
+	const [nameOpen, setNameOpen] = useState(false)
 	
 	const navigate = useNavigate();
 	
 	const [visible, setVisible] = useState({ table: false });
 	
 	const {setCarColor, setCarOptions} = useContext(CarInfoContext)
+	
+	useEffect(() => {
+		setCartName(cart.cartName)
+	}, [cart]);
 	
 	const onClickDelete = () => {
 		setIsModalOpen(true);
@@ -39,6 +53,27 @@ const CartItem = ({ cart, idx, pageFlag, setPageFlag }) => {
 		setCarColor(cart.carColor);
 		setCarOptions(cart.carOptions);
 		navigate(`customize/${cart.carNo}/true`)
+	}
+	
+	const onClickNameEditToggle = () => {
+		if (nameOpen === true)
+		{const nameChange = async () => {
+			try {
+				const rsp = CartApi.nameChange(cartName)
+				if(rsp.data) {
+					console.log("이름 변경에 성공했습니다.")
+				}
+				else console.log("이름 변경에 실패했습니다.")
+			}
+			catch (e) {
+				console.log("이름 변경 통신에 실패했습니다.")
+				console.log(e);
+			}
+			
+			
+		}}
+		setNameOpen(!nameOpen);
+		
 	}
 	
 	const confirmDelete = async () => {
@@ -65,6 +100,10 @@ const CartItem = ({ cart, idx, pageFlag, setPageFlag }) => {
 		console.log("삭제가 취소되었습니다.");
 	};
 	
+	const onChangeName = (e) => {
+		setCartName(e.target.value);
+	}
+	
 	return (
 		<CartItemContainer>
 			{isModalOpen && (
@@ -74,7 +113,12 @@ const CartItem = ({ cart, idx, pageFlag, setPageFlag }) => {
 					onCancel={cancelDelete}
 				/>
 			)}
-			<CartNumberContainer>{idx + 1}</CartNumberContainer>
+			<CartNumberContainer>
+				{nameOpen ? <NameInput></NameInput> : <NameContainer onChange={onChangeName} value={cartName}>{cart.cartName}</NameContainer>}
+				<IconButton onClick={onClickNameEditToggle}>
+					{nameOpen ? <EditOff/> :<Edit/>}
+				</IconButton>
+			</CartNumberContainer>
 			<CartImage src={cart.url} />
 			<AccordionComponent
 				label="차량의 세부 견적입니다."

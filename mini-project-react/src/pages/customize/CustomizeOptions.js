@@ -35,21 +35,18 @@ const CustomizeOptions =() => {
 		list: colors,
 		value: carColor,
 		setter: setCarColor,
-		keyName: "commonName",
-		keyUrl: "commonUrl",
+		keyName: "colorName",
+		keyUrl: "colorUrl",
 		isBg : true},
 		{name: "옵션",
 		id: "options",
 		list: options,
 		value: carOptions,
 		setter: setCarOptions,
-		keyName: "name",},
+		keyName: "featureName"},
 	]
 	
-	
-	
-	
-	
+	console.log(colors)
 	
 	return(
 		<OptionsContainer>

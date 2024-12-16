@@ -50,6 +50,11 @@ export const MenuItem = styled.button`
   font-weight: bold;
   font-size: 1rem;
   color: transparent;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
   ${(props) =>
     props.isSubOpen &&
     css`
@@ -69,6 +74,11 @@ export const MenuItemBrand = styled.button`
   font-weight: bold;
   font-size: 1rem;
   color: transparent;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
   ${(props) =>
     props.isSubOpen &&
     css`
@@ -90,6 +100,11 @@ export const MenuItemSmall = styled.button`
   font-weight: bold;
   cursor: pointer;
   color: transparent;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
   ${(props) =>
     props.isSubOpen &&
     css`
@@ -116,7 +131,7 @@ export const MenuLogo = styled.div`
   right: 0px;
   border: none;
   z-index: 2;
-  top: 10px;
+  top: 15px;
   ${(props) =>
     props.isSubOpen &&
     css`

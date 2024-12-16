@@ -5,10 +5,10 @@ import {
   Button,
   ButtonContainer,
 } from "../../styles/home/HomeBrand";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import {Navigation, Pagination} from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 
 const HomeBrand = () => {
   const brandList = [
@@ -62,11 +62,11 @@ const HomeBrand = () => {
       logo: "/testlogos/ASTONMARTIN.png",
     },
     {
-      name: "CONTINENTAL-GT",
-      image: "/image/MainPage_Brand/BENTLEY/CONTINENTAL_GT/ESS1.webp",
-      hoverimage: "/image/MainPage_Brand/BENTLEY/CONTINENTAL_GT/ESS0.webp",
+      name: "ACCORD TURBO",
+      image: "/image/MainPage_Brand/HONDA/ACCORD_TURBO/color_11_360.png",
+      hoverimage: "/image/MainPage_Brand/HONDA/ACCORD_TURBO/color_11_360.png",
       link: "#",
-      logo: "/testlogos/BENTLEY.png",
+      logo: "/testlogos/HONDA.png",
     },
     {
       name: "TRAX",
@@ -83,18 +83,18 @@ const HomeBrand = () => {
       logo: "/testlogos/FERRARI.png",
     },
     {
-      name: "MSTANG GT",
+      name: "MUSTANG GT",
       image: "/image/MainPage_Brand/FORD/MUSTANG_GT/45.jpg",
       hoverimage: "/image/MainPage_Brand/FORD/MUSTANG_GT/45.jpg",
       link: "#",
       logo: "/testlogos/FORD.png",
     },
     {
-      name: "ACCORD TURBO",
-      image: "/image/MainPage_Brand/HONDA/ACCORD_TURBO/color_11_360.png",
-      hoverimage: "/image/MainPage_Brand/HONDA/ACCORD_TURBO/color_11_360.png",
+      name: "CONTINENTAL-GT",
+      image: "/image/MainPage_Brand/BENTLEY/CONTINENTAL_GT/ESS1.webp",
+      hoverimage: "/image/MainPage_Brand/BENTLEY/CONTINENTAL_GT/ESS0.webp",
       link: "#",
-      logo: "/testlogos/HONDA.png",
+      logo: "/testlogos/BENTLEY.png",
     },
     {
       name: "GRAND CHEROKEE",
@@ -224,6 +224,7 @@ const HomeBrand = () => {
           loop={true}
           slidesPerView={1}
           simulateTouch={true}
+          speed={1000}
         >
           {groupedBrandList.map((group, index) => (
             <SwiperSlide key={index}>

@@ -39,10 +39,10 @@ public class CsvUploadRepository {
                     carCsvVo.getEfficiency(),
                     carCsvVo.getCarPrice(),
                     carCsvVo.getCarFrontUrl(),
-                    carCsvVo.getCarAroundUrl(),
-                    carCsvVo.getCar3dUrl(),
-                    carCsvVo.getCarDesc(),
-                    carCsvVo.getSummary()
+                    carCsvVo.getCarAroundUrl().isEmpty() ? "d" : carCsvVo.getCarAroundUrl(),
+                    carCsvVo.getCar3dUrl().isEmpty() ? "d" : carCsvVo.getCar3dUrl(),
+	                  carCsvVo.getCarDesc().isEmpty() ? "d" : carCsvVo.getCarDesc(),
+                    carCsvVo.getSummary().isEmpty() ? "d" : carCsvVo.getSummary(),
             });
         }
 

@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export const Container = styled.div`
   height: 100vh;
   // 영역 확인용
   background-color: none;
+  z-index: 10;
 `;
 
 export const NavContainer = styled.div`
@@ -21,7 +22,7 @@ export const NavContainer = styled.div`
   // 크기 설정용
   width: 100%;
   position: absolute;
-  z-index: 1;
+  z-index: 10;
 `;
 export const MenuContainer = styled.div`
   display: flex;
@@ -39,8 +40,16 @@ export const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
+  color: white;
   height: 40px;
   transition: background-color 0.5s ease, transform 0.5s ease;
+  z-index: 10;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
+
   &:hover {
     background-color: rgba(128, 128, 128, 0.1);
   }
@@ -55,19 +64,25 @@ export const ImageCounterContainer = styled.div`
 export const Initial = styled.div`
   margin: 0 auto;
   cursor: pointer;
-  color: black;
+  color: white;
   margin-top: 0px;
   font-weight: bold;
   font-size: 1.6rem;
   display: flex;
+  z-index: 10;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
 `;
 
 export const StyledLink = styled(Link)`
-		color: black;
-		text-decoration: none;
-		display: flex;
-		justify-content: end;
-		font-weight: bold;
-		font-size: 1.2em;
-		z-index: 1;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  justify-content: end;
+  font-weight: bold;
+  font-size: 1.2em;
+  z-index: 10;
 `;

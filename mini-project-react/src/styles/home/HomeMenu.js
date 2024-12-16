@@ -1,5 +1,5 @@
-import styled, {css} from "styled-components";
-import {Link} from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const MenuContainer = styled.div`
   left: 0;
   top: 0;
   background-color: rgba(128, 128, 128, 0.6);
-  z-index: 2;
+  z-index: 10;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
 
@@ -35,7 +35,7 @@ export const MenuGroup = styled.div`
   margin: 10px 20px;
   background-color: white;
   position: relative;
-  height: 300px;
+  height: 320px;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -63,6 +63,11 @@ export const MenuItem = styled.button`
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s ease, transform 0.5s ease;
+  @font-face {
+    font-family: "initial";
+    src: url("/fonts/Blinker-ExtraBold.ttf") format("truetype");
+  }
+  font-family: "'initial', sans-serif";
   background-color: ${(props) =>
     props.isSubOpen ? "rgba(128,128,128,0.3)" : "white"};
   &:hover {
@@ -71,7 +76,7 @@ export const MenuItem = styled.button`
   & + &::before {
     content: "";
     position: absolute;
-    top: -16px;
+    top: -15px;
     left: 0px;
     width: 200px;
     height: 2px;
@@ -84,7 +89,7 @@ export const MenuItem = styled.button`
       &::before {
         content: "";
         position: absolute;
-        top: -16px;
+        top: -15px;
         left: 0px;
         width: 200px;
         height: 2px;
@@ -94,7 +99,7 @@ export const MenuItem = styled.button`
       &::after {
         content: "";
         position: absolute;
-        top: 55px;
+        top: 60px;
         left: 0px;
         width: 200px;
         height: 2px;
@@ -168,7 +173,7 @@ export const StyledDiv = styled.div`
   &::before {
     content: "";
     position: absolute;
-    top: 35%;
+    top: 55%;
     left: 60%;
     width: 10px;
     height: 2px;
@@ -178,7 +183,7 @@ export const StyledDiv = styled.div`
   &::after {
     content: "";
     position: absolute;
-    top: 65%;
+    top: 85%;
     left: 60%;
     width: 10px;
     height: 2px;
