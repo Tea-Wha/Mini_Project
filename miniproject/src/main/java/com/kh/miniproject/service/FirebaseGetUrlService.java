@@ -18,10 +18,11 @@ public class FirebaseGetUrlService {
 
     private final String firebaseCredentialsPath = "src/main/resources/firebase-service-account.json";
     private static final String BUCKET_NAME = "mini-project-d9c21.firebasestorage.app";
-    private static final String FOLDER_PATH = "IMAGE/CAR_COLORCHIP/HYUNDAI/"; // Firebase의 경로 지정
-    private static final String FOLDER_TOP_PATH = "IMAGE/CAR_SP_IMAGE/HYUNDAI/IONIQ6/"; // 상세 정보 관련 경로
-    String[] FOLDER_COLOR_PATHS = ColorChipPaths.getPathsByBrand("8");
+    private static final String FOLDER_PATH = "IMAGE/CAR_COLORCHIP/"; // Firebase의 경로 지정
+    private static final String FOLDER_TOP_PATH = "IMAGE/CAR_SP_IMAGE/"; // 상세 정보 관련 경로
+    String[] FOLDER_COLOR_PATH = ColorChipPaths.getPathsByBrand("8");
     String[] FOLDER_REP_PATHS = RepImagePaths.getFolderRepPathsPaths();
+    String[] FOLDER_COLOR_PATHS = ColorChipPaths.getFolderColorPaths();
 
     // 전체 URL, 단일 경로 -> 컬러 칩 URL (상위 폴더에서)
     public List<String> getImageFullUrls() throws IOException {
@@ -91,6 +92,45 @@ public class FirebaseGetUrlService {
         return result;
     }
 
+    // 폴더 구조 전부 동일 -> Color Path에서 디렉토리 따와서 -> SP_IMAGE 경로로 변경
+    public List<List<String>> getCustomSPUrlsDistribution() throws IOException {
+        // Firebase Storage 초기화
+        Storage storage = getStorage();
+
+        // 특정 경로의 파일 가져오기
+        Bucket bucket = storage.get(BUCKET_NAME);
+        List<List<String>> result = new ArrayList<>();
+        List<List<String>> customResult = new ArrayList<>();
+
+        for (String folderPath : FOLDER_COLOR_PATHS) {
+
+            List<String> imageUrls = new ArrayList<>();
+            List<String> customUrls = new ArrayList<>();
+
+            // Blob 리스트 가져오기
+            for (Blob blob : bucket.list(Storage.BlobListOption.prefix(folderPath)).iterateAll()) {
+                // Blob URL 생성
+                String encodedPath = blob.getName().replace("/", "%2F");
+                String customPath = blob.getName().replace("CAR_COLORCHIP/", "CAR_SP_IMAGE/").replace("/", "%2F");
+                String customUrl = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + customPath;
+                String url = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + encodedPath + "?alt=media";
+
+                String encodedSlash = "%2F";
+                int lastIndex = customUrl.lastIndexOf(encodedSlash);
+
+                if (lastIndex != -1){
+                    customUrl = customUrl.substring(0, lastIndex + encodedSlash.length());
+                }
+                imageUrls.add(url);
+                customUrls.add(customUrl);
+            }
+            customResult.add(customUrls);
+            result.add(imageUrls);
+        }
+        System.out.println(result);
+        return customResult;
+    }
+
     // Rep 이미지 받아오기 (2중 배열 -> 차량 경로 설정 시 -> 색상 별 구분 없음)
     // 경로 나누기 + 전체 URL -> 차 이미지 URL (REP / SP) (다중 경로) (다중경로 설정 필요) (컬러 폴더대로 구분)
     public List<List<String>> getImageShortRepUrlsDistribution() throws IOException {
@@ -120,11 +160,11 @@ public class FirebaseGetUrlService {
             shortResult.add(shortUrls); // 축약 URL 경로
         }
         System.out.println(result); // 확인용
-        return shortResult;
+        return result;
     }
 
-    // 상위 단일 폴더에서 하위 폴더 경로 자동 인식 -> 색상 별 URL 이중 배열 구조로 반환
-    // CAR_SP_IMAGE 전용 함수 (CAR_REP IMAGE도 사용 가능)
+    // 상위 단일 폴더에서 하위 폴더 경로 자동 인식 (For문) -> 색상 별 URL 삼중 배열 구조로 반환
+    // CAR_SP_IMAGE 전용 함수 (CAR_REP IMAGE도 사용 가능) -> 축약 경로 전용
     public List<List<List<String>>> getImageShortRepFolderUrlsDistribution() throws IOException {
         // Firebase Storage 초기화
         Storage storage = getStorage();
@@ -167,8 +207,10 @@ public class FirebaseGetUrlService {
             shortResult.add(subShortFolderUrls);
         }
 
-        return shortResult;
+        return result;
     }
+
+
 
     // 경로 나누기 + Color Name -> 차 이미지 설정된 Name (REP / SP) (다중 경로) (다중경로 설정 필요) (컬러 폴더대로 구분)
     public List<List<String>> getImageColorNamesDistribution() throws IOException {
@@ -254,6 +296,7 @@ public List<List<String>> getImageShortUrlsDistribution() throws IOException {
     System.out.println(result);
     return shortResult; // 축약 경로 웹페이지에 반환
 }
+
 
 
     private Storage getStorage() throws IOException {
