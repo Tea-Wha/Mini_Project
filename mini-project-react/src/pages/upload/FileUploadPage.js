@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { uploadCarCsvFile, uploadColorCsvFile, uploadFeatureCsvFile } from "../../api/CsvUploadApi";
+import { uploadCarCsvFile, uploadColorCsvFile, uploadFeatureCsvFile, downloadCarFile, downloadColorFile, downloadFeatureFile } from "../../api/CsvUploadApi";
 import {
   StyledContainer,
   UploadSection,
@@ -116,6 +116,48 @@ function FileUploadPage() {
     }
   };
 
+  const downloadCarCsv = async () => {
+    try {
+      const blob = await downloadCarFile(); // 서비스 함수 호출하여 파일 다운로드
+
+      // URL.createObjectURL을 이용하여 다운로드 URL을 생성
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Cars.csv"; // 다운로드할 파일 이름 지정
+      link.click(); // 다운로드 실행
+    } catch (error) {
+      console.error("파일 다운로드 중 오류 발생:", error);
+    }
+  };
+
+  const downloadColorCsv = async () => {
+    try {
+      const blob = await downloadColorFile(); // 서비스 함수 호출하여 파일 다운로드
+
+      // URL.createObjectURL을 이용하여 다운로드 URL을 생성
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Colors.csv"; // 다운로드할 파일 이름 지정
+      link.click(); // 다운로드 실행
+    } catch (error) {
+      console.error("파일 다운로드 중 오류 발생:", error);
+    }
+  };
+
+  const downloadFeaturerCsv = async () => {
+    try {
+      const blob = await downloadFeatureFile(); // 서비스 함수 호출하여 파일 다운로드
+
+      // URL.createObjectURL을 이용하여 다운로드 URL을 생성
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Features.csv"; // 다운로드할 파일 이름 지정
+      link.click(); // 다운로드 실행
+    } catch (error) {
+      console.error("파일 다운로드 중 오류 발생:", error);
+    }
+  };
+
   return (
     <StyledContainer>
       <StyledH2>CSV 파일 업로드</StyledH2>
@@ -136,6 +178,7 @@ function FileUploadPage() {
           {isUploadingForCar ? "업로드 중..." : "Car 업로드"}
         </StyledButton>
         {uploadStatusForCar && <StatusMessage success={uploadStatusForCar.includes("성공")}>{uploadStatusForCar}</StatusMessage>}
+        <StyledButton onClick={downloadCarCsv}>Car Format 다운로드</StyledButton> {/* 다운로드 버튼 */}
       </UploadSection>
 
       {/* Color Upload Section */}
@@ -154,6 +197,7 @@ function FileUploadPage() {
           {isUploadingForColor ? "업로드 중..." : "Color 업로드"}
         </StyledButton>
         {uploadStatusForColor && <StatusMessage success={uploadStatusForColor.includes("성공")}>{uploadStatusForColor}</StatusMessage>}
+        <StyledButton onClick={downloadColorCsv}>Color Format 다운로드</StyledButton> {/* 다운로드 버튼 */}
       </UploadSection>
 
       {/* Feature Upload Section */}
@@ -172,6 +216,7 @@ function FileUploadPage() {
           {isUploadingForFeature ? "업로드 중..." : "Feature 업로드"}
         </StyledButton>
         {uploadStatusForFeature && <StatusMessage success={uploadStatusForFeature.includes("성공")}>{uploadStatusForFeature}</StatusMessage>}
+        <StyledButton onClick={downloadFeaturerCsv}>Feature Format 다운로드</StyledButton> {/* 다운로드 버튼 */}
       </UploadSection>
     </StyledContainer>
   );
