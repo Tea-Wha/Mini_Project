@@ -12,8 +12,8 @@ const CarDescContainer = styled.div`
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		width: 1000px;
-		margin: 10px auto;
+		width: 1200px;
+		margin: 100px auto;
 `
 
 const CarDescCard = styled(Card)`
@@ -27,8 +27,20 @@ const CarDescCard = styled(Card)`
 
 const CarImage = styled.img`
 		width: 300px;
-		height: 150px;
+		max-height: 150px;
 		object-fit: cover;
+		margin: 10px 0;
+`
+
+const Logo = styled.img`
+    max-width: 300px;
+    max-height: 150px;
+    object-fit: cover;
+`
+
+const Blink = styled.div`
+		width: 300px;
+		height: 100px;
 `
 
 const CarDescription = styled(Card)`
@@ -66,26 +78,27 @@ const BrandDesc = () => {
 		<CarDescContainer>
 			{brand &&
 				<CarDescCard>
-					<CarImage src={brand.url || "/testlogos/hyundai.png"}/>
+					<Logo src={brand.brandUrl}/>
 					<CarDescription>
 						<CarCardInfoContainer>
-							{brand.name || "현대"}
+							{brand.brandName}
 						</CarCardInfoContainer>
 						<CarCardInfoContainer>
-							국가 : {brand.country || "한국"}
+							국가 : {brand.country}
 						</CarCardInfoContainer>
 					</CarDescription>
 				</CarDescCard>}
 			<AccordionContainer>
-				<AccordionComponent label={`${brand.name || "현대" }의 차량들입니다.`} id="table" name="차량 정보" visible={visible} setVisible={setVisible}>
+				<AccordionComponent label={`${brand.brandName }의 차량들입니다.`} id="table" name="차량 정보" visible={visible} setVisible={setVisible}>
 					<CarsContainer>
 						{Array.isArray(brandCar) && brandCar.map((car, index) => (
 							<Link to={`/carInfo/${car.carNo}`} key={index}>
-								<Tooltip key={index} title={car.carName} >
-									<CarImage src={car.carFrontUrl}></CarImage>
+								<Tooltip key={index} title={car.carName + " " + car.carPrice} >
+									<CarImage src={car.carUrl} alt="image"></CarImage>
 								</Tooltip>
 							</Link>
 						))}
+						<Blink></Blink><Blink></Blink>
 					</CarsContainer>
 				</AccordionComponent>
 			</AccordionContainer>

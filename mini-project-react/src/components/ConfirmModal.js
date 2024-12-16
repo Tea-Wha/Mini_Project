@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Button} from "@mui/material";
 
 const ModalOverlay = styled.div`
     position: fixed;
@@ -26,8 +27,8 @@ const ConfirmModal = ({ message, onConfirm, onCancel }) => {
 		<ModalOverlay>
 			<ModalContent>
 				<p>{message}</p>
-				<button onClick={onConfirm}>확인</button>
-				<button onClick={onCancel}>취소</button>
+				<Button onClick={onConfirm}>확인</Button>
+				<Button onClick={onCancel}>취소</Button>
 			</ModalContent>
 		</ModalOverlay>
 	);

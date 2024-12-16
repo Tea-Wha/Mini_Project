@@ -11,7 +11,6 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   // 영역 확인용
-  background-color: none;
   z-index: 10;
 `;
 
@@ -19,6 +18,7 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+	top: 0;
   // 크기 설정용
   width: 100%;
   position: absolute;
@@ -40,8 +40,9 @@ export const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  color: white;
-  height: 40px;
+    color: ${props => (props.color ? "#1c1c1c" : "white")};
+
+    height: 40px;
   transition: background-color 0.5s ease, transform 0.5s ease;
   z-index: 10;
   @font-face {
@@ -58,13 +59,12 @@ export const Button = styled.button`
 export const ImageCounterContainer = styled.div`
   width: 150px;
   margin: 0 auto;
-  background-color: aquamarine;
 `;
 
 export const Initial = styled.div`
   margin: 0 auto;
   cursor: pointer;
-  color: white;
+    color: ${props => (props.color ? "#1c1c1c" : "white")};
   margin-top: 0px;
   font-weight: bold;
   font-size: 1.6rem;
@@ -79,9 +79,12 @@ export const Initial = styled.div`
 
 export const StyledLink = styled(Link)`
   color: black;
+		min-width: 100px;
+		min-height: 50px;
   text-decoration: none;
   display: flex;
   justify-content: end;
+		align-items: center;
   font-weight: bold;
   font-size: 1.2em;
   z-index: 10;

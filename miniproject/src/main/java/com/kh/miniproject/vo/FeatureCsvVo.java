@@ -13,5 +13,4 @@ public class FeatureCsvVo {
     private String featureType;
     private String featureValue;
     private int carNo;
-    private String featureDesc;
 }

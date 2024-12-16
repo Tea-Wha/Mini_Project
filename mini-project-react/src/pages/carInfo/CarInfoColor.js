@@ -7,15 +7,16 @@ import styled from "styled-components";
 
 const ImageContainer = styled.div`
 		width: 100px;
-		height: 75px;
+		height: 100px;
 		overflow: hidden;
 		margin: 20px 0 50px;
-		border-radius: 8px;
+		border-radius: 50%;
 		
 `
 const Image = styled.img`
 		width: 100%;
 		height: 100%; /* 부모의 높이도 채움 */
+		border-radius: 50%;
 		object-fit: cover;
 `
 
@@ -23,7 +24,7 @@ const ColorsContainer = styled.div`
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
-		
+		flex-wrap: wrap;
 `
 
 const ColorChip = styled.div`

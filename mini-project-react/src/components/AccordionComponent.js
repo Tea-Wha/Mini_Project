@@ -31,19 +31,20 @@ const AccordionComponents = ({
     <AccordionCustom
       expanded={visible[id]}
       onChange={() => setVisible({ ...visible, [id]: !visible[id] })}
-      sx={visible ? { boxShadow: 3 } : { boxShadow: 3 }}
+      sx={{ boxShadow: 3 }}
     >
       <AccordionSummaryCustom
         expandIcon={reversed ? <ExpandLess /> : <ExpandMore />}
         aria-controls={`${id}-content`}
         id={`${id}-header`}
+        
       >
         <Typography>{name}</Typography>
       </AccordionSummaryCustom>
       <DividerCustom>
         <Chip label={label} size="small" />
       </DividerCustom>
-      <AccordionDetailsCustom>
+      <AccordionDetailsCustom >
         {children} {/* 여기서 children을 렌더링합니다 */}
       </AccordionDetailsCustom>
     </AccordionCustom>

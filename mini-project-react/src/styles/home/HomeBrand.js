@@ -38,7 +38,6 @@ export const SubContainer = styled.div`
   align-items: center;
   width: 98%;
   height: 90%;
-  background-color: #f0f0f0;
   background-color: transparent;
   border: none;
   border-radius: 10px;
