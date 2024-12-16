@@ -24,8 +24,8 @@ public class CartRepository {
 	private final static String NUM_CART = "SELECT COUNT(*) FROM CARTS WHERE USER_ID = ?";
 	private final static String CREATE_CART = "INSERT INTO CARTS(USER_ID, CAR_NO, CART_COLOR, CART_OPTIONS, CART_PRICE, CART_NO) VALUES(?,?,?,?,?,COMMENT_NO_SEQ.NEXTVAL)";
 	private final static String NAME_CHANGE = "UPDATE CARTS SET CART_NAME = ? WHERE CART_NO = ?";
-	private final static String UPDATE_CART = "UPDATE CARTS SET CART_OPTIONS = ?, CART_COLOR = ? WHERE CART_NO = ?" ;
-	private final static String DELETE_CART = "UPDATE CARTS SET USERID = 'DELETE' WHERE CART_NO = ? "; // 쓰레기통용 계정 생성
+	private final static String UPDATE_CART = "UPDATE CARTS SET CART_OPTIONS = ?, CART_COLOR = ?, CART_PRICE = ? WHERE CART_NO = ?" ;
+	private final static String DELETE_CART = "UPDATE CARTS SET USER_ID = 'DELETE' WHERE CART_NO = ? "; // 쓰레기통용 계정 생성
 	
 	public List<CartVo> getCart(String userId) {
 		List<CartVo> cartList = jdbcTemplate.query(GET_CART, new CartRowMapper(), userId);
@@ -57,7 +57,7 @@ public class CartRepository {
 	
 	public boolean updateCart(CartVo cartVo) {
 		log.warn("수정하려는 카트 {}", cartVo);
-		int isSuccess = jdbcTemplate.update(UPDATE_CART,  cartVo.getCartColor(), cartVo.getCartOption(), cartVo.getCartColor(), cartVo.getCartNo());
+		int isSuccess = jdbcTemplate.update(UPDATE_CART, cartVo.getCartOption(), cartVo.getCartColor(), cartVo.getCartPrice(), cartVo.getCartNo());
 		log.info("변경된 내역 : {}", isSuccess);
 		return isSuccess > 0;
 	}

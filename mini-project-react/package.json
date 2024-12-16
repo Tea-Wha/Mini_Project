@@ -12,7 +12,11 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.7.7",
     "firebase": "^11.0.2",
+<<<<<<< HEAD
     "firebase-tools": "^13.29.1",
+=======
+    "punycode": "^2.3.1",
+>>>>>>> dec9beb6cc9edb8f79e0c1da50245b471793f9fb
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1",

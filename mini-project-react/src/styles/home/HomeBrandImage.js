@@ -27,7 +27,7 @@ export const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   position: relative;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0 10px 0;
   border: 3px solid #f0f0f0;
   border-radius: 10px;
 `;

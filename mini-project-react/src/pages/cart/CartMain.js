@@ -4,16 +4,28 @@ import CartApi from "../../api/CartApi";
 import styled from "styled-components";
 import CartItem from "./CartItem";
 import {useNavigate} from "react-router-dom";
+import NavComponent from "../../components/NavComponent";
+import Paper from "@mui/material/Paper";
+import {Card} from "@mui/material";
 
-const CartContainer = styled.div`
+const Container = styled.div`
+		position: fixed;
+	width: 100%;
+		height: 100vh;
+		background-color: #f5f5f5;
+`
+
+const CartContainer = styled(Card)`
 		display: flex;
-		background-color: bisque;
+		align-items: flex-start;
 `
 const PageContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		margin: 50px auto;
+		
 `
 
 
@@ -50,12 +62,16 @@ const CartMain = () => {
 	
 	
 	return (
-		<PageContainer>
-			<h1>{nickName}님의 장바구니</h1>
-			<CartContainer>
-				{cart && cart.map((item, idx) => (<CartItem cart={item} key={idx} idx={idx} setPageFlag={setPageFlag} pageFlag={pageFlag}/>))}
-			</CartContainer>
-		</PageContainer>
+		<Container>
+			<NavComponent color={true}/>
+			<PageContainer>
+				<h1>{nickName}님의 장바구니</h1>
+				<CartContainer>
+					{cart && cart.map((item, idx) => (
+						<CartItem cart={item} key={idx} idx={idx} setPageFlag={setPageFlag} pageFlag={pageFlag}/>))}
+				</CartContainer>
+			</PageContainer>
+		</Container>
 	)
 }
 

@@ -69,6 +69,7 @@ const Login = () => {
         <StyledInput
           placeholder="비밀번호"
           value={inputPw}
+          type="password"
           onChange={(e) => handleInputChange(e, setInputPw, setisPw)}
         ></StyledInput>
         {isId && isPw ? (

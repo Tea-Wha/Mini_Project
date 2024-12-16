@@ -23,7 +23,7 @@ public class BrandListRepository {
 	private final JdbcTemplate jdbcTemplate;
 	private final static String MANUFACTURER_INFO = "SELECT MANUFACTURER_NAME, MANUFACTURER_URL, COUNTRY FROM MANUFACTURERS WHERE MANUFACTURER_NAME = ?";
 	private final static String BRAND_CARS = "SELECT CAR_NO, CAR_NAME, CAR_FRONT_URL, CAR_PRICE FROM VM_LIST_CAR WHERE MANUFACTURER_NAME = ?";
-	
+	private final static String BRAND_ALL = "SELECT MANUFACTURER_NAME, MANUFACTURER_URL, COUNTRY FROM MANUFACTURERS";
 	
 	public BrandVo getBrandInfo(String manufacturerName) {
 		log.info("제조사 : {}", manufacturerName);
@@ -35,7 +35,9 @@ public class BrandListRepository {
 		return jdbcTemplate.query(BRAND_CARS, new Object[]{manufacturerName}, new BrandCarRowMapper(firebaseDirService));
 	}
 
-	
+	public List<BrandVo> getBrandAll() {
+		return jdbcTemplate.query(BRAND_ALL, new BrandInfoRowMapper());
+	}
 	
 	public static class BrandInfoRowMapper implements RowMapper<BrandVo> {
 		
@@ -59,16 +61,12 @@ public class BrandListRepository {
 		@Override
 		public BrandCarVo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// 첫 번째 이미지 URL을 안전하게 가져오는 로직
-			final String URL = rs.getString("MANUFACTURER_URL");
+			final String URL = rs.getString("CAR_FRONT_URL");
 			log.warn("URL : {}", URL);
-			List<String> carUrls = firebaseDirService.getImageUrls("IMAGE/CAR_REP_IMAGE/" + URL);
-			
-			String carUrl = (carUrls != null && !carUrls.isEmpty()) ? carUrls.get(0) : null;
-			
 			return new BrandCarVo(
 				rs.getInt("CAR_NO"),
 				rs.getString("CAR_NAME"),
-				carUrl,
+				rs.getString("CAR_FRONT_URL"),
 				rs.getInt("CAR_PRICE")
 			);
 		}

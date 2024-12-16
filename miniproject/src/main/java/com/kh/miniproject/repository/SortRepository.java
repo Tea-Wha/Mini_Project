@@ -1,7 +1,6 @@
 package com.kh.miniproject.repository;
 
 import com.kh.miniproject.service.FirebaseDirService;
-import com.kh.miniproject.util.RepImagePaths;
 import com.kh.miniproject.vo.CategoryVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +22,7 @@ public class SortRepository {
     
     @Autowired
     private FirebaseDirService firebaseDirService;
+    
 
     public List<CategoryVo> sortInfo(String carName, String manufacturer, Integer minPrice, Integer maxPrice,
                                     String engineType, String classification) {
@@ -96,10 +96,11 @@ public class SortRepository {
                 categoryVo.setEngineType(rs.getString("ENGINE_TYPE"));
                 categoryVo.setClassification(rs.getString("CLASSIFICATION"));
                 categoryVo.setManufacturerUrl(rs.getString("MANUFACTURER_URL"));
-//                categoryVo.setCarFrontUrl(rs.getString("CAR_FRONT_URL"));
+                categoryVo.setCarFrontUrl(rs.getString("CAR_FRONT_URL"));
                 return categoryVo;
             }
         });
     }
+    
 }
 

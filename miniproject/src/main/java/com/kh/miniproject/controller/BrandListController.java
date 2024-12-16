@@ -35,4 +35,11 @@ public class BrandListController {
 		log.warn( "getCar : {}", brandCarVo);
 		return brandCarVo;
 	}
+	
+	@GetMapping("/all")
+	public List<BrandVo> getAllBrand() {
+		List<BrandVo> brandVoList = brandListService.getBrandAll();
+		log.warn( "getAllBrand : {}", brandVoList);
+		return brandVoList;
+	}
 }

@@ -25,4 +25,8 @@ public class BrandListService {
 	public List<BrandCarVo> getBrandCarList(String manufacturerName) {
 		return brandListRepository.getBrandCars(manufacturerName);
 	}
+	
+	public List<BrandVo> getBrandAll() {
+		return brandListRepository.getBrandAll();
+	}
 }
