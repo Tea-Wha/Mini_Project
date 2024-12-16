@@ -50,7 +50,7 @@ public class FirebaseGetUrlController {
     @GetMapping("/api/images/fullsearchtesturls/distribution") // Custom 상황 (전체 URL 받아오기) (다중 경로)
     public List<String> getAllSearchTestImageUrlsDistribution() throws IOException {
         return firebaseGetUrlService.getImageFullSearchUrlsTestDistribution();
->>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
+>>>>>>>
     }
     
     // 대표 이미지 받아오기

@@ -23,11 +23,8 @@ public class FirebaseGetUrlService {
     private static final String FOLDER_TOP_PATH = "IMAGE/CAR_SP_IMAGE/"; // 상세 정보 관련 경로
     String[] FOLDER_COLOR_PATH = ColorChipPaths.getPathsByBrand("8");
     String[] FOLDER_REP_PATHS = RepImagePaths.getFolderRepPathsPaths();
-<<<<<<< HEAD
     String[] FOLDER_COLOR_PATHS = ColorChipPaths.getFolderColorPaths();
-=======
     String[] FOLDER_SEARCH_PATHS = SearchImagePaths.getFolderSearchPathsPaths();
->>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
 
     // 전체 URL, 단일 경로 -> 컬러 칩 URL (상위 폴더에서)
     public List<String> getImageFullUrls() throws IOException {
@@ -98,39 +95,32 @@ public class FirebaseGetUrlService {
         return result;
     }
 
-<<<<<<< HEAD
     // 폴더 구조 전부 동일 -> Color Path에서 디렉토리 따와서 -> SP_IMAGE 경로로 변경
     public List<List<String>> getCustomSPUrlsDistribution() throws IOException {
-=======
     // 경로 나누기 + 전체 URL -> 차 이미지 URL (REP / SP) (다중 경로) (다중경로 설정 필요) (컬러 폴더대로 구분)
     public List<List<String>> getImageFullSearchUrlsDistribution() throws IOException {
->>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
         // Firebase Storage 초기화
         Storage storage = getStorage();
 
         // 특정 경로의 파일 가져오기
         Bucket bucket = storage.get(BUCKET_NAME);
         List<List<String>> result = new ArrayList<>();
-<<<<<<< HEAD
         List<List<String>> customResult = new ArrayList<>();
 
         for (String folderPath : FOLDER_COLOR_PATHS) {
 
             List<String> imageUrls = new ArrayList<>();
             List<String> customUrls = new ArrayList<>();
-=======
 
         for (String folderPath : FOLDER_SEARCH_PATHS) {
 
             List<String> imageUrls = new ArrayList<>();
             List<String> name = new ArrayList<>();
->>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
 
             // Blob 리스트 가져오기
             for (Blob blob : bucket.list(Storage.BlobListOption.prefix(folderPath)).iterateAll()) {
                 // Blob URL 생성
                 String encodedPath = blob.getName().replace("/", "%2F");
-<<<<<<< HEAD
                 String customPath = blob.getName().replace("CAR_COLORCHIP/", "CAR_SP_IMAGE/").replace("/", "%2F");
                 String customUrl = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + customPath;
                 String url = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + encodedPath + "?alt=media";
@@ -149,7 +139,6 @@ public class FirebaseGetUrlService {
         }
         System.out.println(result);
         return customResult;
-=======
                 String url = "https://firebasestorage.googleapis.com/v0/b/" + BUCKET_NAME + "/o/" + encodedPath + "?alt=media";
                 imageUrls.add(url); // 전체 URL 경로
             }
@@ -181,7 +170,6 @@ public class FirebaseGetUrlService {
         }
         System.out.println(result);
         return result;
->>>>>>> f1c75d5f501d9c70828b9e73d125caa624b5ff99
     }
 
     // Rep 이미지 받아오기 (2중 배열 -> 차량 경로 설정 시 -> 색상 별 구분 없음)
