@@ -66,6 +66,7 @@ public class FirebaseGetUrlService {
             imageUrls.add(url); // 전체 URL 경로
             shortimageUrls.add(shortPath); // 축약 URL 경로
         }
+        
         System.out.println("Image URL: " + imageUrls); // 확인용 URL
         return shortimageUrls;
     }

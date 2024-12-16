@@ -55,3 +55,48 @@ export const uploadFeatureCsvFile = async (fileForFeature) => {
     throw error; // 오류 처리
   }
 };
+
+export const downloadCarFile = async () => {
+  try {
+    const response = await axios.get(KH_DOMAIN + "/csv/downloadCar", {
+      responseType: "arraybuffer", // 파일 데이터를 바이너리 형식으로 받아옴
+    });
+
+    // 응답으로 받은 파일 데이터를 Blob으로 변환
+    const blob = new Blob([response.data], { type: "text/csv" });
+    return blob;
+  } catch (error) {
+    console.error("파일 다운로드 중 오류 발생:", error);
+    throw error; // 에러를 호출한 곳으로 전달
+  }
+};
+
+export const downloadColorFile = async () => {
+  try {
+    const response = await axios.get(KH_DOMAIN + "/csv/downloadColor", {
+      responseType: "arraybuffer", // 파일 데이터를 바이너리 형식으로 받아옴
+    });
+
+    // 응답으로 받은 파일 데이터를 Blob으로 변환
+    const blob = new Blob([response.data], { type: "text/csv" });
+    return blob;
+  } catch (error) {
+    console.error("파일 다운로드 중 오류 발생:", error);
+    throw error; // 에러를 호출한 곳으로 전달
+  }
+};
+
+export const downloadFeatureFile = async () => {
+  try {
+    const response = await axios.get(KH_DOMAIN + "/csv/downloadFeature", {
+      responseType: "arraybuffer", // 파일 데이터를 바이너리 형식으로 받아옴
+    });
+
+    // 응답으로 받은 파일 데이터를 Blob으로 변환
+    const blob = new Blob([response.data], { type: "text/csv" });
+    return blob;
+  } catch (error) {
+    console.error("파일 다운로드 중 오류 발생:", error);
+    throw error; // 에러를 호출한 곳으로 전달
+  }
+};
