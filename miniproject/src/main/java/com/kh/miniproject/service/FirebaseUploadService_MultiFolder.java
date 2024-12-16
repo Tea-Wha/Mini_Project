@@ -70,14 +70,19 @@ public class FirebaseUploadService_MultiFolder {
             System.err.println("업로드 실패: "+firebasePath+" - " +e.getMessage());
         }
     }
-
-
-    private Storage getStorage() throws IOException {
-        // Storage 서비스 가져오기
-        return StorageOptions.newBuilder()
-                .setCredentials(GoogleCredentials.fromStream(new FileInputStream(firebaseCredentialsPath)))
-                .build()
-                .getService();
+  
+  
+  private Storage getStorage() throws IOException {
+    // 클래스패스에서 firebase-service-account.json 파일을 읽기
+    InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase-service-account.json");
+    if (serviceAccount == null) {
+      throw new FileNotFoundException("firebase-service-account.json file not found in resources folder");
     }
+    
+    return StorageOptions.newBuilder()
+      .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+      .build()
+      .getService();
+  }
 
 }
