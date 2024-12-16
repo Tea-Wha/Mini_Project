@@ -6,13 +6,17 @@ package com.kh.miniproject.controller;
 import com.kh.miniproject.service.CsvUploadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -63,4 +67,55 @@ public class CsvUploadController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 처리 중 오류가 발생했습니다.");
         }
     }
-}
+
+    @GetMapping("/downloadCar")
+    public ResponseEntity<byte[]> downloadCarFormat() {
+        Resource resource = new ClassPathResource("static/csv/Cars.csv");
+        try (InputStream inputStream = resource.getInputStream()) {
+            byte[] fileData = inputStream.readAllBytes();
+            System.out.println("파일 내용: " + new String(fileData));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("text/csv"))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Cars.csv\"")
+                    .body(fileData); // 파일 데이터 반환
+        } catch (IOException e) {
+            log.warn("파일 전달 실패");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/downloadColor")
+    public ResponseEntity<byte[]> downloadColorFormat() {
+        Resource resource = new ClassPathResource("static/csv/Colors.csv");
+        try (InputStream inputStream = resource.getInputStream()) {
+            byte[] fileData = inputStream.readAllBytes();
+            System.out.println("파일 내용: " + new String(fileData));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("text/csv"))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Colors.csv\"")
+                    .body(fileData); // 파일 데이터 반환
+        } catch (IOException e) {
+            log.warn("파일 전달 실패");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/downloadFeature")
+    public ResponseEntity<byte[]> downloadFeatureFormat() {
+        Resource resource = new ClassPathResource("static/csv/Features.csv");
+        try (InputStream inputStream = resource.getInputStream()) {
+            byte[] fileData = inputStream.readAllBytes();
+            System.out.println("파일 내용: " + new String(fileData));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("text/csv"))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Features.csv\"")
+                    .body(fileData); // 파일 데이터 반환
+        } catch (IOException e) {
+            log.warn("파일 전달 실패");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    }
