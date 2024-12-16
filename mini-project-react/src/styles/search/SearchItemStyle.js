@@ -30,12 +30,16 @@ export const ItemTableHead = styled(TableHead)``;
 
 export const ItemTableRow = styled(TableRow)``;
 
-export const ItemTableCell = styled(TableCell)``;
+export const ItemTableCell = styled(TableCell)`
+  padding: 0;
+`;
 
 export const Image = styled.img`
   width: 300px; /* 이미지 크기 조정 */
 `;
 
 export const Logo = styled.img`
-  width: 90px;
+  max-width: 50px;
+  max-height: 50px;
+  margin: 0 auto;
 `;

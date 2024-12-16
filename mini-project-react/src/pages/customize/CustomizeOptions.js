@@ -10,7 +10,7 @@ const OptionsContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		right: 0;
-		top: 0;
+		top: 50px;
 		width: 30%;
 		height: 100%;
 `
@@ -26,7 +26,6 @@ const CustomizeOptions =() => {
 	const [visible, setVisible] = useState({
 		color: false, option: false, table: false
 	});
-	window.localStorage.clear()
 	const {colors, options ,carColor, setCarColor, carOptions, setCarOptions} = useContext(CarInfoContext);
 	
 	const seletor = [
@@ -43,7 +42,7 @@ const CustomizeOptions =() => {
 		list: options,
 		value: carOptions,
 		setter: setCarOptions,
-		keyName: "featureName"},
+		keyName: "featureValue"},
 	]
 	
 	console.log(colors)

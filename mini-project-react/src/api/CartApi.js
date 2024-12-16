@@ -1,5 +1,6 @@
 import axios from "axios";
-const KH_DOMAIN = "http://localhost:8111";
+import {KH_DOMAIN} from "./Constant";
+
 
 const CartApi = {
 	
@@ -20,7 +21,7 @@ const CartApi = {
 	
 	updateCart: async (cartVo) => {
 		console.log("카트 업데이트 : " + JSON.stringify(cartVo));
-		return await axios.post(KH_DOMAIN + "/cart/postCart", cartVo);
+		return await axios.post(KH_DOMAIN + "/cart/updateCart", cartVo);
 	},
 	
 	nameChange: async (cartName, cartNo) => {

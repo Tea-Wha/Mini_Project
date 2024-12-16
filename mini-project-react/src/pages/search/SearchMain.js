@@ -6,9 +6,19 @@ import { SearchContext } from "../../context/SearchStore";
 import SearchItems from "./SearchItems";
 import { Button, Tooltip } from "@mui/material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import NavComponent from "../../components/NavComponent";
+
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+`;
 
 //정렬용으로 만들어놓음 밑은 그냥 기능구분용
 const BoardContainer = styled.div`
+  margin: 100px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,32 +149,29 @@ const SearchMain = () => {
   }, []);
 
   return (
-    <BoardContainer>
-      <SearchContainer>
-        <SearchOptions
-          companies={companies}
-          engines={engines}
-          maxPrice={maxPrice}
-          classList={classList}
-          search={search}
-        />
-      </SearchContainer>
-      <ListContainer>
-        {/*<SearchArrange*/}
-        {/*	sort={sort}*/}
-        {/*	setSortBy={(sortBy) =>*/}
-        {/*		dispatchSort({ type: "SET_SORT_BY", payload: sortBy })*/}
-        {/*	}*/}
-        {/*/>*/}
-        <Tooltip title="모든 선택 초기화" placement="top">
-          <ClearButton variant="outlined" onClick={clearLocalStorage}>
-            {" "}
-            <RestartAltIcon />{" "}
-          </ClearButton>
-        </Tooltip>
-        <SearchItems list={list} />
-      </ListContainer>
-    </BoardContainer>
+    <Container>
+      <NavComponent color={true}/>
+      <BoardContainer>
+        <SearchContainer>
+          <SearchOptions
+            companies={companies}
+            engines={engines}
+            maxPrice={maxPrice}
+            classList={classList}
+            search={search}
+          />
+        </SearchContainer>
+        <ListContainer>
+          <Tooltip title="모든 선택 초기화" placement="top">
+            <ClearButton variant="outlined" onClick={clearLocalStorage}>
+              {" "}
+              <RestartAltIcon />{" "}
+            </ClearButton>
+          </Tooltip>
+          <SearchItems list={list} />
+        </ListContainer>
+      </BoardContainer>
+    </Container>
   );
 };
 export default SearchMain;

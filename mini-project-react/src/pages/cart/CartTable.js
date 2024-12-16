@@ -23,7 +23,7 @@ const CartTable = ({cart}) => {
 						색상
 					</TableCell>
 					<TableCell>
-						{cart.color}
+						{cart.cartColor}
 					</TableCell>
 				</TableRow>
 				<TableRow>
@@ -31,9 +31,12 @@ const CartTable = ({cart}) => {
 						옵션
 					</TableCell>
 					<TableCell>
-						{Array.isArray(cart.cartOption) && cart.cartOption.map((item, index) => (
-							<div key={index}>{item}</div>
-						))}
+						{cart.cartOption && cart.cartOption.split(',').map((item, index) => (
+							<div key={index}>
+								{item}
+							</div>
+						)
+						)}
 					</TableCell>
 				</TableRow>
 			</TableBody>

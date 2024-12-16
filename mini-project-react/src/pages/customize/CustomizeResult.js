@@ -6,6 +6,7 @@ import {IconButton, Table, TableBody, TableCell, TableHead, TableRow, Tooltip} f
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {ShoppingCartCheckout} from "@mui/icons-material";
 import {priceFormatter} from "../../Formatter";
+import {UserContext} from "../../context/UserStore";
 
 const PriceContainer = styled.div`
 		display: flex;
@@ -21,6 +22,8 @@ const PriceContainer = styled.div`
 const CustomizeResult = ({onClickSubmit, updateFlag}) => {
 	const [visible, setVisible] = useState({result:true});
 	
+	const {nickName} = useContext(UserContext);
+	
 	const {carPrice} = useContext(CarInfoContext);
 	
 	const totalPrice = Array.isArray(carPrice)
@@ -31,9 +34,9 @@ const CustomizeResult = ({onClickSubmit, updateFlag}) => {
 	
 	return (
 		<PriceContainer>
-			<Tooltip title={updateFlag ? `수정하기`:`추가하기`}>
+			{nickName && <Tooltip title={updateFlag ? `수정하기`:`추가하기`}>
 				<IconButton onClick={onClickSubmit} sx={{marginRight: 2}}>{updateFlag ? <ShoppingCartCheckout/> : <AddShoppingCartIcon/>}</IconButton>
-			</Tooltip>
+			</Tooltip>}
 			<AccordionComponent name={`총 가격 : ${priceFormatter(totalPrice)}`} id="result" label="선택하신 요소별 금액입니다." visible={visible} setVisible={setVisible} reversed={true}>
 				<Table>
 				<TableHead>

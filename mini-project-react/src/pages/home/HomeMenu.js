@@ -15,7 +15,6 @@ import {useEffect} from "react";
 const HomeMenu = ({setMenuOpen, subPageOpen, setSubPageOpen, menuOpen}) => {
   const menuList = [
     {name: "Search", link: "/search"},
-    {name: "Customizing", link: "/customize/1"},
   ];
 
   const toggleList = [

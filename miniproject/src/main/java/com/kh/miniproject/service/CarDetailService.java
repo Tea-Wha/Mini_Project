@@ -29,6 +29,8 @@ public class CarDetailService {
 
     // 견적페이지 : repository 의 차량옵션 불러오는 메서드 호출
     public List<FeatureVo> getFeatureInfo(int carNo) {
-        return carDetailRepository.getFeatureInfo(carNo);
+        List<FeatureVo> list = carDetailRepository.getFeatureInfo(carNo);
+        log.warn("feature list : {}", list);
+        return list;
     }
 }

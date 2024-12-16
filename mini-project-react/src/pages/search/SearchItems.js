@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ClearIcon from '@mui/icons-material/Clear';
-import {Box, IconButton, TableRow, TableSortLabel} from "@mui/material";
+import {Box, IconButton, Skeleton, TableRow, TableSortLabel} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { StyledLink } from "../../styles/home/HomeHead";
 import {
@@ -91,11 +91,10 @@ const SearchItems = ({ list }) => {
 				<ItemTableBody>
 					{stableSort(list, getComparator(order, orderBy)).map((item) => (
 						<TableRow key={item.carNo}>
-							{console.log(item.carFront)}
 							{[
 								// 차량 이미지 클릭 시 차량 정보 페이지로 이동
 								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carNo}>
-									<Image src={item.carFrontUrl || `/testimages/sonata_001.png`} alt="Car" />
+									{item.carFrontUrl ? <Image src={item.carFrontUrl}/> : <Skeleton sx={{width: "300px"}}/>}
 								</StyledLink>,
 								
 								
@@ -105,9 +104,9 @@ const SearchItems = ({ list }) => {
 								</StyledLink>,
 								
 								// 브랜드 이름 클릭 시 브랜드 페이지로 이동
-								<StyledLink to={`/carInfo/${item.carNo}`} key={item.carName}>
-									<IconButton>
-										<Logo src={item.manufacturerUrl || `/testlogos/hyundai.png`} alt="logo" />
+								<StyledLink to={`/brand/${item.manufacturer}`} key={item.carName}>
+									<IconButton sx = {{height:"70px", width:"70px"}}>
+										<Logo src={item.manufacturerUrl} alt="logo" />
 									</IconButton>
 								</StyledLink>,
 								
